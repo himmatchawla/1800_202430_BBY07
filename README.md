@@ -5,7 +5,7 @@ COMP1800 Lab 3
 
 ## 2. Names of Contributors
 List team members and/or short bio's here... 
-Himmat
+Hi, this is Himmat!
 Hayden
 Hi this is Sophia!
 	
