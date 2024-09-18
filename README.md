@@ -1,45 +1,26 @@
 # Project Title
 
 ## 1. Project Description
-For public transportation safety.
+State your app in a nutshell, or one-sentence pitch. Give some elaboration on what the core features are.  
+This browser based web application to ... 
 
 ## 2. Names of Contributors
 List team members and/or short bio's here... 
-
-* Sohpia
-* Hayden 
-* Himmat
-
 * Hi my name is Sophia! 
 * ...
 * ...
-93e58ed49b90fb125b57cda6bcc8dcd5cbc93524
 	
 ## 3. Technologies and Resources Used
-List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
-* HTML, CSS, JavaScript
-* Bootstrap 5.0 (Frontend library)
-* Firebase 8.0 (BAAS - Backend as a Service)
-* ...
+Git and Github
 
 ## 4. Complete setup/installion/usage
-State what a user needs to do when they come to your project.  How do others start using your code or application?
-Here are the steps ...
-* ...
-* ...
-* ...
+See readme file
 
 ## 5. Known Bugs and Limitations
-Here are some known bugs:
-* ...
-* ...
-* ...
+Conflicts
 
 ## 6. Features for Future
-What we'd like to build in the future:
-* ...
-* ...
-* ...
+No conflicts
 	
 ## 7. Contents of Folder
 Content of the project folder:
