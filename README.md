@@ -7,7 +7,7 @@ COMP1800 Lab 3
 List team members and/or short bio's here... 
 Himmat
 Hayden
-Sophia
+Hi this is Sophia!
 	
 ## 3. Technologies and Resources Used
 Git and Github
