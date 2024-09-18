@@ -5,9 +5,15 @@ For public transportation safety.
 
 ## 2. Names of Contributors
 List team members and/or short bio's here... 
+
 * Sohpia
 * Hayden 
 * Himmat
+
+* Hi my name is Sophia! 
+* ...
+* ...
+93e58ed49b90fb125b57cda6bcc8dcd5cbc93524
 	
 ## 3. Technologies and Resources Used
 List technologies (with version numbers), API's, icons, fonts, images, media or data sources, and other resources that were used.
