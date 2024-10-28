@@ -1,0 +1,43 @@
+#homepage-title-img {
+    width: 100%;
+}
+
+.nav_before_login {
+    background-color: #384d60;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav_before_login ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+}
+
+.nav_before_login ul li {
+    margin: 0 5px;
+}
+
+.nav_before_login ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+
+.nav_before_login ul li a:hover {
+    background-color: #333;
+}
+
+@media (max-width: 330px) {
+    .nav_before_login ul li {
+        margin: 0 0px;
+    }
+}
