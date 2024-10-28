@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TransitAura</title>
-    <link rel="stylesheet" href="styles.css">
+    <meta name="comp1800 template" content="My 1800 App">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <!-- Bootstrap if we need it -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+
+    <!-- Firebase -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <!-- Other libs -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+
 </head>
+
 <body>
+    <nav id="navbarPlaceholder"></nav>
 
-    <header> 
-        <img src="logo.png">
-        <h1>TransitAura</h1>
-    </header>
-    <nav>
+    <nav id="footerPlaceholder"></nav>
 
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="main.html">Dashboard</a></li>
-            <li><a href="routechecker.html">Routes</a></li>
-            <li><a href="stationchecker.html">Stations</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
-    </nav>
-    <section>
-        <h2>What is TransitAura?</h2>
-        <p>We are a website dedicated to making Metro Vancouver safer by providing real-time transit safety information to users. Users can report and view perceived safety levels and incident reports on any bus, train, or station.</p>
-    </section>
+    <!-- JS funcs  -->
+    <script src="scripts/firebaseAPI.js"></script>
+    <script src="scripts/skeleton.js"></script>
+    <script src="scripts/script.js"></script>
+    <script>
+        logout();
+    </script>
 
-    <div id = "map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.033760470945!2d-123.0030446226395!3d49.22709531030047!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x548676595c5fb407%3A0x70139844bf95bfa5!2sMetropolis%20at%20Metrotown!5e0!3m2!1sen!2sca!4v1728417072636!5m2!1sen!2sca" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-    </div>
-
-    <footer>
-        <div class="footer-left">
-            <a href="help.html">Help</a>
-            <a href="aboutus.html">About Us</a>
-            <a href="reportbug.html">Report a Bug</a>
-        </div>
-        <div class="footer-right">
-            <a href="privacypolicy.html">Privacy Policy</a>
-            <a href="tos.html">Terms of Service</a>
-            <a href="legal.html">Legal</a>
-        </div>
-    </footer>
 </body>
+
 </html>
