@@ -171,6 +171,6 @@ p[id$='-p'] {
     background-color: #e6f2ff;
   }
 
-  #search-routes-h1, #search-stations-h1 {
+  #search-routes-h1, #search-stations-h1, #login-h1 {
     text-align: center;
   }
