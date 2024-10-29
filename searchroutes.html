@@ -31,16 +31,17 @@
 
 <body>
     <nav id="navbarPlaceholder"></nav>
-    <img src="media/placeholder.jpg" id="homepage-title-img">
-    <h2 id="homepage-h2-1">TransitAura, getting you there safely.</h2>
 
-    <p id="homepage-p1">Welcome to TransitAura, a project aimed at making Vancouver safer for its residents. Using our easy-to-navigate interface, users can view Safety Levels and Incidents on their transit routes and stations. This data is crowd-sourced, and everyone has a part to play in keeping transit safe!</p>
+    <h1 id="search-routes-h1">Search Your Route</h1>
 
-    <h2 id="homepage-h2-2">Riding Transit? TransitAura.</h2>
-    
-    <p id="homepage-p2">Make an account to start reporting and viewing today!</p>
+    <div class="dropdown-container">
+        <input type="text" id="dropdownInputRoutes" class="dropdown-input" placeholder="Search options..." oninput="filterOptions()" onclick="toggleDropdown()">
+        <div id="dropdownOptionsRoutes" class="dropdown-options"></div>
+      </div>
 
     <nav id="footerPlaceholder"></nav>
+
+
 
     <!-- JS funcs  -->
     <script src="scripts/firebaseAPI.js"></script>
@@ -50,7 +51,40 @@
     <script>
         logout();
     </script>
+    <script>
+        function filterOptions() {
+        const input = document.getElementById('dropdownInputRoutes').value.toLowerCase();
+        const options = document.getElementById('dropdownOptionsRoutes').children;
+        for (const option of options) {
+            if (option.textContent.toLowerCase().includes(input)) {
+            option.style.display = 'block';
+            } else {
+            option.style.display = 'none';
+            }
+        }
+        }
+
+        function toggleDropdown() {
+        const dropdownOptionsRoutes = document.getElementById('dropdownOptionsRoutes');
+        dropdownOptionsRoutes.style.display = dropdownOptionsRoutes.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function selectOption(value) {
+        document.getElementById('dropdownInputRoutes').value = value;
+        document.getElementById('dropdownOptionsRoutes').style.display = 'none'; // Hide dropdown after selection
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOptions);
+
+        window.addEventListener('click', function(event) {
+        if (!event.target.closest('.dropdown-container')) {
+            document.getElementById('dropdownOptionsRoutes').style.display = 'none';
+        }
+        });
+    </script>
 
 </body>
 
 </html>
+
+

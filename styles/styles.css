@@ -1,0 +1,176 @@
+body {
+    background-color: #f0f5f6;
+}
+
+
+#homepage-title-img {
+    width: 100%;
+}
+
+.nav_before_login {
+    background-color: #384d60;
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav_before_login ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+}
+
+.nav_before_login ul li {
+    margin: 0 5px;
+}
+
+.nav_before_login ul li a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 4px;
+}
+
+.nav_before_login ul li a:hover {
+    background-color: #333;
+}
+
+
+
+
+
+
+
+/*For About Us page*/
+#aboutUs{
+    background-image: url("images/bus1.jpg");
+    background-color: #384d60;
+    color: white;
+}
+.h1InAbout{
+    text-align: center;
+}
+
+@media (max-width: 330px) {
+    .nav_before_login ul li {
+        margin: 0 0px;
+    }
+}
+
+#homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 25px;
+}
+
+@media (min-width: 769px) {
+    #homepage-title-img {
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+
+    }
+
+    .nav_before_login {
+        /* width: 50%; */
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
+
+    #homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
+        max-width: 50%; /* Adjust width as needed */
+        margin: 0 auto;   /* Center the container */
+        margin-top: 15px;
+        padding: 0 20px;
+    }
+}
+
+#limited-to-van {
+    font-size: 1rem;
+    text-align: center;
+    max-width: 1000px;
+    margin-bottom: 40px;
+    color: #000000; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button {
+    font-size: 1.1rem;
+    padding: 12px 25px;
+    margin-top: 15px;
+    display: block;
+    width: 100%;
+    max-width: 600px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #2a73e8;
+    color: #ffffff;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+button:hover {
+    background-color: #3a8df5;
+    transform: scale(1.03);
+}
+
+p[id$='-p'] {
+    font-size: 0.9rem;
+    color: #000000;
+    margin: 5px 0 20px 0;
+    text-align: center;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+ .dropdown-container {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .dropdown-input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    box-sizing: border-box;
+    outline: none;
+  }
+
+  .dropdown-options {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    max-height: 150px;
+    overflow-y: auto;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    background-color: #fff;
+    display: none; /* Hidden by default */
+    z-index: 1000;
+  }
+
+  .dropdown-options div {
+    padding: 10px;
+    cursor: pointer;
+  }
+
+  .dropdown-options div:hover {
+    background-color: #e6f2ff;
+  }
+
+  #search-routes-h1, #search-stations-h1, #login-h1 {
+    text-align: center;
+  }
