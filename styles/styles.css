@@ -48,7 +48,11 @@ body {
 
 
 /*For About Us page*/
-
+#aboutUs{
+    background-image: url("images/bus1.jpg");
+    background-color: #384d60;
+    color: white;
+}
 .h1InAbout{
     text-align: center;
 }
