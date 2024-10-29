@@ -42,8 +42,35 @@ body {
 }
 
 
+.nav_after_login {
+    background-color: #0044cc !important;
+}
 
 
+.nav_after_login .nav-item {
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+    justify-content: center;
+}
+
+.nav_after_login .nav-item img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+}
+
+.nav_after_login .navbar {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.logout-container {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 
 
@@ -84,8 +111,8 @@ body {
     }
 
     #homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
-        max-width: 50%; /* Adjust width as needed */
-        margin: 0 auto;   /* Center the container */
+        max-width: 50%;
+        margin: 0 auto;  
         margin-top: 15px;
         padding: 0 20px;
     }
