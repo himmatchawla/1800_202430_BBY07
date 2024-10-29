@@ -32,43 +32,16 @@
 <body>
     <nav id="navbarPlaceholder"></nav>
 
-    <p id="limited-to-van">For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.</p>
+    <h1 id="search-routes-h1">Search Your Route</h1>
 
-    <a href="searchstations.html" style="text-decoration: none;">
-    <button id="search-stations-button">Search Stations</button></a>
-    <p id="search-stations-p">Search Stations for Safety Levels and Incident Reports</p>
-
-    <a href="searchroutes.html" style="text-decoration: none;">
-    <button id="search-routes-button">Search Routes</button></a>
-    <p id="search-routes-p">Search Bus and Train Routes for Safety Levels and Incident Reports</p>
-
-    <h2 id="recent-h2">Recently Viewed</h2>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-
-
-    <h2 id="saved-stations-h2">Saved Stations</h2>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-
-
-    <h2 id="saved-routes-h2">Saved Routes</h2>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-
-
-
+    <div class="dropdown-container">
+        <input type="text" id="dropdownInputRoutes" class="dropdown-input" placeholder="Search options..." oninput="filterOptions()" onclick="toggleDropdown()">
+        <div id="dropdownOptionsRoutes" class="dropdown-options"></div>
+      </div>
 
     <nav id="footerPlaceholder"></nav>
+
+
 
     <!-- JS funcs  -->
     <script src="scripts/firebaseAPI.js"></script>
@@ -78,7 +51,40 @@
     <script>
         logout();
     </script>
+    <script>
+        function filterOptions() {
+        const input = document.getElementById('dropdownInputRoutes').value.toLowerCase();
+        const options = document.getElementById('dropdownOptionsRoutes').children;
+        for (const option of options) {
+            if (option.textContent.toLowerCase().includes(input)) {
+            option.style.display = 'block';
+            } else {
+            option.style.display = 'none';
+            }
+        }
+        }
+
+        function toggleDropdown() {
+        const dropdownOptionsRoutes = document.getElementById('dropdownOptionsRoutes');
+        dropdownOptionsRoutes.style.display = dropdownOptionsRoutes.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function selectOption(value) {
+        document.getElementById('dropdownInputRoutes').value = value;
+        document.getElementById('dropdownOptionsRoutes').style.display = 'none'; // Hide dropdown after selection
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOptions);
+
+        window.addEventListener('click', function(event) {
+        if (!event.target.closest('.dropdown-container')) {
+            document.getElementById('dropdownOptionsRoutes').style.display = 'none';
+        }
+        });
+    </script>
 
 </body>
 
 </html>
+
+
