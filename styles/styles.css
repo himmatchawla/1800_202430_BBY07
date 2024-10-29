@@ -74,7 +74,7 @@ body {
 
 
 
-/*For About Us page*/
+/*For About Us page(Before Login)*/
 #aboutUs{
     background-image: url("images/bus1.jpg");
     background-color: #384d60;
@@ -83,6 +83,12 @@ body {
 .h1InAbout{
     text-align: center;
 }
+
+
+/*For Help page (Before Login)*/
+
+
+
 
 @media (max-width: 330px) {
     .nav_before_login ul li {
