@@ -1,3 +1,8 @@
+body {
+    background-color: #f0f5f6;
+}
+
+
 #homepage-title-img {
     width: 100%;
 }
@@ -39,5 +44,33 @@
 @media (max-width: 330px) {
     .nav_before_login ul li {
         margin: 0 0px;
+    }
+}
+
+#homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 25px;
+}
+
+@media (min-width: 769px) {
+    #homepage-title-img {
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+
+    }
+
+    .nav_before_login {
+        /* width: 50%; */
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
+
+    #homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
+        max-width: 50%; /* Adjust width as needed */
+        margin: 0 auto;   /* Center the container */
+        margin-top: 15px;
+        padding: 0 20px;
     }
 }
