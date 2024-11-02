@@ -24,6 +24,23 @@ body {
     display: flex; 
 }
 
+#login-h1 {
+    padding: 30px;
+}
+#firebaseui-auth-container {
+    margin-top: 30%;
+}
+
+#firebaseui-auth-container .firebaseui-card-actions .firebaseui-form-actions {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#firebaseui-auth-container .firebaseui-card-actions .firebaseui-form-actions .firebaseui-button {
+    margin: 10px;
+}
+
+
 .nav_before_login ul li {
     margin: 0 5px;
 }
