@@ -1,7 +1,12 @@
 body {
     background-color: #f0f5f6;
+    
 }
 
+#user-name{
+    text-align: center;
+    font-size: 10vw;
+}
 
 #homepage-title-img {
     width: 100%;

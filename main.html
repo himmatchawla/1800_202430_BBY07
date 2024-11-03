@@ -6,7 +6,7 @@
     <meta name="comp1800 template" content="My 1800 App">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
+
     <!-- Bootstrap if we need it -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -19,7 +19,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
@@ -32,14 +32,17 @@
 <body>
     <nav id="navbarPlaceholder"></nav>
 
-    <p id="limited-to-van">For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.</p>
+    <h1 id="user-name" class="display-4">Welcome, <span id="name-goes-here"></span> </h1>
+
+    <p id="limited-to-van">For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.
+    </p>
 
     <a href="searchstations.html" style="text-decoration: none;">
-    <button id="search-stations-button">Search Stations</button></a>
+        <button id="search-stations-button">Search Stations</button></a>
     <p id="search-stations-p">Search Stations for Safety Levels and Incident Reports</p>
 
     <a href="searchroutes.html" style="text-decoration: none;">
-    <button id="search-routes-button">Search Routes</button></a>
+        <button id="search-routes-button">Search Routes</button></a>
     <p id="search-routes-p">Search Bus and Train Routes for Safety Levels and Incident Reports</p>
 
     <h2 id="recent-h2">Recently Viewed</h2>
@@ -51,12 +54,31 @@
 
 
     <h2 id="saved-stations-h2">Saved Stations</h2>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
+    <p>Saved Station #1: <span id="quote-goes-here"></span></p>
+    <!-- <div class="card">
+        <h5 class="card-header">Featured</h5>
+        <div class="card-body">
+            <h5 class="card-title">Special title treatment</h5>
+            <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div> -->
+    <template id="savedStationsTemplate">
+        <div class="card">
+            <h5 class="card-title card-header"></h5>
+            <div class="card-body">
+                <p class="card-text"></p>
+                <p class="card-address"></p>
+                <p class="card-busy"></p>
+                <p class="card-time"></p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
 
+            </div>
+        </div>
+    </template>
+
+
+    <div id="savedStations-go-here"></div>
 
     <h2 id="saved-routes-h2">Saved Routes</h2>
     <p>...</p>
@@ -75,8 +97,8 @@
     <script src="scripts/skeleton.js"></script>
     <script src="scripts/script.js"></script>
     <script src="scripts/authentication.js"></script>
-    <script>
-    </script>
+    <script src="scripts/main.js"></script>
+
 
 </body>
 
