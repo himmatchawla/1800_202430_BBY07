@@ -42,37 +42,47 @@
 // readQuote();  // Call the function to read the data
 
 function writeSavedStations() {
-    //define a variable for the collection you want to create in Firestore to populate data
+    
     var savedStationsRef = db.collection("savedStations");
 
     savedStationsRef.doc("Metrotown Station").set({
         code: "BBY01",
-        name: "Metrotown Station", //replace with your own city?
+        name: "Metrotown Station", 
         city: "Burnaby",
         province: "BC",
         address: "4401 Beresford Street, Burnaby",
 		details: "Located in Metrotown",
         busy: "Not busy",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
     });
-    savedStationsRef.doc("Rotyal Oak Staion").set({
+    savedStationsRef.doc("Royal Oak Staion").set({
         code: "BBY02",
-        name: "Rotyal Oak Staion", //replace with your own city?
+        name: "Royal Oak Staion", 
         city: "Burnaby",
         province: "BC",
         address: "5199 Beresford Street, Burnaby",
 		details: "Located in Edmonds",
         busy: "busy",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system time
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
     });
     savedStationsRef.doc("Edmonds Station").set({
         code: "BBY03",
-        name: "Edmonds Station", //replace with your own city?
+        name: "Edmonds Station", 
         city: "Burnaby",
         province: "BC",
         address: "6944 18th Avenue, Burnaby",
 		details: "Located in Edmonds",
         busy: "busy",
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system timehttps://chatgpt.com/gpts
+    });
+    savedStationsRef.doc("Patterson").set({
+        code: "BBY04",
+        name: "Patterson Station", 
+        city: "Burnaby",
+        province: "BC",
+        address: "6944 18th Avenue, Burnaby",
+		details: "Located in Patterson",
+        busy: "not busy",
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system timehttps://chatgpt.com/gpts
     });
 }
