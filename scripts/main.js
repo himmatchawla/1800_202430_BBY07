@@ -75,7 +75,7 @@ function writeSavedStations() {
         busy: "busy",
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system timehttps://chatgpt.com/gpts
     });
-    savedStationsRef.doc("Patterson").set({
+    savedStationsRef.doc("Patterson Station").set({
         code: "BBY04",
         name: "Patterson Station", 
         city: "Burnaby",
@@ -86,7 +86,7 @@ function writeSavedStations() {
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system timehttps://chatgpt.com/gpts
     });
 }
-// writeSavedStations();         //if you used method 1
+ //writeSavedStations();         //if you used method 1
 
 
 //------------------------------------------------------------------------------
