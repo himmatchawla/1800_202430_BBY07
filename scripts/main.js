@@ -17,7 +17,7 @@
              //document.querySelector("#name-goes-here").innerText = userName
 
          } else {
-              //No user is signed in.
+             // No user is signed in.
              console.log ("No user is logged in");
          }
      });

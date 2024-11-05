@@ -3,6 +3,13 @@ body {
     
 }
 
+#book-mark-heading{
+    font-size: 3vw;
+}
+
+#name-goes-here{
+    text-align: center;
+}
 #user-name{
     text-align: center;
     font-size: 10vw;
@@ -94,6 +101,10 @@ body {
     transform: translateY(-50%);
 }
 
+/*For Saved Stgations/Routes*/
+#saved-stations-h2{
+    text-align: center;
+}
 
 
 /*For About Us page(Before Login)*/
