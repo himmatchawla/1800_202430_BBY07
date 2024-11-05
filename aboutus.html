@@ -1,11 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <title>TransitAura</title>
-    <meta name="comp1800 template" content="My 1800 App">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="comp1800 template" content="My 1800 App" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Learn more about TransitAura, our mission, and our team dedicated to enhancing public transit safety."
+    />
+    <title>About Us | TransitAura</title>
 
     <!-- Bootstrap if we need it -->
     <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,51 +18,88 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script> -->
 
-    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/styles.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css"
+    />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-  
-    <!-- Other libs -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-</head>
 
-<body id="body">
+    <!-- Other libs -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body id="body">
+    <header>
+      <button onclick="goBack()" class="back-button">← Back</button>
+    </header>
+
     <div id="aboutUs">
-        <div>
-            <h1 class="h1InAbout">What is TransitAura?</h1>
-        </div>
-        <div>
-            <p>
-                At <span style="color:#6699CC">TransitAura</span>, our mission is to make public transit safer and more
-                accessible for everyone.
-                By providing real-time safety insights and easy access to emergency contacts, we aim to empower transit
-                users to make informed choices.
-            </p>
-        </div>
-        <div>
-            <h1 class="h1InAbout">Who are we?</h1>
-            <p>
-                We’re a team of first-term Computer Systems Technology students with a passion for making a difference.
-                With
-                fresh perspectives and a shared dedication to public safety, we’ve come together to create an app that
-                helps
-                transit users stay informed and safe.
-            </p>
-        </div>
-        <div>
-            <h1 class="h1InAbout">Why did we build this app?</h1>
-            <p>
-                Every transit user deserves peace of mind. We built this app to help communities stay informed about
-                potential safety
-                issues, creating a safer transit environment for everyone.
-            </p>
-        </div>
+      <div>
+        <h1 class="h1InAbout">What is TransitAura?</h1>
+      </div>
+
+      <div>
+        <p>
+          <span style="color: #6699cc">TransitAura</span> provides real-time
+          safety insights and easy access to emergency contacts. We empower
+          transit users to make safe, informed decisions on public transit.
+        </p>
+      </div>
+
+      <div>
+        <h1 class="h1InAbout">Our Story</h1>
+      </div>
+      <div>
+        <p>
+          <span style="color: #6699cc">TransitAura</span> began with our mission
+          to make public transit safer and more accessible for everyone.
+        </p>
+      </div>
+
+      <div>
+        <h1 class="h1InAbout">Our Values</h1>
+      </div>
+      <div>
+        <p>
+          2-3 values that define our approach, like "user safety" or "community
+          focus". think back to theme for this term
+        </p>
+      </div>
+
+      <div>
+        <h1 class="h1InAbout">Our Vision for Transit Safety</h1>
+      </div>
+      <div>
+        <p>
+          Every transit user deserves peace of mind. We built this app to help
+          communities stay informed about potential safety issues, creating a
+          safer transit environment for everyone.
+        </p>
+      </div>
+
+      <div>
+        <h1 class="h1InAbout">Meet the Team</h1>
+        <p>
+          We are three Computer Systems Technology students with a passion for
+          making a difference. With fresh perspectives and a shared commitment
+          to public safety, we've created an app to help transit users stay
+          informed and safe.
+        </p>
+      </div>
     </div>
+
+    <!--ngl i forgot how to add space at the bottom so I put br for now-->
+    <br /><br /><br /><br />
 
     <nav id="navbarPlaceholder"></nav>
 
@@ -66,7 +107,5 @@
     <script src="scripts/skeleton.js"></script>
     <script src="scripts/script.js"></script>
     <script src="scripts/main.js"></script>
-
-</body>
-
+  </body>
 </html>
