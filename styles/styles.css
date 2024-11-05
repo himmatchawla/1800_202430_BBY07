@@ -53,24 +53,6 @@ body {
 }
 
 
-.nav_before_login ul li {
-    margin: 0 5px;
-}
-
-.nav_before_login ul li a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 16px;
-    padding: 8px 12px;
-    transition: background-color 0.3s, color 0.3s;
-    border-radius: 4px;
-}
-
-.nav_before_login ul li a:hover {
-    background-color: #333;
-}
-
-
 .nav_after_login {
     background-color: #0044cc !important;
 }
@@ -89,19 +71,12 @@ body {
     margin-right: 8px;
 }
 
-.nav_after_login .navbar {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-
 .logout-container {
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
 }
-
-
 
 
 /*For Saved Stgations/Routes*/
@@ -126,7 +101,9 @@ body {
 
 
 
-
+#body {
+    background-color: #384d60;
+}
 
 /*For About Us page(Before Login)*/
 #aboutUs{

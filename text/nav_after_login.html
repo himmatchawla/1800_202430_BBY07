@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Navbar After Login</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href = "/styles/images.css" rel = "stylesheet">
+  <link href="/styles/images.css" rel="stylesheet">
   <style>
     .dropup-menu {
       position: fixed;
@@ -21,75 +22,84 @@
       justify-content: center;
       transition: opacity 0.3s ease;
       opacity: 0;
+      z-index: 5;
     }
+
     .dropup-menu.active {
       display: flex;
       opacity: 1;
     }
+
     .dropup-menu a {
-      display: block;
-      margin: 10px 0;
+      /* display: block; */
+      /* margin: 10px 0; */
       color: white;
       text-decoration: none;
-      font-size: 1.2rem;
+      /* font-size: 1.2rem; */
     }
+
     .navbar-nav {
+      height: auto;
+      width: 80%;
       display: flex;
-      flex-direction: column;
+      justify-content: space-between;
       align-items: center;
     }
+
     .navbar-nav .nav-item {
-      margin-bottom: 15px;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
-    .navbar-nav .nav-item img {
-      margin-bottom: 5px;
-    }
+
     .navbar-nav .nav-item a {
       cursor: pointer;
     }
   </style>
 </head>
+
 <body>
 
-<nav class="navbar navbar-expand bg-primary fixed-bottom">
-  <div class="container-fluid d-flex justify-content-center">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <img id = "bookmark-icon"src="/media/bookmark.png" alt="Bookmarked Icon" />
-        <a class="nav-link text-light" href="/afterLogin/bookmark.html">Bookmarked</a>
-      </li>
-      <li class="nav-item">
-        <img id = "home-icon" src="/media/home.png" alt="Home Icon" />
-        <a class="nav-link text-light" href="/main.html">Home</a>
-      </li>
-      <li class="nav-item">
-        <img id = "profile-icon" src="/media/account.png" alt="Sorry no image" />
-        <a class="nav-link text-light" href="#" onclick="toggleDropupMenu()">Profile</a>
-      </li>
-    </ul>
+  <nav class="navbar navbar-expand bg-primary fixed-bottom">
+    <div class="container-fluid d-flex justify-content-center">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/afterLogin/bookmark.html">
+            <img id="bookmark-icon" src="/media/bookmark.png" alt="Bookmarked Icon" />
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="/main.html">
+            <img id="home-icon" src="../media/house-door-fill.svg" alt="Home Icon" />
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-light" href="#" onclick="toggleDropupMenu()">
+            <img id="profile-icon" src="/media/account.png" alt="Sorry no image" />
+          </a>
+        </li>
+      </ul>
 
+    </div>
+  </nav>
+
+  <div class="dropup-menu" id="profileDropupMenu">
+    <a href="#">Account Details</a>
+    <a href="#">Account Settings</a>
+    <a href="#">Aurapoints</a>
+    <button class="btn btn-outline-light mt-3" onclick="logout()"><a href="../index.html">Logout</a></button>
+    <button class="btn btn-outline-light mt-3" onclick="toggleDropupMenu()">Close</button>
   </div>
-</nav>
 
-<div class="dropup-menu" id="profileDropupMenu">
-  <a href="#">Account Details</a>
-  <a href="#">Account Settings</a>
-  <a href="#">Aurapoints</a>
-  <button class="btn btn-outline-light mt-3"onclick="logout()"><a href="../index.html">Logout</a></button>
-  <button class="btn btn-outline-light mt-3" onclick="toggleDropupMenu()">Close</button>
-</div>
+  <script>
+    function toggleDropupMenu() {
+      const menu = document.getElementById('profileDropupMenu');
+      menu.classList.toggle('active');
+    }
+  </script>
+  <script src="/scripts/script.js"></script>
 
-<script>
-  function toggleDropupMenu() {
-    const menu = document.getElementById('profileDropupMenu');
-    menu.classList.toggle('active');
-  }
-</script>
-<script src="/scripts/script.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

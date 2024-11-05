@@ -4,7 +4,7 @@
 
 
 function sayHello() {
-    //do something
+  //do something
 }
 //sayHello();    //invoke function
 
@@ -12,10 +12,12 @@ function sayHello() {
 // Call this function when the "logout" button is clicked
 //-------------------------------------------------
 function logout() {
-    firebase.auth().signOut().then(() => {
-        // Sign-out successful.
-        console.log("logging out user");
-      }).catch((error) => {
-        // An error happened.
-      });
+  firebase.auth().signOut().then(() => {
+    // Sign-out successful.
+    console.log("logging out user");
+  }).then(() => {
+    window.location.href = "/"
+  }).catch((error) => {
+    // An error happened.
+  });
 }

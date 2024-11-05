@@ -15,36 +15,58 @@
     </script> -->
 
     <link rel="stylesheet" href="styles/styles.css">
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+  
+    <!-- Other libs -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
-<body id="aboutUs">
-    <div>
-        <h1 class="h1InAbout">What is TransitAura?</h1>
+<body id="body">
+    <div id="aboutUs">
+        <div>
+            <h1 class="h1InAbout">What is TransitAura?</h1>
+        </div>
+        <div>
+            <p>
+                At <span style="color:#6699CC">TransitAura</span>, our mission is to make public transit safer and more
+                accessible for everyone.
+                By providing real-time safety insights and easy access to emergency contacts, we aim to empower transit
+                users to make informed choices.
+            </p>
+        </div>
+        <div>
+            <h1 class="h1InAbout">Who are we?</h1>
+            <p>
+                We’re a team of first-term Computer Systems Technology students with a passion for making a difference.
+                With
+                fresh perspectives and a shared dedication to public safety, we’ve come together to create an app that
+                helps
+                transit users stay informed and safe.
+            </p>
+        </div>
+        <div>
+            <h1 class="h1InAbout">Why did we build this app?</h1>
+            <p>
+                Every transit user deserves peace of mind. We built this app to help communities stay informed about
+                potential safety
+                issues, creating a safer transit environment for everyone.
+            </p>
+        </div>
     </div>
-    <div>
-        <p>
-            At <span style="color:#6699CC">TransitAura</span>, our mission is to make public transit safer and more
-            accessible for everyone.
-            By providing real-time safety insights and easy access to emergency contacts, we aim to empower transit
-            users to make informed choices.
-        </p>
-    </div>
-    <div>
-        <h1 class="h1InAbout">Who are we?</h1>
-        <p>
-            We’re a team of first-term Computer Systems Technology students with a passion for making a difference. With
-            fresh perspectives and a shared dedication to public safety, we’ve come together to create an app that helps
-            transit users stay informed and safe.
-        </p>
-    </div>
-    <div>
-        <h1 class = "h1InAbout">Why did we build this app?</h1>
-        <p>
-            Every transit user deserves peace of mind. We built this app to help communities stay informed about potential safety
-            issues, creating a safer transit environment for everyone.
-        </p>
-    </div>
+
+    <nav id="navbarPlaceholder"></nav>
+
+    <script src="scripts/firebaseAPI.js"></script>
+    <script src="scripts/skeleton.js"></script>
+    <script src="scripts/script.js"></script>
+    <script src="scripts/main.js"></script>
+
 </body>
 
 </html>
