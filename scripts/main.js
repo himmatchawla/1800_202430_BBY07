@@ -89,6 +89,8 @@ function writeSavedStations() {
  //writeSavedStations();         //if you used method 1
 
 
+
+
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
@@ -128,3 +130,85 @@ function displayCardsDynamically(collection) {
 }
 
 displayCardsDynamically("savedStations");  //input param is the name of the collection
+
+
+function writeSavedRoutes() {
+    
+    var savedRoutesRef = db.collection("savedRoutes");
+
+    savedRoutesRef.doc("bus-130").set({
+        code: "BUS130",
+        name: "Bus 130", 
+        city: "Burnaby",
+		details: "Located in Metrotown",
+        busy: "Not busy",
+        safetyLevel: "dangerous",
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+    });
+    savedRoutesRef.doc("bus-222").set({
+        code: "BUS222",
+        name: "Bus 222", 
+        city: "Burnaby",
+		details: "Located in Metrotown",
+        busy: "Not busy",
+        safetyLevel: "Safe",
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+    });
+    savedRoutesRef.doc("bus-119").set({
+        code: "BUS119",
+        name: "Bus 119", 
+        city: "Burnaby",
+		details: "Located in Metrotown",
+        busy: "Not busy",
+        safetyLevel: "Safe",
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+    });
+    savedRoutesRef.doc("bus-19").set({
+        code: "BUS19",
+        name: "Bus 19", 
+        city: "Burnaby",
+		details: "Located in Metrotown",
+        busy: "Not busy",
+        safetyLevel: "Moderate",
+        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+    });
+}
+//writeSavedRoutes();         //if you used method 1
+
+ function displayRoutes(collection) {
+    let cardTemplate1 = document.getElementById("savedRoutesTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
+
+    db.collection(collection).get()   //the collection called "hikes"
+        .then(allSavedRoutes => {
+            //var i = 1;  //Optional: if you want to have a unique ID for each hike
+            allSavedRoutes.forEach(doc => { //iterate thru each doc
+                let name1 = doc.data().name;       // get value of the "name" key
+                let details1 = doc.data().details;  // get value of the "details" key
+				let busy1 = doc.data().busy;    //get unique ID to each hike to be used for fetching right image
+                let safetyLevel1 = doc.data().safetyLevel;
+                
+                // let time_updated = doc.data().last_updated.toDate().toLocaleString(); // Convert Firestore timestamp to readable format
+                let newcard1 = cardTemplate1.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+
+                //update title and text and image
+                newcard1.querySelector('.bus-title').innerHTML = name1;
+                newcard1.querySelector('.bus-details').innerHTML = details1;
+                newcard1.querySelector('.bus-busy').innerHTML = busy1;
+                newcard1.querySelector('.bus-safetyLevel').innerHTML = safetyLevel1;                
+                // newcard.querySelector('.card-time').innerHTML = time_updated;
+                // newcard.querySelector('.card-image').src = `./images/${hikeCode}.jpg`; //Example: NV01.jpg
+
+                //Optional: give unique ids to all elements for future use
+                // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
+                // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
+                // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
+
+                //attach to gallery, Example: "hikes-go-here"
+                document.getElementById(collection + "-go-here").appendChild(newcard1);
+
+                //i++;   //Optional: iterate variable to serve as unique ID
+            })
+        })
+}
+
+displayRoutes("savedRoutes");  //input param is the name of the collection

@@ -106,6 +106,12 @@ body {
     text-align: center;
 }
 
+#saved-routes-h2{
+    text-align: center;
+    padding-top: 6%;
+    padding-bottom: 4%;
+}
+
 
 /*For About Us page(Before Login)*/
 #aboutUs{
