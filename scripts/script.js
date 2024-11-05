@@ -21,3 +21,8 @@ function logout() {
     // An error happened.
   });
 }
+
+//back button, goes back to previous page
+function goBack() {
+  window.history.back();
+}
