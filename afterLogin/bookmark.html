@@ -40,11 +40,10 @@
         <div class="card">
             <h5 class="card-title card-header"></h5>
             <div class="card-body">
-                <p class="card-text"></p>
-                <p class="card-address"></p>
-                <p class="card-busy"></p>
-                <p class="card-time"></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <p>Location: <span class="card-text"></span></p>
+                <p>Busyness: <span class="card-busy"></span></p>
+                <p>Address: <span class="card-address"></span></p>
+                <a href="#" class="btn btn-primary">Report Incident</a>
             </div>
         </div>
     </template>
@@ -61,7 +60,7 @@
                 <p class="bus-safetyLevel"></p>
                 <p class="bus-details"></p>
                 <p class="bus-busy"></p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
+                <a href="#" class="btn btn-primary">report Incident</a>
             </div>
         </div>
     </template>
@@ -69,15 +68,13 @@
 
     <div id="savedRoutes-go-here"></div>
 
+    <nav id="navbarPlaceholder"></nav>
 
-    
-
-   
 
 
     <!-- JS funcs  -->
     <script src="/scripts/firebaseAPI.js"></script>
-    <script src="/scripts/skeleton.js"></script>
+    <script src="../scripts/skeleton.js"></script>
     <script src="/scripts/script.js"></script>
     <script src="/scripts/main.js"></script>
     

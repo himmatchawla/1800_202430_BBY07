@@ -80,7 +80,7 @@ function writeSavedStations() {
         name: "Patterson Station", 
         city: "Burnaby",
         province: "BC",
-        address: "6944 18th Avenue, Burnaby",
+        address: "4101 Beresford St., Burnaby",
 		details: "Located in Patterson",
         busy: "not busy",
         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system timehttps://chatgpt.com/gpts

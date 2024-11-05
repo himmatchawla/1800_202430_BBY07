@@ -101,16 +101,31 @@ body {
     transform: translateY(-50%);
 }
 
+
+
+
 /*For Saved Stgations/Routes*/
+#user-name2{
+    font-size: 7vw;
+}
 #saved-stations-h2{
     text-align: center;
+    font-size: 6.5vw;
 }
 
 #saved-routes-h2{
     text-align: center;
     padding-top: 6%;
-    padding-bottom: 4%;
+    padding-bottom: 2%;
+    font-size: 6.5vw;
 }
+
+.card{
+    margin-top: 6%;
+}
+
+
+
 
 
 /*For About Us page(Before Login)*/
