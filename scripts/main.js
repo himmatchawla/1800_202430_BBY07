@@ -1,3 +1,4 @@
+ // LOGIN FUNCTION
  function getNameFromAuth() {
      firebase.auth().onAuthStateChanged(user => {
          // Check if a user is signed in:
@@ -25,6 +26,7 @@
  getNameFromAuth(); //run the function
 
 
+// ??
 // function readQuote() {
 //     db.collection("savedStations").doc("metrotown")  // Accessing the "Edmonds" document
 //         .onSnapshot(docSnapshot => {
@@ -41,6 +43,7 @@
 // }
 // readQuote();  // Call the function to read the data
 
+// WRITE STATIONS MANUALLY TO FIRESTORE (HAYDEN)
 function writeSavedStations() {
     
     var savedStationsRef = db.collection("savedStations");
@@ -131,7 +134,7 @@ function displayStations(collection) {
 
 displayStations("savedStations");  //input param is the name of the collection
 
-
+// WRITE ROUTES MANUALLY TO FIRESTORE (HAYDEN)
 function writeSavedRoutes() {
     
     var savedRoutesRef = db.collection("savedRoutes");
@@ -212,3 +215,36 @@ function writeSavedRoutes() {
 }
 
 displayRoutes("savedRoutes");  //input param is the name of the collection
+
+
+
+
+// WRITE JSON API TO STATIONS IN FIRESTORE (HIMMAT)
+function readJsonAndSaveToFirestore() {
+    fetch('rapid-transit-stations.json')
+      .then(response => response.json())
+      .then(data => {
+        // Assuming `data` is an array of objects and you have a collection called 'items'
+        const batch = db.batch();
+        
+        data.forEach((item, index) => {
+          // Here, we're generating a new document ID for each item.
+          // If your items have unique IDs, use `doc(item.id)` instead.
+          var docRef = db.collection('stations').doc(item.station); // Auto-generate new ID
+          batch.set(docRef, item);
+  
+          // Firestore batch has a limit of 500 operations per batch.
+          // If you approach this limit, you'd need to handle multiple batches.
+        });
+  
+        // Commit the batch
+        return batch.commit().then(() => {
+          console.log('Successfully saved data to Firestore!');
+        });
+      })
+      .catch(error => {
+        console.error('Error reading JSON file or saving to Firestore:', error);
+      });
+  }
+
+  readJsonAndSaveToFirestore();

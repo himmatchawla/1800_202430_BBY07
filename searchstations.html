@@ -74,35 +74,85 @@
     <script src="scripts/main.js"></script>
 
     <script>
-        function filterOptions() {
-        const input = document.getElementById('dropdownInputStations').value.toLowerCase();
-        const options = document.getElementById('dropdownOptionsStations').children;
-        for (const option of options) {
-            if (option.textContent.toLowerCase().includes(input)) {
-            option.style.display = 'block';
-            } else {
-            option.style.display = 'none';
-            }
-        }
-        }
+        // function filterOptions() {
+        // const input = document.getElementById('dropdownInputStations').value.toLowerCase();
+        // const options = document.getElementById('dropdownOptionsStations').children;
+        // for (const option of options) {
+        //     if (option.textContent.toLowerCase().includes(input)) {
+        //     option.style.display = 'block';
+        //     } else {
+        //     option.style.display = 'none';
+        //     }
+        // }
+        // }
 
-        function toggleDropdown() {
-        const dropdownOptionsStations = document.getElementById('dropdownOptionsStations');
-        dropdownOptionsStations.style.display = dropdownOptionsStations.style.display === 'none' ? 'block' : 'none';
-        }
+        // function toggleDropdown() {
+        // const dropdownOptionsStations = document.getElementById('dropdownOptionsStations');
+        // dropdownOptionsStations.style.display = dropdownOptionsStations.style.display === 'none' ? 'block' : 'none';
+        // }
 
-        function selectOption(value) {
-        document.getElementById('dropdownInputStations').value = value;
-        document.getElementById('dropdownOptionsStations').style.display = 'none'; // Hide dropdown after selection
-        }
+        // function selectOption(value) {
+        // document.getElementById('dropdownInputStations').value = value;
+        // document.getElementById('dropdownOptionsStations').style.display = 'none'; // Hide dropdown after selection
+        // }
 
-        document.addEventListener('DOMContentLoaded', loadOptions);
+        // document.addEventListener('DOMContentLoaded', loadOptions);
 
-        window.addEventListener('click', function(event) {
-        if (!event.target.closest('.dropdown-container')) {
-            document.getElementById('dropdownOptionsStations').style.display = 'none';
-        }
+        // window.addEventListener('click', function(event) {
+        // if (!event.target.closest('.dropdown-container')) {
+        //     document.getElementById('dropdownOptionsStations').style.display = 'none';
+        // }
+        // });
+
+        async function loadOptions() {
+    const dropdownOptionsStations = document.getElementById('dropdownOptionsStations');
+    dropdownOptionsStations.innerHTML = ''; // Clear existing options
+
+    try {
+        const querySnapshot = await db.collection('stations').get();
+        querySnapshot.forEach((doc) => {
+            const stationName = doc.id;
+            const option = document.createElement('div');
+            option.className = 'dropdown-option';
+            option.textContent = stationName;
+            option.onclick = () => selectOption(stationName);
+            dropdownOptionsStations.appendChild(option);
         });
+    } catch (error) {
+        console.error("Error loading stations:", error);
+    }
+}
+
+function filterOptions() {
+    const input = document.getElementById('dropdownInputStations').value.toLowerCase();
+    const options = document.getElementById('dropdownOptionsStations').children;
+    for (const option of options) {
+        if (option.textContent.toLowerCase().includes(input)) {
+            option.style.display = 'block';
+        } else {
+            option.style.display = 'none';
+        }
+    }
+}
+
+function toggleDropdown() {
+    const dropdownOptionsStations = document.getElementById('dropdownOptionsStations');
+    dropdownOptionsStations.style.display = dropdownOptionsStations.style.display === 'none' ? 'block' : 'none';
+}
+
+function selectOption(value) {
+    document.getElementById('dropdownInputStations').value = value;
+    document.getElementById('dropdownOptionsStations').style.display = 'none';
+}
+
+document.addEventListener('DOMContentLoaded', loadOptions);
+
+window.addEventListener('click', function(event) {
+    if (!event.target.closest('.dropdown-container')) {
+        document.getElementById('dropdownOptionsStations').style.display = 'none';
+    }
+});
+
     </script>
 
 </body>
