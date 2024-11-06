@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= stationName %> Station</title>
+</head>
+<body>
+  <h1>Welcome to <%= stationName %> Station</h1>
+
+  <div>
+    <h2>Details:</h2>
+    <p><strong>Location:</strong> <%= stationData.location || 'N/A' %></p>
+    <p><strong>Description:</strong> <%= stationData.description || 'N/A' %></p>
+    <p><strong>Facilities:</strong> <%= stationData.facilities || 'N/A' %></p>
+    <!-- Add other fields as needed -->
+  </div>
+</body>
+</html>
