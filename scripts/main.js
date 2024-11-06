@@ -94,7 +94,7 @@ function writeSavedStations() {
 //------------------------------------------------------------------------------
 // Input parameter is a string representing the collection we are reading from
 //------------------------------------------------------------------------------
-function displayCardsDynamically(collection) {
+function displayStations(collection) {
     let cardTemplate = document.getElementById("savedStationsTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
 
     db.collection(collection).get()   //the collection called "hikes"
@@ -129,7 +129,7 @@ function displayCardsDynamically(collection) {
         })
 }
 
-displayCardsDynamically("savedStations");  //input param is the name of the collection
+displayStations("savedStations");  //input param is the name of the collection
 
 
 function writeSavedRoutes() {
