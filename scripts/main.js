@@ -97,7 +97,7 @@ function writeSavedStations() {
 function displayCardsDynamically(collection) {
     let cardTemplate = document.getElementById("savedStationsTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
 
-    db.collection(collection).get()   //the collection called "hikes"
+    db.collection(collection).get()   //the collection called "savedStations"
         .then(allSavedStations => {
             //var i = 1;  //Optional: if you want to have a unique ID for each hike
             allSavedStations.forEach(doc => { //iterate thru each doc
