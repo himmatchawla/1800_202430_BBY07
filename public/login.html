@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Login</title>
+
+    <!-- Firebase App (the core Firebase SDK) -->
+        <!-- Firebase -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>    
+
+    <!-- Other libs -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+
+     <!-- Ensure login.js loads after firebaseui.js -->
+     <script src="scripts/login.js" defer></script> <!-- Load login functionality -->
+
+</head>
+<body>
+    <h1>Login</h1>
+    <div id="firebaseui-auth-container"></div> <!-- FirebaseUI renders here -->
+
+    <p>Don’t have an account? Sign up using the options above.</p>
+</body>
+</html>

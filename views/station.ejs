@@ -3,17 +3,73 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= stationName %> Station</title>
+  <title>Station</title>
 </head>
 <body>
-  <h1>Welcome to <%= stationName %> Station</h1>
+  <h1>Welcome to Station</h1>
 
   <div>
     <h2>Details:</h2>
-    <p><strong>Location:</strong> <%= stationData.location || 'N/A' %></p>
-    <p><strong>Description:</strong> <%= stationData.description || 'N/A' %></p>
-    <p><strong>Facilities:</strong> <%= stationData.facilities || 'N/A' %></p>
-    <!-- Add other fields as needed -->
+    <p><strong>Neighborhood:</strong> <%= station.geo_local_area || 'N/A' %></p>
+    <p><strong>Description:</strong> <%= station.description || 'N/A' %></p>
+    <p><strong>Facilities:</strong> <%= station.facilities || 'N/A' %></p>
+
+    <p>Current Average Safety Level: <%= station.currentSafetyLevel || 'N/A' %></p>
+
+    <!-- Safety Level Form -->
+    <form id="safetyLevelForm">
+      <label for="safetyLevel">Report Safety Level (1 = Very Unsafe, 5 = Very Safe):</label>
+      <select name="safetyLevel" id="safetyLevel">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+      <button id="submitSafetyLevel">Submit Safety Level</button>
+    </form>
+
+    <p id="responseMessage"></p>
   </div>
+
+  <!-- Client-Side JavaScript to Handle Form Submission -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const submitButton = document.getElementById('submitSafetyLevel');
+  const safetyLevelSelect = document.getElementById('safetyLevel');
+
+  if (submitButton && safetyLevelSelect) {
+    submitButton.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent form submission from refreshing the page
+
+      const safetyLevel = safetyLevelSelect.value; // Get value from the <select> element
+      const stationId = '<%= stationId %>'; // Pass station ID dynamically
+
+      fetch(`/station/${stationId}/report-safety`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        credentials: "include",
+        body: JSON.stringify({ safetyLevel: Number(safetyLevel) })
+      })
+      .then(response => {
+        if (!response.ok) throw new Error("Failed to report safety level");
+        return response.json();
+      })
+      .then(data => {
+        document.getElementById("responseMessage").textContent = "Safety level reported successfully!";
+      })
+      .catch(error => {
+        console.error("Error:", error);
+        document.getElementById("responseMessage").textContent = "Error reporting safety level. Please try again.";
+      });
+    });
+  } else {
+    console.error("submitSafetyLevel button or safetyLevel select element not found in the DOM.");
+  }
+});
+  </script>
+  
 </body>
 </html>
