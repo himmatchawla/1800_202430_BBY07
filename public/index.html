@@ -7,30 +7,55 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <!-- Bootstrap if we need it -->
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
     </script> 
-
-    <!-- Firebase -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Other libs -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
 
+        <!-- Firebase -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    
+
 </head>
 
 <body>
-    <nav id="navbarPlaceholder"></nav>
+
+    <nav class="navbar navbar-expand bg-primary fixed-bottom">
+        <div class="container-fluid d-flex justify-content-center">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/aboutus.html">
+                <img src="./media/person-raised-hand.svg" />
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/index.html">
+                <img src="./media/house-door-fill.svg" />
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/help.html">
+                <img src="./media/question-square-fill.svg" />
+              </a>
+            </li>
+          </ul>
+    
+        </div>
+      </nav>
+    
     <div class="container text-center py-4">
         <div class="rounded-circle overflow-hidden">
             <img class="responsive" src="./media/logo.png" alt="">
@@ -39,13 +64,6 @@
         <a href="login.html" class="btn btn-warning" role="button">Log in</a>
     </div>
     
-        
-    
-    
-    <nav id="navbarPlaceholder"></nav>
-    <!-- <img src="media/placeholder.jpg" id="homepage-title-img"> -->
-    
-
     <p id="homepage-p1">Welcome to TransitAura, a project aimed at making Vancouver safer for its residents. Using our easy-to-navigate interface, users can view Safety Levels and Incidents on their transit routes and stations. This data is crowd-sourced, and everyone has a part to play in keeping transit safe!</p>
 
     <h2 id="homepage-h2-2">Riding Transit? TransitAura.</h2>
@@ -53,13 +71,6 @@
     <p id="homepage-p2">Make an account to start reporting and viewing today!</p>
 
     <nav id="navbarPlaceholder"></nav>
-
-    <!-- JS funcs  -->
-    <script src="scripts/firebaseAPI.js"></script>
-    <script src="scripts/skeleton.js"></script>
-    <script src="scripts/script.js"></script>
-    
-    
 
 </body>
 
