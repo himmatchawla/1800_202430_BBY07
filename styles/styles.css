@@ -107,6 +107,11 @@ body {
     background-color: #0044cc !important;
 }
 
+#bookmark-icon, #home-icon, #profile-icon {
+    width: 24px; /* adjust as needed */
+    height: 24px;
+}
+
 
 .navbar-nav {
     height: auto;
