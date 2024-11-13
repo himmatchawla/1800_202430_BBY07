@@ -87,7 +87,7 @@ body {
   }
 
 #login-h1 {
-    padding: 30px;
+    padding: 50px;
 }
 #firebaseui-auth-container {
     margin-top: 30%;
@@ -214,17 +214,47 @@ body {
     background-image: url("images/bus1.jpg");
     background-color: #384d60;
     color: white;
+
 }
 .h1InAbout{
     text-align: center;
-    padding-top: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 0px;
 }
 
 /* ABOUT US CSS*/
 #aboutUs p{
-    margin: 40px
+    margin: 40px;
+    /* margin-bottom: 10px; */
+}
+#aboutUs ul{
+    margin: 30px;
 }
 
+#aboutUs .values img{
+    display: block;
+    height: 30%;
+    width: 340px;
+    height: 200px;
+    border-radius: 2%;
+    margin: auto;
+}
+#aboutUs .vision img{
+    display: block;
+    width: 340px;
+    height: 200px;
+    border-radius: 2%;
+    margin: auto;
+}
+
+#aboutUs .team img{
+    display: block;
+    width: 340px;
+    height: 200px;
+    border-radius: 2%;
+    margin: auto;
+}
 
 /*For Help page (Before Login)*/
 
