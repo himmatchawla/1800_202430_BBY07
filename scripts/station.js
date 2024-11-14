@@ -1,6 +1,10 @@
 // script run tester
 console.log("Hello from station JS");
 
+// Ensure Firebase and Firestore (`db`) are available from the config file
+if (!firebase.apps.length) {
+    console.error("Firebase is not initialized. Check if firebaseConfig.js is loaded before station.js.");
+}
 
 // Get stationId from URL (used in station.html)
 function getStationIdFromURL() {
@@ -49,7 +53,6 @@ async function addToRecentlyViewed(stationId) {
                 await recentlyViewedRef.doc(doc.id).delete();
             }
         }
-
     } catch (error) {
         console.error("Error updating recently viewed stations:", error);
     }
@@ -99,7 +102,7 @@ if (window.location.pathname.includes("main.html")) {
 
 if (window.location.pathname.includes("station.html")) {
 
-    // load the station data based on the stationId
+    // Load the station data based on the stationId
     async function loadStationData() {
         const stationId = getStationIdFromURL();
         if (!stationId) {
@@ -115,7 +118,6 @@ if (window.location.pathname.includes("station.html")) {
                 document.getElementById("stationNeighborhood").textContent = `Neighborhood: ${stationData.neighborhood || "N/A"}`;
                 document.getElementById("stationDescription").textContent = `Description: ${stationData.description || "N/A"}`;
                 document.getElementById("stationFacilities").textContent = `Facilities: ${stationData.facilities || "N/A"}`;
-
                 calculateAverageSafetyLevel(stationId); // calculate average safety level (function defined below)
             } else {
                 console.error("Station data not found.");
@@ -125,7 +127,7 @@ if (window.location.pathname.includes("station.html")) {
         }
     }
 
-    // report safety level, store in both station and user history, and award aura points
+    // Report safety level, store in both station and user history, and award aura points
     async function reportSafetyLevel(stationId, safetyLevel) {
         const user = firebase.auth().currentUser;
 
@@ -172,7 +174,7 @@ if (window.location.pathname.includes("station.html")) {
         }
     }
 
-    // calculate and display the average safety level from reports within the last hour
+    // Calculate and display the average safety level from reports within the last hour
     async function calculateAverageSafetyLevel(stationId) {
         const oneHourAgo = new Date(Date.now() - 3600000); // calculation for one hour ago
         const safetyReportsRef = db.collection("stations").doc(stationId).collection("safetyReports");
@@ -195,7 +197,7 @@ if (window.location.pathname.includes("station.html")) {
         }
     }
 
-    // display the average safety level on a gradient bar
+    // Display the average safety level on a gradient bar
     function displayAverageSafetyLevelBar(averageSafetyLevel) {
         const overlay = document.getElementById("averageOverlay");
         if (averageSafetyLevel === "N/A") {
@@ -210,7 +212,7 @@ if (window.location.pathname.includes("station.html")) {
         }
     }
 
-    // load station data and attach event listener to the button on page load
+    // Load station data and attach event listener to the button on page load
     document.addEventListener("DOMContentLoaded", () => {
         console.log("DOMContentLoaded triggered");
 
