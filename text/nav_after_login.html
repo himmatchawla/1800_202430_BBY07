@@ -23,3 +23,17 @@
 
     </div>
   </nav>
+
+  <div class="dropup-menu" id="profileDropupMenu">
+    <a href="#">Account Details</a>
+    <a href="#">Account Settings</a>
+    <a href="#">Aurapoints</a>
+    <button class="btn btn-outline-light mt-3" onclick="logout()"><a href="../index.html">Logout</a></button>
+    <button class="btn btn-outline-light mt-3" onclick="toggleDropupMenu()">Close</button>
+  </div>
+  <script>
+    function toggleDropupMenu() {
+      const menu = document.getElementById('profileDropupMenu');
+      menu.classList.toggle('active');
+    }
+  </script>

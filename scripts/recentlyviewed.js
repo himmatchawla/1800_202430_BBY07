@@ -35,7 +35,7 @@
     } catch (error) {
         console.error("Error updating recently viewed stations:", error);
     }
-}
+
 
 // Function to retrieve and display recently viewed stations on main.html
 async function displayRecentlyViewedStations() {

@@ -1,28 +1,28 @@
- function getNameFromAuth() {
-     firebase.auth().onAuthStateChanged(user => {
-         // Check if a user is signed in:
-         if (user) {
-             // Do something for the currently logged-in user here: 
-             console.log(user.uid); //print the uid in the browser console
-             console.log(user.displayName);  //print the user name in the browser console
-             userName = user.displayName;
+//  function getNameFromAuth() {
+//      firebase.auth().onAuthStateChanged(user => {
+//          // Check if a user is signed in:
+//          if (user) {
+//              // Do something for the currently logged-in user here: 
+//              console.log(user.uid); //print the uid in the browser console
+//              console.log(user.displayName);  //print the user name in the browser console
+//              userName = user.displayName;
 
-             //method #1:  insert with JS
-             document.getElementById("name-goes-here").innerText = userName;    
+//              //method #1:  insert with JS
+//              document.getElementById("name-goes-here").innerText = userName;    
 
-             //method #2:  insert using jquery
-             //$("#name-goes-here").text(userName); //using jquery
+//              //method #2:  insert using jquery
+//              //$("#name-goes-here").text(userName); //using jquery
 
-             //method #3:  insert using querySelector
-             //document.querySelector("#name-goes-here").innerText = userName
+//              //method #3:  insert using querySelector
+//              //document.querySelector("#name-goes-here").innerText = userName
 
-         } else {
-             // No user is signed in.
-             console.log ("No user is logged in");
-         }
-     });
- }
- getNameFromAuth(); //run the function
+//          } else {
+//              // No user is signed in.
+//              console.log ("No user is logged in");
+//          }
+//      });
+//  }
+//  getNameFromAuth(); //run the function
 
 
 // function readQuote() {
@@ -41,51 +41,51 @@
 // }
 // readQuote();  // Call the function to read the data
 
-function writeSavedStations() {
+// function writeSavedStations() {
     
-    var savedStationsRef = db.collection("savedStations");
+//     var savedStationsRef = db.collection("savedStations");
 
-    savedStationsRef.doc("Metrotown Station").set({
-        code: "BBY01",
-        name: "Metrotown Station", 
-        city: "Burnaby",
-        province: "BC",
-        address: "4401 Beresford Street, Burnaby",
-		details: "Located in Metrotown",
-        busy: "Not busy",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
-    });
-    savedStationsRef.doc("Royal Oak Staion").set({
-        code: "BBY02",
-        name: "Royal Oak Staion", 
-        city: "Burnaby",
-        province: "BC",
-        address: "5199 Beresford Street, Burnaby",
-		details: "Located in Edmonds",
-        busy: "busy",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
-    });
-    savedStationsRef.doc("Edmonds Station").set({
-        code: "BBY03",
-        name: "Edmonds Station", 
-        city: "Burnaby",
-        province: "BC",
-        address: "6944 18th Avenue, Burnaby",
-		details: "Located in Edmonds",
-        busy: "busy",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system timehttps://chatgpt.com/gpts
-    });
-    savedStationsRef.doc("Patterson Station").set({
-        code: "BBY04",
-        name: "Patterson Station", 
-        city: "Burnaby",
-        province: "BC",
-        address: "4101 Beresford St., Burnaby",
-		details: "Located in Patterson",
-        busy: "not busy",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system timehttps://chatgpt.com/gpts
-    });
-}
+//     savedStationsRef.doc("Metrotown Station").set({
+//         code: "BBY01",
+//         name: "Metrotown Station", 
+//         city: "Burnaby",
+//         province: "BC",
+//         address: "4401 Beresford Street, Burnaby",
+// 		details: "Located in Metrotown",
+//         busy: "Not busy",
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+//     });
+//     savedStationsRef.doc("Royal Oak Staion").set({
+//         code: "BBY02",
+//         name: "Royal Oak Staion", 
+//         city: "Burnaby",
+//         province: "BC",
+//         address: "5199 Beresford Street, Burnaby",
+// 		details: "Located in Edmonds",
+//         busy: "busy",
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+//     });
+//     savedStationsRef.doc("Edmonds Station").set({
+//         code: "BBY03",
+//         name: "Edmonds Station", 
+//         city: "Burnaby",
+//         province: "BC",
+//         address: "6944 18th Avenue, Burnaby",
+// 		details: "Located in Edmonds",
+//         busy: "busy",
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system timehttps://chatgpt.com/gpts
+//     });
+//     savedStationsRef.doc("Patterson Station").set({
+//         code: "BBY04",
+//         name: "Patterson Station", 
+//         city: "Burnaby",
+//         province: "BC",
+//         address: "4101 Beresford St., Burnaby",
+// 		details: "Located in Patterson",
+//         busy: "not busy",
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  //current system timehttps://chatgpt.com/gpts
+//     });
+// }
  //writeSavedStations();         //if you used method 1
 
 
@@ -132,47 +132,47 @@ function displayCardsDynamically(collection) {
 displayCardsDynamically("savedStations");  //input param is the name of the collection
 
 
-function writeSavedRoutes() {
+// function writeSavedRoutes() {
     
-    var savedRoutesRef = db.collection("savedRoutes");
+//     var savedRoutesRef = db.collection("savedRoutes");
 
-    savedRoutesRef.doc("bus-130").set({
-        code: "BUS130",
-        name: "Bus 130", 
-        city: "Burnaby",
-		details: "Located in Metrotown",
-        busy: "Not busy",
-        safetyLevel: "dangerous",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
-    });
-    savedRoutesRef.doc("bus-222").set({
-        code: "BUS222",
-        name: "Bus 222", 
-        city: "Burnaby",
-		details: "Located in Metrotown",
-        busy: "Not busy",
-        safetyLevel: "Safe",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
-    });
-    savedRoutesRef.doc("bus-119").set({
-        code: "BUS119",
-        name: "Bus 119", 
-        city: "Burnaby",
-		details: "Located in Metrotown",
-        busy: "Not busy",
-        safetyLevel: "Safe",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
-    });
-    savedRoutesRef.doc("bus-19").set({
-        code: "BUS19",
-        name: "Bus 19", 
-        city: "Burnaby",
-		details: "Located in Metrotown",
-        busy: "Not busy",
-        safetyLevel: "Moderate",
-        last_updated: firebase.firestore.FieldValue.serverTimestamp()  
-    });
-}
+//     savedRoutesRef.doc("bus-130").set({
+//         code: "BUS130",
+//         name: "Bus 130", 
+//         city: "Burnaby",
+// 		details: "Located in Metrotown",
+//         busy: "Not busy",
+//         safetyLevel: "dangerous",
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+//     });
+//     savedRoutesRef.doc("bus-222").set({
+//         code: "BUS222",
+//         name: "Bus 222", 
+//         city: "Burnaby",
+// 		details: "Located in Metrotown",
+//         busy: "Not busy",
+//         safetyLevel: "Safe",
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+//     });
+//     savedRoutesRef.doc("bus-119").set({
+//         code: "BUS119",
+//         name: "Bus 119", 
+//         city: "Burnaby",
+// 		details: "Located in Metrotown",
+//         busy: "Not busy",
+//         safetyLevel: "Safe",
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+//     });
+//     savedRoutesRef.doc("bus-19").set({
+//         code: "BUS19",
+//         name: "Bus 19", 
+//         city: "Burnaby",
+// 		details: "Located in Metrotown",
+//         busy: "Not busy",
+//         safetyLevel: "Moderate",
+//         last_updated: firebase.firestore.FieldValue.serverTimestamp()  
+//     });
+// }
 //writeSavedRoutes();         //if you used method 1
 
  function displayRoutes(collection) {
@@ -212,3 +212,4 @@ function writeSavedRoutes() {
 }
 
 displayRoutes("savedRoutes");  //input param is the name of the collection
+

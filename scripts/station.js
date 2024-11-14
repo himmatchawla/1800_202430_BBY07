@@ -2,7 +2,6 @@
 console.log("Hello from station JS");
 
 
-
 // Get stationId from URL (used in station.html)
 function getStationIdFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
