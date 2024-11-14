@@ -383,3 +383,40 @@ p[id$='-p'] {
   #search-routes-h1, #search-stations-h1, #login-h1 {
     text-align: center;
   }
+
+.safety-bar-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 20px auto;
+    position: relative;
+    height: 30px;
+    background: linear-gradient(to right, red, yellow, green); /* Gradient from red to green */
+    border-radius: 5px;
+}
+
+.safety-bar {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 5px;
+}
+
+.average-overlay {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: white;
+    color: black;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+#donthaveaccount {
+    text-align: center;
+}
+
+#loginheader {
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}

@@ -29,9 +29,6 @@
     <!-- Other libs -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
-
-    
-
 </head>
 
 <body>
@@ -67,20 +64,31 @@
         <button id="search-routes-button">Search Routes</button></a>
     <p id="search-routes-p">Search Bus and Train Routes for Safety Levels and Incident Reports</p>
 
-    <h2 id="recent-h2">Recently Viewed</h2>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
-    <p>...</p>
+    
+    <div id="recentlyViewedContainer">
+      <h2 id="recent-h2">Recently Viewed</h2>
+  </div>
 
 
 
 
 
     <!-- JS funcs  -->
+    <script src="scripts/firebaseConfig.js"></script>
     <script src="scripts/login.js"></script>
     <script src="scripts/skeleton.js"></script>
+    <script src="scripts/station.js"></script>
+    <script src="scripts/recentlyviewed.js"></script>
+    <script>
+      firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+              displayRecentlyViewedStations();
+          } else {
+              console.log("No user logged in.");
+          }
+      });
+    </script>
+    
 
 </body>
 

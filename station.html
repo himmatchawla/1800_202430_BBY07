@@ -26,6 +26,7 @@
     <!-- Other libs -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
+    <script src="scripts/firebaseConfig.js"></script>
     <script src="scripts/login.js"></script>
   <script src="scripts/station.js"></script>
   <script src="scripts/skeleton.js"></script>
@@ -37,6 +38,13 @@
   <p id="stationDescription">Description: </p>
   <p id="stationFacilities">Facilities: </p>
   <p id="currentSafetyLevel">Current Safety Level: </p>
+  <div class="safety-bar-container">
+    <div class="safety-bar">
+        <div class="average-overlay" id="averageOverlay">N/A</div>
+    </div>
+</div>
+<p id="reportMessage"></p> <!-- Display the report status here -->
+
 
   <label for="safetyLevelInput">Report Safety Level (1-5):</label>
   <select id="safetyLevelInput">
