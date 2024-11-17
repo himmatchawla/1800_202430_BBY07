@@ -24,4 +24,3 @@
 
   
   document.getElementById("uploadButton").addEventListener("click", uploadJSONToFirestore);
-  

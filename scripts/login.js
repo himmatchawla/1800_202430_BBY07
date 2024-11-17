@@ -3,6 +3,7 @@
 // script run tester
 console.log("Login script loaded");
 
+const auth = firebase.auth();
 
 // configure FirebaseUI for authentication
 const uiConfig = {
@@ -43,6 +44,8 @@ async function checkUserDocument() {
     const userDoc = await userRef.get();
     if (!userDoc.exists) {
       await userRef.set({
+        name: user.displayName,
+        email: user.email,
         auraPoints: 0,
         history: []
       });
@@ -60,3 +63,18 @@ firebase.auth().onAuthStateChanged((user) => {
     console.log("User is logged out");
   }
 });
+
+    // display name on main.html
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        console.log("User detected:", user); // Debugging info
+        if (user.displayName) {
+          document.getElementById('nameGoesHere').textContent = user.displayName;
+        } else {
+          document.getElementById('nameGoesHere').textContent = "User";
+          console.log("Display name not set for this user.");
+        }
+      } else {
+        console.log("No user logged in.");
+      }
+    });
