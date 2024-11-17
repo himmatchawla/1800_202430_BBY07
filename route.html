@@ -25,12 +25,13 @@
 
     <!-- Other libs -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="stylesheet" href="styles/styles.css">
   <script src="scripts/firebaseConfig.js"></script>
   <script src="scripts/login.js"></script>
   <script src="scripts/routes.js"></script>
+  <script src="scripts/skeleton.js"></script>
   <script src="scripts/recentlyviewed.js"></script>
-  <link rel="stylesheet" href="styles/styles.css">
+  
 
 
 </head>
@@ -56,6 +57,8 @@
       <option value="5">5 - Very Safe</option>
   </select>
   <button id="reportSafetyButton">Submit Safety Level</button>
+
+  <div id="successMessage" class="success-message"></div>
 
   <div id="recentIncidents" class="mt-5">
     <h4>Recent Incidents</h4>

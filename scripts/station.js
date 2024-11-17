@@ -12,7 +12,7 @@ function getStationIdFromURL() {
     return urlParams.get("stationId");
 }
 
-// display last 5 incident reports for that station
+// fisplay last 5 incident reports for that station
 async function displayRecentIncidents(stationId) {
     try {
         const incidentReportsRef = db.collection("stations").doc(stationId).collection("incidentReports");
@@ -38,7 +38,7 @@ async function displayRecentIncidents(stationId) {
     }
 }
 
-// load station data based on the stationId
+// load station data based on stationId
 async function loadStationData() {
     const stationId = getStationIdFromURL();
     if (!stationId) {
@@ -69,7 +69,8 @@ async function reportSafetyLevel(stationId, safetyLevel) {
     const user = firebase.auth().currentUser;
 
     if (!user) {
-        document.getElementById("reportMessage").textContent = "Please log in to report safety levels.";
+        document.getElementById("successMessage").textContent = "Please log in to report safety levels.";
+        document.getElementById("successMessage").style.color = "red";
         return;
     }
 
@@ -85,10 +86,10 @@ async function reportSafetyLevel(stationId, safetyLevel) {
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
-        // add aura point
+        // add aura points
         const userRef = db.collection("users").doc(userId);
         await userRef.update({
-            auraPoints: firebase.firestore.FieldValue.increment(1)
+            auraPoints: firebase.firestore.FieldValue.increment(1),
         });
 
         // add to user history
@@ -99,11 +100,14 @@ async function reportSafetyLevel(stationId, safetyLevel) {
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
-        document.getElementById("reportMessage").textContent = "Safety level reported successfully. You've earned 1 aura point!";
+        document.getElementById("successMessage").textContent = "Safety level reported successfully. You've earned 1 aura point!";
+        document.getElementById("successMessage").style.color = "green";
+
         calculateAverageSafetyLevel(stationId);
     } catch (error) {
         console.error("Error reporting safety level:", error);
-        document.getElementById("reportMessage").textContent = "Failed to report safety level.";
+        document.getElementById("successMessage").textContent = "Failed to report safety level.";
+        document.getElementById("successMessage").style.color = "red";
     }
 }
 
@@ -111,12 +115,14 @@ async function reportSafetyLevel(stationId, safetyLevel) {
 async function submitIncidentReport(stationId, title, details) {
     const user = firebase.auth().currentUser;
     if (!user) {
-        alert("You must be logged in to submit a report.");
+        document.getElementById("successMessage").textContent = "You must be logged in to submit a report.";
+        document.getElementById("successMessage").style.color = "red";
         return;
     }
 
     if (!details.trim()) {
-        alert("Details field is required.");
+        document.getElementById("successMessage").textContent = "Details field is required.";
+        document.getElementById("successMessage").style.color = "red";
         return;
     }
 
@@ -134,7 +140,7 @@ async function submitIncidentReport(stationId, title, details) {
         // add aura points
         const userRef = db.collection("users").doc(user.uid);
         await userRef.update({
-            auraPoints: firebase.firestore.FieldValue.increment(3)
+            auraPoints: firebase.firestore.FieldValue.increment(3),
         });
 
         // add to user history
@@ -146,11 +152,14 @@ async function submitIncidentReport(stationId, title, details) {
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
-        alert("Incident report submitted successfully. You've earned 3 aura points!");
+        document.getElementById("successMessage").textContent = "Incident report submitted successfully. You've earned 3 aura points!";
+        document.getElementById("successMessage").style.color = "green";
+
         displayRecentIncidents(stationId);
     } catch (error) {
         console.error("Error submitting incident report:", error);
-        alert("Failed to submit the report.");
+        document.getElementById("successMessage").textContent = "Failed to submit the report.";
+        document.getElementById("successMessage").style.color = "red";
     }
 }
 
@@ -159,7 +168,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const overlay = document.getElementById("overlay");
     const submitReportBtn = document.getElementById("submitReportBtn");
     const closeOverlay = document.getElementById("closeOverlay");
-    const overlayCard = document.getElementById("overlayCard");
     const incidentForm = document.getElementById("incidentForm");
 
     submitReportBtn.addEventListener("click", () => {
@@ -202,7 +210,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const stationId = getStationIdFromURL();
     if (stationId) {
         loadStationData();
-        addToRecentlyViewed(stationId);
     }
 });
 
@@ -226,7 +233,7 @@ async function calculateAverageSafetyLevel(stationId) {
     }
 }
 
-// display average safety level on a gradient bar
+// Display the average safety level on a gradient bar
 function displayAverageSafetyLevelBar(averageSafetyLevel) {
     const overlay = document.getElementById("averageOverlay");
     if (averageSafetyLevel === "N/A") {
@@ -238,11 +245,3 @@ function displayAverageSafetyLevelBar(averageSafetyLevel) {
         overlay.style.left = `calc(${percentage}% - 20px)`;
     }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const stationId = getStationIdFromURL();
-    if (stationId) {
-        loadStationData();
-        addToRecentlyViewed(stationId);
-    }
-});

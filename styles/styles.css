@@ -367,7 +367,7 @@ p[id$='-p'] {
     border: 1px solid #007bff;
     border-radius: 5px;
     background-color: #fff;
-    display: none; /* Hidden by default */
+    display: none;
     z-index: 1000;
   }
 
@@ -452,4 +452,9 @@ p[id$='-p'] {
     padding: 10px;
     cursor: pointer;
     color: #000;
+}
+
+.success-message {
+    font-size: 16px;
+    margin-top: 10px;
 }
