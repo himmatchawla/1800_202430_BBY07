@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>TransitAura</title>
+    <meta name="comp1800 template" content="My 1800 App">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Icons (Material Design)-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!-- Bootstrap if we need it -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+
+    <!-- Firebase -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <!-- Other libs -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="scripts/dropdown.js" defer></script>
+
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white text-center">
+                        <h3>Incident Report for <span id="stationName">Loading Station...</span></h3>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <!-- Title -->
+                            <div class="mb-3">
+                                <label for="stationReport-title" class="form-label">Add a Title</label>
+                                <input type="text" class="form-control" id="stationReport-title" placeholder="Title" required>
+                            </div>
+
+                            <!-- Type -->
+                            <div class="mb-3">
+                                <label for="stationReport-type" class="form-label">Type of Incident</label>
+                                <select class="form-select" id="stationReport-type" required>
+                                    <option value="">Select Type</option>
+                                    <option value="Type1">Type 1</option>
+                                    <option value="Type2">Type 2</option>
+                                    <option value="Type3">Type 3</option>
+                                </select>
+                            </div>
+
+                            <!-- Date -->
+                            <div class="mb-3">
+                                <label for="stationReport-date" class="form-label">Date of Incident</label>
+                                <input type="date" class="form-control" id="stationReport-date" required>
+                            </div>
+
+                            <!-- Time -->
+                            <div class="mb-3">
+                                <label for="stationReport-time" class="form-label">Time of Incident</label>
+                                <input type="time" class="form-control" id="stationReport-time" required>
+                            </div>
+
+                            <!-- Description -->
+                            <div class="mb-3">
+                                <label for="stationReport-description" class="form-label">Details of the Incident</label>
+                                <textarea class="form-control" id="stationReport-description" rows="5" placeholder="Provide detailed information about the incident" required></textarea>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="d-flex justify-content-end">
+                                <button type="button" class="btn btn-primary btn-lg" onclick="writeStationReport()">Submit Report</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <nav id="navbarPlaceholder"></nav>
+
+        <!-- JS funcs  -->
+
+        <script src="scripts/firebaseConfig.js"></script>
+        <script src="scripts/eachStation.js"></script>
+        <script src="scripts/stationIncidentReport.js"></script>
+        <script src="scripts/skeleton.js"></script>
+        <script src="scripts/station.js"></script>
+        <script src="scripts/main.js"></script>
+
+
+
+
+
+</body>
+
+</html>
+
+
