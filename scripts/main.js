@@ -218,39 +218,37 @@
 
 
 function displayStations(collection) {
-    let cardTemplate = document.getElementById("stationsTemplate"); // Retrieve the HTML element with the ID "hikeCardTemplate" and store it in the cardTemplate variable. 
+    let cardTemplate = document.getElementById("stationsTemplate"); // Template for stations
 
-    db.collection(collection).get()   //the collection called "savedStations"
+    db.collection(collection).get()
         .then(allSavedStations => {
-            //var i = 1;  //Optional: if you want to have a unique ID for each hike
-            allSavedStations.forEach(doc => { //iterate thru each doc
-                let name = doc.data().name;       // get value of the "name" key
-                //let details = doc.data().details;
-                let stationSafety = doc.data().currentSafetyLevel;
-                // let time_updated = doc.data().last_updated.toDate().toLocaleString(); // Convert Firestore timestamp to readable format
-                let newcard = cardTemplate.content.cloneNode(true); // Clone the HTML template to create a new card (newcard) that will be filled with Firestore data.
+            allSavedStations.forEach(doc => {
+                console.log("Document ID:", doc.id);
+                console.log("Document Data:", doc.data()); // Log data for debugging
 
-                //update title and text and image
+                // Check for the 'name' or 'station' field and use whichever exists
+                let name = doc.data().name || doc.data().station || "Unnamed Station";
+                let stationSafety = doc.data().currentSafetyLevel || "Unknown Safety Level";
+
+                let newcard = cardTemplate.content.cloneNode(true); // Clone the template
+
+                // Update the card with data
                 newcard.querySelector('.station-title').innerHTML = name;
-                //newcard.querySelector('.station-details').innerHTML = details;
                 newcard.querySelector('.station-safety').innerHTML = stationSafety;
-                // newcard.querySelector('.card-time').innerHTML = time_updated;
-                // newcard.querySelector('.card-image').src = `./images/${hikeCode}.jpg`; //Example: NV01.jpg
+                newcard.querySelector('a').href = "incidentReport.html?docID=" + doc.id;
 
-                //Optional: give unique ids to all elements for future use
-                // newcard.querySelector('.card-title').setAttribute("id", "ctitle" + i);
-                // newcard.querySelector('.card-text').setAttribute("id", "ctext" + i);
-                // newcard.querySelector('.card-image').setAttribute("id", "cimage" + i);
-
-                //attach to gallery, Example: "hikes-go-here"
+                // Attach to gallery
                 document.getElementById(collection + "-go-here").appendChild(newcard);
-
-                //i++;   //Optional: iterate variable to serve as unique ID
-            })
+            });
         })
+        .catch(error => {
+            console.error("Error fetching stations:", error);
+        });
 }
 
-displayStations("stations");  //input param is the name of the collection
+// Call the function to display stations
+displayStations("stations");
+
 
 
 function displayRoutes(collection) {

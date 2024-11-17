@@ -48,4 +48,3 @@ function writeStationReport() {
         window.location.href = 'review.html';
     }
 }
-
