@@ -1,47 +1,67 @@
+// RECENTLYVIEWED.JS HANDLES RECENTLY VIEWED CONTAINER ON MAIN.HTML
+
+// firebase init
+if (!firebase.apps.length) {
+    console.error("Firebase is not initialized. Check if firebaseConfig.js is loaded before recentlyviewed.js.");
+}
+
+// add station or route to the recently viewed list
+async function addToRecentlyViewed(itemId, type) {
+    const user = firebase.auth().currentUser;
+
+    if (!user) {
+        console.error("No user is logged in."); // error logging
+        return;
+    }
+
     const userId = user.uid;
     const userRef = db.collection("users").doc(userId);
     const recentlyViewedRef = userRef.collection("recentlyViewed");
 
-    try {
-        // Check if the station already exists in recently viewed
-        const existingDocs = await recentlyViewedRef.where("stationId", "==", stationId).get();
+    try { // runs into issues sometimes, so its in a try block
+        const existingDocs = await recentlyViewedRef
+            .where("itemId", "==", itemId)
+            .where("type", "==", type)
+            .get();
 
         if (!existingDocs.empty) {
-            // If the station already exists, update its timestamp to mark it as most recent
             const existingDoc = existingDocs.docs[0];
             await recentlyViewedRef.doc(existingDoc.id).update({
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             });
         } else {
-            // Otherwise, add the station with a timestamp
             await recentlyViewedRef.add({
-                stationId: stationId,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                itemId: itemId,
+                type: type,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             });
         }
 
-        // Ensure only the 5 most recent stations are kept
         const snapshot = await recentlyViewedRef.orderBy("timestamp", "desc").get();
         const docs = snapshot.docs;
 
         if (docs.length > 5) {
-            // Delete oldest entries beyond the 5 most recent
             const excessDocs = docs.slice(5);
-            for (let doc of excessDocs) {
+            for (const doc of excessDocs) {
                 await recentlyViewedRef.doc(doc.id).delete();
             }
         }
-
     } catch (error) {
-        console.error("Error updating recently viewed stations:", error);
+        console.error("Error updating recently viewed items:", error); // error logging
     }
+}
 
-
-// Function to retrieve and display recently viewed stations on main.html
-async function displayRecentlyViewedStations() {
+// retrieve and display recently viewed
+async function displayRecentlyViewedItems() {
     const user = firebase.auth().currentUser;
-    if (!user) {
-        console.error("No user is logged in.");
+
+    if (!user) { // runs into issues sometimes, so its in a try block
+        console.error("No user is logged in."); // error logging
+        const container = document.getElementById("recentlyViewedContainer");
+        container.innerHTML = `
+            <h2>Recently Viewed</h2>
+            <p>Please log in to see recently viewed items.</p>
+        `;
         return;
     }
 
@@ -49,46 +69,64 @@ async function displayRecentlyViewedStations() {
     const recentlyViewedRef = db.collection("users").doc(userId).collection("recentlyViewed");
 
     try {
-        // Get the 5 most recent stations in order
         const snapshot = await recentlyViewedRef.orderBy("timestamp", "desc").limit(5).get();
-        const recentlyViewedContainer = document.getElementById("recentlyViewedContainer");
-        recentlyViewedContainer.innerHTML = ""; // Clear any previous data
+        const container = document.getElementById("recentlyViewedContainer");
 
-        snapshot.forEach(doc => {
-            const stationId = doc.data().stationId;
-            const stationElement = document.createElement("div");
-            stationElement.classList.add("recent-station");
-            stationElement.textContent = `Station: ${stationId}`;
-            
-            // Optionally make the station clickable to view it again
-            stationElement.onclick = () => {
-                window.location.href = `station.html?stationId=${stationId}`;
-            };
+        container.innerHTML = "<h2>Recently Viewed</h2>";
 
-            recentlyViewedContainer.appendChild(stationElement);
+        if (snapshot.empty) {
+            container.innerHTML += `<p>No recently viewed items.</p>`;
+            return;
+        }
+
+        snapshot.forEach((doc) => {
+            const data = doc.data();
+            const itemElement = document.createElement("div");
+            itemElement.classList.add("recent-item");
+
+            const link =
+                data.type === "station"
+                    ? `station.html?stationId=${data.itemId}`
+                    : `route.html?routeId=${data.itemId}`;
+
+            itemElement.innerHTML = `
+                <a href="${link}">
+                    ${data.type === "station" ? "Station" : "Route"}: ${data.itemId}
+                </a>
+            `;
+            container.appendChild(itemElement);
         });
     } catch (error) {
-        console.error("Error displaying recently viewed stations:", error);
+        console.error("Error displaying recently viewed items:", error); // error logging
     }
 }
 
-// Check if on station.html and add station to recently viewed if applicable
-if (window.location.pathname.includes("station.html")) {
-    document.addEventListener("DOMContentLoaded", () => {
-        const stationId = getStationIdFromURL();
-        if (stationId) {
-            addToRecentlyViewed(stationId);
-        }
-    });
-}
-
-// Automatically display recently viewed stations on main.html
-if (window.location.pathname.includes("main.html")) {
-    document.addEventListener("DOMContentLoaded", displayRecentlyViewedStations);
-}
-
-// Helper function to get the station ID from the URL
+// extract station or route IDs from the URL
 function getStationIdFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
     return urlParams.get("stationId");
 }
+
+function getRouteIdFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get("routeId");
+}
+
+// listen for auth state changes and handle recently viewed items
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        const pathname = window.location.pathname;
+
+        if (pathname.includes("station.html")) {
+            const stationId = getStationIdFromURL();
+            if (stationId) addToRecentlyViewed(stationId, "station");
+        } else if (pathname.includes("route.html")) {
+            const routeId = getRouteIdFromURL();
+            if (routeId) addToRecentlyViewed(routeId, "route");
+        } else if (pathname.includes("main.html")) {
+            displayRecentlyViewedItems();
+        }
+    } else {
+        console.error("No user is logged in."); // error logging
+    }
+});

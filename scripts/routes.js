@@ -1,21 +1,23 @@
+// ROUTES.JS HANDLES THE ROUTE.HTML PAGE AND ALLOWS FOR SAFETY REPORTING AND INCIDENT REPORTING
+
 // error logging
-console.log("Hello from station JS");
+console.log("Hello from routes.js");
 
 // firebase init
 if (!firebase.apps.length) {
-    console.error("Firebase is not initialized. Check if firebaseConfig.js is loaded before station.js.");
+    console.error("Firebase is not initialized. Check if firebaseConfig.js is loaded before routes.js.");
 }
 
-// get stationId from URL
-function getStationIdFromURL() {
+// get routeId from URL
+function getRouteIdFromURL() {
     const urlParams = new URLSearchParams(window.location.search);
-    return urlParams.get("stationId");
+    return urlParams.get("routeId");
 }
 
-// display last 5 incident reports for that station
-async function displayRecentIncidents(stationId) {
-    try {
-        const incidentReportsRef = db.collection("stations").doc(stationId).collection("incidentReports");
+// display the last 5 incident reports for that route
+async function displayRecentIncidents(routeId) {
+    try { // try block
+        const incidentReportsRef = db.collection("routes").doc(routeId).collection("incidentReports");
         const snapshot = await incidentReportsRef.orderBy("timestamp", "desc").limit(5).get();
         const incidentsContainer = document.getElementById("recentIncidents");
 
@@ -38,34 +40,32 @@ async function displayRecentIncidents(stationId) {
     }
 }
 
-// load station data based on the stationId
-async function loadStationData() {
-    const stationId = getStationIdFromURL();
-    if (!stationId) {
-        console.error("No station ID specified in URL.");
+// load route data based on routeId
+async function loadRouteData() {
+    const routeId = getRouteIdFromURL();
+    if (!routeId) {
+        console.error("No route ID specified in URL.");
         return;
     }
 
-    try {
-        const stationDoc = await db.collection("stations").doc(stationId).get();
-        if (stationDoc.exists) {
-            const stationData = stationDoc.data();
-            document.getElementById("stationName").textContent = stationData.name || "Unknown";
-            document.getElementById("stationNeighborhood").textContent = `Neighborhood: ${stationData.neighborhood || "N/A"}`;
-            document.getElementById("stationDescription").textContent = `Description: ${stationData.description || "N/A"}`;
-            document.getElementById("stationFacilities").textContent = `Facilities: ${stationData.facilities || "N/A"}`;
-            calculateAverageSafetyLevel(stationId);
-            displayRecentIncidents(stationId);
+    try { // try block
+        const routeDoc = await db.collection("routes").doc(routeId).get();
+        if (routeDoc.exists) {
+            const routeData = routeDoc.data();
+            document.getElementById("routeName").textContent = routeId || "Unknown";
+            document.getElementById("routeDescription").textContent = `Description: ${routeData.description || "N/A"}`;
+            calculateAverageSafetyLevel(routeId);
+            displayRecentIncidents(routeId);
         } else {
-            console.error("Station data not found.");
+            console.error("Route data not found."); 
         }
     } catch (error) {
-        console.error("Error loading station data:", error);
+        console.error("Error loading route data:", error);
     }
 }
 
 // submit safety level report
-async function reportSafetyLevel(stationId, safetyLevel) {
+async function reportSafetyLevel(routeId, safetyLevel) {
     const user = firebase.auth().currentUser;
 
     if (!user) {
@@ -75,8 +75,8 @@ async function reportSafetyLevel(stationId, safetyLevel) {
 
     const userId = user.uid;
 
-    try {
-        const safetyReportsRef = db.collection("stations").doc(stationId).collection("safetyReports");
+    try { // try block
+        const safetyReportsRef = db.collection("routes").doc(routeId).collection("safetyReports");
         const newReportRef = safetyReportsRef.doc();
 
         await newReportRef.set({
@@ -94,13 +94,13 @@ async function reportSafetyLevel(stationId, safetyLevel) {
         // add to user history
         await userRef.collection("history").doc(newReportRef.id).set({
             type: "Safety Report",
-            stationId: stationId,
+            routeId: routeId,
             safetyLevel: parseInt(safetyLevel),
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
         document.getElementById("reportMessage").textContent = "Safety level reported successfully. You've earned 1 aura point!";
-        calculateAverageSafetyLevel(stationId);
+        calculateAverageSafetyLevel(routeId);
     } catch (error) {
         console.error("Error reporting safety level:", error);
         document.getElementById("reportMessage").textContent = "Failed to report safety level.";
@@ -108,7 +108,7 @@ async function reportSafetyLevel(stationId, safetyLevel) {
 }
 
 // submit incident report
-async function submitIncidentReport(stationId, title, details) {
+async function submitIncidentReport(routeId, title, details) {
     const user = firebase.auth().currentUser;
     if (!user) {
         alert("You must be logged in to submit a report.");
@@ -121,7 +121,7 @@ async function submitIncidentReport(stationId, title, details) {
     }
 
     try {
-        const incidentReportsRef = db.collection("stations").doc(stationId).collection("incidentReports");
+        const incidentReportsRef = db.collection("routes").doc(routeId).collection("incidentReports");
         const newIncidentRef = incidentReportsRef.doc();
 
         await newIncidentRef.set({
@@ -140,14 +140,14 @@ async function submitIncidentReport(stationId, title, details) {
         // add to user history
         await userRef.collection("history").doc(newIncidentRef.id).set({
             type: "Incident Report",
-            stationId: stationId,
+            routeId: routeId,
             title: title || "No Title",
             details: details,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
         alert("Incident report submitted successfully. You've earned 3 aura points!");
-        displayRecentIncidents(stationId);
+        displayRecentIncidents(routeId);
     } catch (error) {
         console.error("Error submitting incident report:", error);
         alert("Failed to submit the report.");
@@ -178,10 +178,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
     incidentForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const stationId = getStationIdFromURL();
+        const routeId = getRouteIdFromURL();
         const title = document.getElementById("incidentTitle").value;
         const details = document.getElementById("incidentDetails").value;
-        submitIncidentReport(stationId, title, details);
+        submitIncidentReport(routeId, title, details);
         overlay.style.display = "none";
         incidentForm.reset();
     });
@@ -191,25 +191,25 @@ document.addEventListener("DOMContentLoaded", () => {
         reportButton.addEventListener("click", () => {
             const safetyLevel = document.getElementById("safetyLevelInput").value;
             if (safetyLevel) {
-                const stationId = getStationIdFromURL();
-                reportSafetyLevel(stationId, parseInt(safetyLevel));
+                const routeId = getRouteIdFromURL();
+                reportSafetyLevel(routeId, parseInt(safetyLevel));
             } else {
                 alert("Please select a safety level before submitting.");
             }
         });
     }
 
-    const stationId = getStationIdFromURL();
-    if (stationId) {
-        loadStationData();
-        addToRecentlyViewed(stationId);
+    const routeId = getRouteIdFromURL();
+    if (routeId) {
+        loadRouteData();
+        addToRecentlyViewed(routeId); // Update for routes
     }
 });
 
-// calculate and display average safety level
-async function calculateAverageSafetyLevel(stationId) {
+// calculate and display the average safety level
+async function calculateAverageSafetyLevel(routeId) {
     const oneHourAgo = new Date(Date.now() - 3600000);
-    const safetyReportsRef = db.collection("stations").doc(stationId).collection("safetyReports");
+    const safetyReportsRef = db.collection("routes").doc(routeId).collection("safetyReports");
 
     try {
         const recentReportsSnapshot = await safetyReportsRef.where("timestamp", ">", oneHourAgo).get();
@@ -226,7 +226,7 @@ async function calculateAverageSafetyLevel(stationId) {
     }
 }
 
-// display average safety level on a gradient bar
+// display average safety level on gradient bar
 function displayAverageSafetyLevelBar(averageSafetyLevel) {
     const overlay = document.getElementById("averageOverlay");
     if (averageSafetyLevel === "N/A") {
@@ -238,11 +238,3 @@ function displayAverageSafetyLevelBar(averageSafetyLevel) {
         overlay.style.left = `calc(${percentage}% - 20px)`;
     }
 }
-
-document.addEventListener("DOMContentLoaded", () => {
-    const stationId = getStationIdFromURL();
-    if (stationId) {
-        loadStationData();
-        addToRecentlyViewed(stationId);
-    }
-});

@@ -1,114 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <title>TransitAura</title>
-    <meta name="comp1800 template" content="My 1800 App">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Search Routes</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- Google Icons (Material Design)-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     
+        <!-- Bootstrap if we need it -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
     
-    <!-- Bootstrap if we need it -->
-     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script> 
-
-    <!-- Firebase -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
-    <!-- Other libs -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="styles/styles.css">
-
-</head>
-
-<body>
-    <nav id="navbarPlaceholder"></nav>
-
-    <div class="back-button-container">
-        <a href="main.html">
-        <button>
-            ← Back
-        </button>
-        </a>
-    </div>
+        <!-- Firebase -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     
-    <h1 id="search-routes-h1">Search Your Route</h1>
+        <!-- Other libs -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <div class="dropdown-container">
-        <input type="text" id="dropdownInputRoutes" class="dropdown-input" placeholder="Search options..." oninput="filterOptions()" onclick="toggleDropdown()">
-        <div id="dropdownOptionsRoutes" class="dropdown-options"></div>
-      </div>
-
-  
-      <template id="routesTemplate">
-        <div class="card">
-            <h5 class="routes-title card-header"></h5>
-            <div class="card-body">
-                <p>Bus Number: <span class="routes-number"></span></p>
-                <p>safetyLevel: <span class="routes-safetyLevel"></span></p>
-                <i class="material-icons">bookmark_border</i>
-                <a href="./incidentReport.html" class="btn btn-primary">Report Incident</a>
-            </div>
-        </div>
-    </template>
-
-      <div id="routes-go-here"></div>
-
-    <nav id="navbarPlaceholder"></nav>
-
-
-
-    <!-- JS funcs  -->
-    <!-- JS funcs  -->
-    <script src="scripts/eachStation.js"></script>
     <script src="scripts/firebaseConfig.js"></script>
     <script src="scripts/login.js"></script>
+    <script src="scripts/routes.js"></script>
     <script src="scripts/skeleton.js"></script>
-    <script src="scripts/main.js"></script>
-
-    <script>
-        function filterOptions() {
-        const input = document.getElementById('dropdownInputRoutes').value.toLowerCase();
-        const options = document.getElementById('dropdownOptionsRoutes').children;
-        for (const option of options) {
-            if (option.textContent.toLowerCase().includes(input)) {
-            option.style.display = 'block';
-            } else {
-            option.style.display = 'none';
-            }
+    <script src="scripts/dropdown.js"></script>
+    <script src="scripts/routes.js"></script>
+    <link rel="stylesheet" href="styles/styles.css">
+    <style>
+        .dropdown-container {
+            position: relative;
+            width: 100%;
         }
+        .dropdown-input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
         }
-
-        function toggleDropdown() {
-        const dropdownOptionsRoutes = document.getElementById('dropdownOptionsRoutes');
-        dropdownOptionsRoutes.style.display = dropdownOptionsRoutes.style.display === 'none' ? 'block' : 'none';
+        .dropdown-options {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            width: 100%;
+            max-height: 200px;
+            overflow-y: auto;
+            z-index: 1;
         }
-
-        function selectOption(value) {
-        document.getElementById('dropdownInputRoutes').value = value;
-        document.getElementById('dropdownOptionsRoutes').style.display = 'none'; // Hide dropdown after selection
+        .dropdown-options.show {
+            display: block;
         }
-
-        document.addEventListener('DOMContentLoaded', loadOptions);
-
-        window.addEventListener('click', function(event) {
-        if (!event.target.closest('.dropdown-container')) {
-            document.getElementById('dropdownOptionsRoutes').style.display = 'none';
+        .dropdown-option {
+            padding: 8px;
+            cursor: pointer;
         }
-        });
-    </script>
+        .dropdown-option:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+  <nav id="navbarPlaceholder"></nav>
 
+  <h1>Search Routes</h1>
+
+  <div class="dropdown-container">
+    <input type="text" id="dropdownInputRoutes" class="dropdown-input" placeholder="Search routes..." oninput="filterOptions()" onclick="toggleDropdown()">
+    <div id="dropdownOptionsRoutes" class="dropdown-options"></div>
+</div>
+
+
+  <div id="routes-go-here"></div>
+
+  <template id="routesTemplate">
+      <div class="card">
+          <h5 class="route-title card-header"></h5>
+          <div class="card-body">
+              <p>Details: <span class="route-text"></span></p>
+              <a href="route.html?routeId={{routeId}}" class="btn btn-primary">View Route</a>
+          </div>
+      </div>
+  </template>
 </body>
-
 </html>
-
-

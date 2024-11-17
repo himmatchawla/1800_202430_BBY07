@@ -1,3 +1,5 @@
+// SKELETON.JS DISPLAYS NAV_BEFORE_LOGIN AND NAV_AFTER_LOGIN
+
 function loadSkeleton() {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {                   

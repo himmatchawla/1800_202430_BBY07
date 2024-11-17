@@ -1,13 +1,13 @@
+// LOGIN.JS HANDLES FIREBASE LOGIN AND LOGOUT, CREATING USER DOCUMENTS AFTER REGISTRATION, AND DISPLAYS THE USER'S NAME ON MAIN.HTML
 
-
-// script run tester
+// error logging
 console.log("Login script loaded");
 
 const auth = firebase.auth();
 
 // configure FirebaseUI for authentication
 const uiConfig = {
-  signInSuccessUrl: 'main.html', // Redirect to this page on successful login
+  signInSuccessUrl: 'main.html',
   signInOptions: [
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
   ],
@@ -15,9 +15,9 @@ const uiConfig = {
   privacyPolicyUrl: '/privacy'
 };
 const ui = new firebaseui.auth.AuthUI(firebase.auth());
-console.log("FirebaseUI initialized"); // debug logging
-ui.start('#firebaseui-auth-container', uiConfig);
-console.log("FirebaseUI started"); // debug logging
+console.log("FirebaseUI initialized"); // error logging
+ui.start('#firebaseui-auth-container', uiConfig); // firebase UI package init
+console.log("FirebaseUI started"); // error logging
 
 // login with Firebase Auth
 async function login(email, password) {
@@ -54,7 +54,7 @@ async function checkUserDocument() {
   }
 }
 
-// listen for auth state changes
+// listen for auth state changes - is user logged in?
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
     console.log("User is logged in:", user);
@@ -64,17 +64,17 @@ firebase.auth().onAuthStateChanged((user) => {
   }
 });
 
-    // display name on main.html
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        console.log("User detected:", user); // Debugging info
-        if (user.displayName) {
-          document.getElementById('nameGoesHere').textContent = user.displayName;
-        } else {
-          document.getElementById('nameGoesHere').textContent = "User";
-          console.log("Display name not set for this user.");
-        }
-      } else {
-        console.log("No user logged in.");
-      }
-    });
+// display name on main.html
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    console.log("User detected:", user); // error logging
+    if (user.displayName) {
+      document.getElementById('nameGoesHere').textContent = user.displayName;
+    } else {
+      document.getElementById('nameGoesHere').textContent = "User";
+      console.log("Display name not set for this user.");
+    }
+  } else {
+    console.log("No user logged in."); // error logging
+  }
+});

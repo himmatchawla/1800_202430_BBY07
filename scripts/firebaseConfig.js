@@ -1,3 +1,5 @@
+// FIREBASECONFIG.JS INITIALIZES FIREBASE AND FIRESTORE
+
 // initialize Firebase
 const firebaseConfig = {
     apiKey: "AIzaSyDr1vA3wOtKq01WABZTtnjKeUOn-Yc17ko",

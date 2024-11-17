@@ -1,39 +1,42 @@
+// DROPDOWN.JS RUNS THE DROPDOWNS ON SEARCHSTATIONS.HTML/SEARCHROUTES.HTML AND REDIRECTS TO STATION.HTML TEMPLATE WITH THE DOCUMENT ID (AKA STATIONID/ROUTEID)
 
-
-// new firebase instance if one doesnt already exist
+// firebase init
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
 
-// set db const as firestore db
-
-
-// populate dropdown w station options
+// populate dropdown with stations or routes
 async function populateDropdown() {
-    const dropdownOptions = document.getElementById('dropdownOptionsStations');
+    const isStationSearch = window.location.pathname.includes('searchstations.html');
+    const collectionName = isStationSearch ? 'stations' : 'routes';
+    const dropdownOptions = document.getElementById(
+        isStationSearch ? 'dropdownOptionsStations' : 'dropdownOptionsRoutes'
+    );
     dropdownOptions.innerHTML = ''; // clear existing options
 
     try {
-        const stationsSnapshot = await db.collection('stations').get(); // pull station options from firestore
-        stationsSnapshot.forEach(doc => {
+        const snapshot = await db.collection(collectionName).get(); // fetch stations/routes from firestore
+        snapshot.forEach(doc => {
             const option = document.createElement('div');
             option.classList.add('dropdown-option');
-            option.textContent = doc.data().name || doc.id; // display the station name or ID (document names in "stations" collection)
+            option.textContent = doc.data().name || doc.id;
 
-            // click event - an option links to station.html + station ID of the clicked station
+            // clicking an option links to station.html or route.html with the respective ID
             option.onclick = () => {
-                window.location.href = `station.html?stationId=${doc.id}`;
+                const page = isStationSearch ? 'station.html' : 'route.html';
+                window.location.href = `${page}?${isStationSearch ? 'stationId' : 'routeId'}=${doc.id}`;
             };
             dropdownOptions.appendChild(option);
         });
     } catch (error) {
-        console.error('Error fetching station names:', error);
+        console.error(`Error fetching ${isStationSearch ? 'station' : 'route'} names:`, error);
     }
 }
 
 // filter dropdown options based on user input
 function filterOptions() {
-    const input = document.getElementById('dropdownInputStations').value.toLowerCase();
+    const isStationSearch = window.location.pathname.includes('searchstations.html');
+    const input = document.getElementById(isStationSearch ? 'dropdownInputStations' : 'dropdownInputRoutes').value.toLowerCase();
     const options = document.querySelectorAll('.dropdown-option');
 
     options.forEach(option => {
@@ -44,9 +47,12 @@ function filterOptions() {
 
 // toggle dropdown display
 function toggleDropdown() {
-    const dropdownOptions = document.getElementById('dropdownOptionsStations');
+    const isStationSearch = window.location.pathname.includes('searchstations.html');
+    const dropdownOptions = document.getElementById(
+        isStationSearch ? 'dropdownOptionsStations' : 'dropdownOptionsRoutes'
+    );
     dropdownOptions.classList.toggle('show');
 }
 
-// load the dropdown when page loads
+// load dropdown when page loads
 document.addEventListener('DOMContentLoaded', populateDropdown);
