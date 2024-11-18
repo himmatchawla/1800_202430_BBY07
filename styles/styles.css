@@ -69,7 +69,6 @@ button:hover {
     text-align: center;
 }
 
-/* Entire Dashboard Card Styling */
 #recentlyViewedContainer {
     padding: 20px;
     background-color: #f0f5f6;
@@ -81,12 +80,10 @@ button:hover {
     transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* Hover Effect for Dashboard Card */
 #recentlyViewedContainer:hover {
     box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Header Styling */
 #recentlyViewedContainer h2 {
     font-family: 'Arial', sans-serif;
     font-size: 1.8rem;
@@ -97,7 +94,6 @@ button:hover {
     padding-bottom: 10px;
 }
 
-/* Cards Container Styling */
 #recentlyViewedCards {
     display: flex;
     flex-wrap: wrap;
@@ -105,7 +101,6 @@ button:hover {
     justify-content: flex-start;
 }
 
-/* Individual Recently Viewed Item */
 .recently-viewed-item {
     background-color: #f0f5f6;
     border: 1px solid #e0e0e0;
@@ -118,20 +113,17 @@ button:hover {
     text-align: center;
 }
 
-/* Hover Effects for Items */
 .recently-viewed-item:hover {
     /* transform: translateY(-3px); */
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Link Styling */
 .recently-viewed-link {
     text-decoration: none;
     color: inherit;
     display: block;
 }
 
-/* Item Text Styling */
 .recently-viewed-content p {
     font-family: 'Arial', sans-serif;
     font-size: 1rem;
