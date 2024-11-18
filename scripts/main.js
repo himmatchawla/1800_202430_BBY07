@@ -239,16 +239,22 @@ function displayStations(collection) {
                 newcard.querySelector('.station-safety').innerHTML = stationSafety;
                 newcard.querySelector('a').href = "incidentReport.html?docID=" + doc.id;
 
-            //     newcard.querySelector('a').id = 'save-' + doc.id;
-            //     newcard.querySelector('i').onclick = () => saveBookmarkStation(doc.id);
+                //
+                let iconID = 'save-' + doc.id;
 
-            //     user.get().then(userDoc => {
-            //         //get the user name
-            //         var bookmarks = userDoc.data().bookmarks;
-            //         if (bookmarks.includes(docID)) {
-            //            document.getElementById('save-' + docID).innerText = 'bookmark';
-            //         }
-            //   })
+                newcard.querySelector('i').id = iconID;
+                newcard.querySelector('i').onclick = () => saveBookmarkStation(doc.id);
+
+                // check if the station is already bookmarked
+                // if you have no bookmarks = ok, doesnt break page
+                currentUser.get().then(userDoc => {
+                    // gets its from the bookmarksStation array or keeps it empty
+                    let bookmarks = userDoc.data().bookmarksStation || [];
+                    //get the user name
+                    if (bookmarks.includes(doc.id)) {
+                       document.getElementById(iconID).innerText = 'bookmark';
+                    }
+              })
 
                 // Attach to gallery
                 document.getElementById(collection + "-go-here").appendChild(newcard);

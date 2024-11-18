@@ -34,6 +34,9 @@ currentUser.update({
         //console.log(iconID);
                     //this is to change the icon of the hike that was saved to "filled"
         document.getElementById(iconID).innerText = 'bookmark';
+    })
+    .catch(error => {
+        console.error("Error loading bookmark", error);
     });
 }
 
