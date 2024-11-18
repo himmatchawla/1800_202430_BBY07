@@ -239,6 +239,9 @@ function displayStations(collection) {
                 newcard.querySelector('.station-safety').innerHTML = stationSafety;
                 newcard.querySelector('a').href = "incidentReport.html?docID=" + doc.id;
 
+                newcard.querySelector('a').id = 'save-' + doc.id;
+                newcard.querySelector('i').onclick = () => saveBookmark(doc.id);
+
                 // Attach to gallery
                 document.getElementById(collection + "-go-here").appendChild(newcard);
             });
@@ -293,3 +296,25 @@ function displayRoutes(collection) {
 }
 
 displayRoutes("routes");  //input param is the name of the collection
+
+//-----------------------------------------------------------------------------
+// This function is called whenever the user clicks on the "bookmark" icon.
+// It adds the hike to the "bookmarks" array
+// Then it will change the bookmark icon from the hollow to the solid version. 
+//-----------------------------------------------------------------------------
+function saveBookmark(stationId) {
+    // Manage the backend process to store the hikeDocID in the database, recording which hike was bookmarked by the user.
+currentUser.update({
+                    // Use 'arrayUnion' to add the new bookmark ID to the 'bookmarks' array.
+            // This method ensures that the ID is added only if it's not already present, preventing duplicates.
+        bookmarksStation: firebase.firestore.FieldValue.arrayUnion(stationId)
+    })
+            // Handle the front-end update to change the icon, providing visual feedback to the user that it has been clicked.
+    .then(function () {
+        console.log("bookmark has been saved for" + stationId);
+        let iconID = 'save-' + stationId;
+        //console.log(iconID);
+                    //this is to change the icon of the hike that was saved to "filled"
+        document.getElementById(iconID).innerText = 'bookmark';
+    });
+}
