@@ -253,6 +253,7 @@ p[id$='-p'] {
 .success-message {
     font-size: 16px;
     margin-top: 10px;
+    text-align: center;
 }
 
 #stationNeighborhood, #stationDescription, #stationFacilities, #currentSafetyLevel {
