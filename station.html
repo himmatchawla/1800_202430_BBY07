@@ -39,15 +39,21 @@
   <p id="stationDescription">Description: </p>
   <p id="stationFacilities">Facilities: </p>
   <p id="currentSafetyLevel">Current Safety Level: </p>
+
+  <p id="reportMessage"></p> 
+  <p id="reportMessage"></p>
+  <div id="successMessage" class="success-message"></div>
+
+<div id="safetyLevel">
+    <h2>Current Safety Level</h2>
   <div class="safety-bar-container">
     <div class="safety-bar">
         <div class="average-overlay" id="averageOverlay">N/A</div>
     </div>
-</div>
-<p id="reportMessage"></p> 
+    </div>
 
 
-  <label for="safetyLevelInput">Report Safety Level (1-5):</label>
+  <label for="safetyLevelInput">Report Safety Level:</label>
   <select id="safetyLevelInput">
       <option value="">Select a level</option>
       <option value="1">1 - Very Unsafe</option>
@@ -57,11 +63,10 @@
       <option value="5">5 - Very Safe</option>
   </select>
   <button id="reportSafetyButton">Submit Safety Level</button>
+</div>
 
-  <p id="reportMessage"></p>
-
-  <div id="successMessage" class="success-message"></div>
-
+<div id="incidents">
+    <h2 id="recentIncidentsH2">Recent Incidents</h2>
   <div id="recentIncidents" class="mt-5">
     <h4>Recent Incidents</h4>
     <div class="incident-list"></div>
@@ -87,6 +92,8 @@
             </div>
         </div>
     </div>
+
+</div>
 
     
 

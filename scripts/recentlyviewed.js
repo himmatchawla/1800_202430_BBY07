@@ -89,11 +89,17 @@ async function displayRecentlyViewedItems() {
                     ? `station.html?stationId=${data.itemId}`
                     : `route.html?routeId=${data.itemId}`;
 
-            itemElement.innerHTML = `
-                <a href="${link}">
-                    ${data.type === "station" ? "Station" : "Route"}: ${data.itemId}
-                </a>
-            `;
+                    itemElement.innerHTML = `
+    <a href="${link}" class="recently-viewed-link">
+        <div class="recently-viewed-item">
+            <div class="recently-viewed-content">
+                <p>${data.itemId}</p>
+            </div>
+        </div>
+    </a>
+`;
+
+                
             container.appendChild(itemElement);
         });
     } catch (error) {

@@ -1,313 +1,6 @@
+/* ---------------WEBSITE WIDE STYLES---------------*/
 body {
-    background-color: #f0f5f6;
-    
-}
-
-#book-mark-heading{
-    font-size: 3vw;
-}
-
-#name-goes-here{
-    text-align: center;
-}
-#user-name{
-    text-align: center;
-    font-size: 10vw;
-}
-
-#homepage-title-img {
-    width: 100%;
-}
-
-/* ---------------- NAV BEFORE LOGIN ----------------*/
-.nav_before_login {
-    
-    padding: 10px 20px;
-    font-family: Arial, sans-serif;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.nav_before_login ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    display: flex; 
-}
-
-.navbar-nav {
-    height: auto;
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .navbar-nav .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .navbar-nav .nav-item a {
-    cursor: pointer;
-  }
-
-/* DOES NAV BEFORE LOGIN NEED A DROPUP MENU??*/
-.dropup-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.3s ease;
-    opacity: 0;
-    z-index: 5;
-  }
-
-  .dropup-menu.active {
-    display: flex;
-    opacity: 1;
-  }
-
-  .dropup-menu a {
-    /* display: block; */
-    /* margin: 10px 0; */
-    color: white;
-    text-decoration: none;
-    /* font-size: 1.2rem; */
-  }
-
-#login-h1 {
-    padding: 50px;
-}
-#firebaseui-auth-container {
-    margin-top: 30%;
-}
-
-#firebaseui-auth-container .firebaseui-card-actions .firebaseui-form-actions {
-    display: flex;
-    flex-direction: column-reverse;
-}
-
-#firebaseui-auth-container .firebaseui-card-actions .firebaseui-form-actions .firebaseui-button {
-    margin: 10px;
-}
-
-/* ---------------- NAV AFTER LOGIN ----------------*/
-.nav_after_login {
-    background-color: #0044cc !important;
-}
-
-#bookmark-icon, #home-icon, #profile-icon {
-    width: 24px; /* adjust as needed */
-    height: 24px;
-}
-
-
-.navbar-nav {
-    height: auto;
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.navbar-nav .nav-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.navbar-nav .nav-item a {
-    cursor: pointer;
-}
-
-
-.logout-container {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-/* NAV AFTER LOGIN - PROFILE DROPUP MENU*/
-.dropup-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    color: white;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.3s ease;
-    opacity: 0;
-    z-index: 5;
-  }
-
-  .dropup-menu.active {
-    display: flex;
-    opacity: 1;
-  }
-
-  .dropup-menu a {
-    /* display: block; */
-    /* margin: 10px 0; */
-    color: white;
-    text-decoration: none;
-    /* font-size: 1.2rem; */
-  }
-
-/*For Saved Stations/Routes*/
-#user-name2{
-    font-size: 7vw;
-}
-#saved-stations-h2{
-    text-align: center;
-    font-size: 6.5vw;
-}
-
-#saved-routes-h2{
-    text-align: center;
-    padding-top: 6%;
-    padding-bottom: 2%;
-    font-size: 6.5vw;
-}
-
-.card{
-    margin-top: 3%;
-}
-
-/*BACK BUTTON CSS
-.back-button-container {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1000; 
-}
-
-.back-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 8px 12px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-}
-*/
-
-
-#body {
-    background-color: #384d60;
-}
-
-/*For About Us page(Before Login)*/
-#aboutUs{
-    background-image: url("images/bus1.jpg");
-    background-color: #384d60;
-    color: white;
-
-}
-.h1InAbout{
-    text-align: center;
-    padding-left: 30px;
-    padding-right: 30px;
-    padding-bottom: 0px;
-}
-
-/* ABOUT US CSS*/
-#aboutUs p{
-    margin: 40px;
-    /* margin-bottom: 10px; */
-}
-#aboutUs ul{
-    margin: 30px;
-}
-
-#aboutUs .values img{
-    display: block;
-    height: 30%;
-    width: 340px;
-    height: 200px;
-    border-radius: 2%;
-    margin: auto;
-}
-#aboutUs .vision img{
-    display: block;
-    width: 340px;
-    height: 200px;
-    border-radius: 2%;
-    margin: auto;
-}
-
-#aboutUs .team img{
-    display: block;
-    width: 340px;
-    height: 200px;
-    border-radius: 2%;
-    margin: auto;
-}
-
-/*For Help page (Before Login)*/
-
-
-
-
-@media (max-width: 330px) {
-    .nav_before_login ul li {
-        margin: 0 0px;
-    }
-}
-
-#homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
-    text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    margin: 25px;
-}
-
-@media (min-width: 769px) {
-    #homepage-title-img {
-        width: 50%;
-        display: block;
-        margin: 0 auto;
-
-    }
-
-    .nav_before_login {
-        /* width: 50%; */
-        margin: 0 auto;
-        margin-bottom: 5px;
-    }
-
-    #homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
-        max-width: 50%;
-        margin: 0 auto;  
-        margin-top: 15px;
-        padding: 0 20px;
-    }
-}
-
-#limited-to-van {
-    font-size: 1rem;
-    text-align: center;
-    max-width: 1000px;
-    margin-bottom: 40px;
-    color: #000000; 
-    margin-left: auto;
-    margin-right: auto;
+    background-color: #ebebeb;
 }
 
 button {
@@ -332,6 +25,124 @@ button:hover {
     transform: scale(1.03);
 }
 
+/*---------------MEDIA QUERIES---------------*/
+@media (max-width: 330px) {
+    .nav_before_login ul li {
+        margin: 0 0px;
+    }
+}
+
+@media (min-width: 769px) {
+    #homepage-title-img {
+        width: 50%;
+        display: block;
+        margin: 0 auto;
+
+    }
+
+    .nav_before_login {
+        /* width: 50%; */
+        margin: 0 auto;
+        margin-bottom: 5px;
+    }
+
+    #homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
+        max-width: 50%;
+        margin: 0 auto;  
+        margin-top: 15px;
+        padding: 0 20px;
+    }
+}
+
+/*---------------MAIN.HTML STYLES---------------*/
+#limited-to-van {
+    font-size: 1rem;
+    text-align: center;
+    max-width: 1000px;
+    /* margin-bottom: 40px; */
+    color: #000000; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#user-name {
+    text-align: center;
+}
+
+/* Entire Dashboard Card Styling */
+#recentlyViewedContainer {
+    padding: 20px;
+    background-color: #f0f5f6;
+    border: 1px solid #2a73e8;
+    border-radius: 15px;
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
+    max-width: 900px;
+    margin: 20px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+/* Hover Effect for Dashboard Card */
+#recentlyViewedContainer:hover {
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+/* Header Styling */
+#recentlyViewedContainer h2 {
+    font-family: 'Arial', sans-serif;
+    font-size: 1.8rem;
+    color: #2a73e8;
+    text-align: center;
+    /* margin-bottom: 20px; */
+    /* border-bottom: 1px solid #f0f5f6; */
+    padding-bottom: 10px;
+}
+
+/* Cards Container Styling */
+#recentlyViewedCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: flex-start;
+}
+
+/* Individual Recently Viewed Item */
+.recently-viewed-item {
+    background-color: #f0f5f6;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
+    margin: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-align: center;
+}
+
+/* Hover Effects for Items */
+.recently-viewed-item:hover {
+    /* transform: translateY(-3px); */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Link Styling */
+.recently-viewed-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+/* Item Text Styling */
+.recently-viewed-content p {
+    font-family: 'Arial', sans-serif;
+    font-size: 1rem;
+    color: rgb(49, 49, 49);
+    margin: 0;
+    font-weight: bold;
+}
+
+
+
+/*---------------SEARCHSTATIONS.HTML AND SEARCHROUTE.HTML STYLES---------------*/
 p[id$='-p'] {
     font-size: 0.9rem;
     color: #000000;
@@ -384,6 +195,8 @@ p[id$='-p'] {
     text-align: center;
   }
 
+
+/*---------------STATION.HTML AND ROUTE.HTML STYLES---------------*/
 .safety-bar-container {
     width: 100%;
     max-width: 400px;
@@ -410,15 +223,6 @@ p[id$='-p'] {
     padding: 5px 10px;
     border-radius: 5px;
     font-weight: bold;
-}
-
-#donthaveaccount {
-    text-align: center;
-}
-
-#loginheader {
-    text-align: center;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
 }
 
 #overlay {
@@ -457,4 +261,297 @@ p[id$='-p'] {
 .success-message {
     font-size: 16px;
     margin-top: 10px;
+}
+
+#stationNeighborhood, #stationDescription, #stationFacilities, #currentSafetyLevel {
+    display: none;
+}
+
+#stationName {
+    text-align: center;
+    font-size: 3em;
+}
+
+#safetyLevel {
+    padding: 20px;
+    background-color: #f0f5f6;
+    border: 1px solid #2a73e8;
+    border-radius: 15px;
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
+    max-width: 900px;
+    margin: 20px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+    }
+    
+#safetyLevel:hover {
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+#incidents {
+    padding: 20px;
+    background-color: #f0f5f6;
+    border: 1px solid #2a73e8;
+    border-radius: 15px;
+    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
+    max-width: 900px;
+    margin: 20px auto;
+    transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+#incidents:hover {
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.2);
+}
+
+#submitReportBtn {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+}
+
+#recentIncidentsH2 {
+    text-align: center;
+}
+
+/*---------------BOOKMARK.HTML STYLES---------------*/
+/* #user-name{
+    text-align: center;
+    font-size: 10vw;
+}
+
+#user-name2{
+    font-size: 7vw;
+}
+#saved-stations-h2{
+    text-align: center;
+    font-size: 6.5vw;
+}
+
+#saved-routes-h2{
+    text-align: center;
+    padding-top: 6%;
+    padding-bottom: 2%;
+    font-size: 6.5vw;
+}
+
+.card{
+    margin-top: 3%;
+} */
+
+/*---------------NAVBAR STYLES---------------*/
+.navbar-nav {
+    height: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar-nav .nav-item a {
+    cursor: pointer;
+  }
+
+.dropup-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    z-index: 5;
+  }
+
+  .dropup-menu.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .dropup-menu a {
+    /* display: block; */
+    /* margin: 10px 0; */
+    color: white;
+    text-decoration: none;
+    /* font-size: 1.2rem; */
+  }
+
+  .nav_after_login {
+    background-color: #0044cc !important;
+}
+
+#bookmark-icon, #home-icon, #profile-icon {
+    width: 24px; /* adjust as needed */
+    height: 24px;
+}
+
+.navbar-nav {
+    height: auto;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-nav .nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar-nav .nav-item a {
+    cursor: pointer;
+}
+
+.logout-container {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.dropup-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    z-index: 5;
+  }
+
+  .dropup-menu.active {
+    display: flex;
+    opacity: 1;
+  }
+
+  .dropup-menu a {
+    /* display: block; */
+    /* margin: 10px 0; */
+    color: white;
+    text-decoration: none;
+    /* font-size: 1.2rem; */
+  }
+
+  /* .nav_before_login {
+    
+    padding: 10px 20px;
+    font-family: Arial, sans-serif;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav_before_login ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+} */
+
+/*---------------INDEX.HTML STYLES---------------*/
+/* #homepage-title-img {
+    width: 100%;
+} */
+
+#homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
+    text-align: center;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    margin: 0 auto;
+}
+
+/*---------------LOGIN.HTML STYLES---------------*/
+#loginheader {
+    text-align: center;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+}
+
+#firebaseui-auth-container {
+    margin-top: 30%;
+}
+
+#firebaseui-auth-container .firebaseui-card-actions .firebaseui-form-actions {
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+#firebaseui-auth-container .firebaseui-card-actions .firebaseui-form-actions .firebaseui-button {
+    margin: 10px;
+}
+
+#donthaveaccount {
+    text-align: center;
+}
+
+/* #login-h1 {
+    padding: 50px;
+} */
+
+/*---------------ABOUTUS.HTML STYLES---------------*/
+/* #body {
+    background-color: #384d60;
+} */
+
+#aboutUs{
+    background-image: url("images/bus1.jpg");
+    /* background-color: #384d60;
+    color: white; */
+
+}
+.h1InAbout{
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 0px;
+}
+
+#aboutUs p{
+    margin: 40px;
+    /* margin-bottom: 10px; */
+}
+#aboutUs ul{
+    margin: 30px;
+}
+
+#aboutUs .values img{
+    display: block;
+    height: 30%;
+    width: 340px;
+    height: 200px;
+    border-radius: 2%;
+    margin: auto;
+}
+#aboutUs .vision img{
+    display: block;
+    width: 340px;
+    height: 200px;
+    border-radius: 2%;
+    margin: auto;
+}
+
+#aboutUs .team img{
+    display: block;
+    width: 340px;
+    height: 200px;
+    border-radius: 2%;
+    margin: auto;
 }
