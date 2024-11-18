@@ -241,9 +241,21 @@ function displayStations(collection) {
 
                 //
                 let iconID = 'save-' + doc.id;
-
                 newcard.querySelector('i').id = iconID;
-                newcard.querySelector('i').onclick = () => saveBookmarkStation(doc.id);
+                // this is the single onclick handler that determines whether to save or 
+                // update the bookmark based on the current state of the icon or the data
+                // instead of having two handlers
+                newcard.querySelector('i').id = 'save-' + doc.id;
+                newcard.querySelector('i').onclick = () => {
+                    const icon = document.getElementById('save-' + doc.id);
+                    if (icon.innerText === 'bookmark') {
+                        updateBookmark(doc.id); // If already bookmarked, remove it
+                    } else {
+                        saveBookmark(doc.id); // If not bookmarked, save it
+                    }
+                };
+
+
 
                 // check if the station is already bookmarked
                 // if you have no bookmarks = ok, doesnt break page
@@ -330,5 +342,52 @@ currentUser.update({
         //console.log(iconID);
                     //this is to change the icon of the hike that was saved to "filled"
         document.getElementById(iconID).innerText = 'bookmark';
+    })
+    // debug message if Firestore has issues
+    .catch(function (error) {
+        console.error("Error saving bookmark:", error);
     });
+}
+
+function updateBookmark(stationId){
+    // alert("inside update bookmark");     //debug
+    currentUser.get().then(doc => {
+        //console.log(doc.data()).bookmarks; //debug
+        currentBookmarks = doc.data().bookmarksStation;
+
+        if (currentBookmarks && currentBookmarks.includes(stationId)) {
+            console.log(stationId);
+            currentUser.update({
+                bookmarksStation: firebase.firestore.FieldValue.arrayRemove(stationId)
+            })
+            .then(function() {
+                console.log("This bookmark is removed for " + currentUser);
+                let iconID = "save-" + stationId;   //"save-2342342"
+                console.log(iconID);
+                document.getElementById(iconID).innerText = "bookmark_border";
+
+            })
+        } else {
+            currentUser.set({
+                bookmarksStation: firebase.firestore.FieldValue.arrayUnion(stationId),
+            },
+            {
+                merge: true
+            })
+            .then(function(){
+                console.log("This bookmark is removed for" + currentUser);
+                let iconID = "save-" + stationId;   //"save-2342342"
+                console.log(iconID);
+                document.getElementById(iconID).innerText = "bookmark_border";
+            })
+        // debug message if Firestore has issues
+        .catch(function (error) {
+            console.error("Error adding bookmark:", error);
+        });
+    }
+})
+// debug message if Firestore has issues
+.catch(function (error) {
+    console.error("Error fetching current user data:", error);
+});
 }
