@@ -216,11 +216,8 @@
 // displayRoutes("savedRoutes");  //input param is the name of the collection
 
 
-
-
-
 function displayStations(collection) {
-    let cardTemplate = document.getElementById("stationsTemplate"); // Template for stations
+    let cardTemplate = document.getElementById("stationsTemplate");
 
     db.collection(collection).get()
         .then(allSavedStations => {
@@ -380,7 +377,7 @@ function updateBookmark(stationId){
                 console.log(iconID);
                 document.getElementById(iconID).innerText = "bookmark_border";
             })
-        // debug message if Firestore has issues
+        // debug message if Firestore has issues for updating the bookmarkStation array
         .catch(function (error) {
             console.error("Error adding bookmark:", error);
         });
