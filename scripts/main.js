@@ -239,8 +239,16 @@ function displayStations(collection) {
                 newcard.querySelector('.station-safety').innerHTML = stationSafety;
                 newcard.querySelector('a').href = "incidentReport.html?docID=" + doc.id;
 
-                newcard.querySelector('a').id = 'save-' + doc.id;
-                newcard.querySelector('i').onclick = () => saveBookmark(doc.id);
+            //     newcard.querySelector('a').id = 'save-' + doc.id;
+            //     newcard.querySelector('i').onclick = () => saveBookmarkStation(doc.id);
+
+            //     user.get().then(userDoc => {
+            //         //get the user name
+            //         var bookmarks = userDoc.data().bookmarks;
+            //         if (bookmarks.includes(docID)) {
+            //            document.getElementById('save-' + docID).innerText = 'bookmark';
+            //         }
+            //   })
 
                 // Attach to gallery
                 document.getElementById(collection + "-go-here").appendChild(newcard);
