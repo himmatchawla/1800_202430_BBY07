@@ -38,6 +38,13 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="/styles/styles.css" />
+<style>.view-item,
+  .remove-bookmark {
+      width: 100%; /* Ensure buttons are the same width */
+      text-align: center; /* Center align text within buttons */
+      margin: 0; /* Remove any margin */
+  }
+  </style>
 </head>
 
 <body>
@@ -54,80 +61,34 @@
   <div class="container">
     <h1 id="user-name" class="display-4">Saved Bookmarks for <span id="nameGoesHere"></span> </h1>
     <!-- Here is container for cards  -->
-    <p> Stations </p>
     <div class="container">
         <div id="StationsCardGroup" class="row row-cols-auto">
         </div>
     </div>
   </div>
 
-<div id="stations-go-here"></div>
+  
+          <h1 class="my-4">Your Bookmarks</h1>
+  
+          <!-- Bookmarks Go Here -->
+          <div id="bookmarks-go-here"></div>
+  
+          <!-- Card Template -->
+          <template id="bookmarksTemplate">
+            <div class="card my-3">
+                <h5 class="bookmark-title card-header"></h5>
+                <div class="card-body">
+                    <p><strong>Details:</strong> <span class="bookmark-details"></span></p>
+                    <p><strong>Safety Level:</strong> <span class="bookmark-safety"></span></p>
+                    <div class="d-flex gap-2">
+                        <a href="#" class="btn btn-primary flex-grow-1 view-item">View</a>
+                        <button class="btn btn-danger flex-grow-1 remove-bookmark">Remove Bookmark</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+        
 
-<!-- Templates for general use, not displayed -->
-
-            <!-- <template id="stationsTemplate">
-              <div class="card">
-                  <h5 class="station-title card-header"></h5>
-                  <div class="card-body">
-                      <p>Location: <span class="station-text"></span></p>
-                      <p>Busyness: <span class="staiton-details"></span></p>
-                      <p>Address: <span class="station-safety"></span></p>
-                      <i class="material-icons">bookmark_border</i>
-                      <a class="btn btn-primary" onclick="saveStationDocumentIDAndRedirect()">Report Incident</a>
-                  </div>
-              </div>
-          </template> -->
-
-<template id="savedStationsCardTemplate">
-    <div class="card py-2 mx-2 bg-light" style="width: 10rem;">
-        <!-- <img class="card-image card-img-top" src=" ..." alt="..."> -->
-        <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <i  class="material-icons" onclick="updateBookmark(stationId)">bookmark</i>
-            <br>
-            <!-- <a class="btn btn-secondary card-href" id="read-more">Read more ...</a> -->
-        </div>
-    </div>
-</template>
-
-  <!-- <div id="book-mark-heading">
-    <h1 id="user-name2" class="display-4">
-      Saved Stations and Routes for
-      <span style="text-align: center" id="name-goes-here"></span>
-    </h1>
-  </div>
-
-  <h2 id="saved-stations-h2">Saved Stations</h2>
-
-  <template id="savedStationsTemplate">
-    <div class="card">
-      <h5 class="card-title card-header"></h5>
-      <div class="card-body">
-        <p>Location: <span class="card-text"></span></p>
-        <p>Busyness: <span class="card-busy"></span></p>
-        <p>Address: <span class="card-address"></span></p>
-        <a href="#" class="btn btn-primary">Report Incident</a>
-      </div>
-    </div>
-  </template>
-
-  <div id="savedStations-go-here"></div>
-
-  <h2 id="saved-routes-h2">Saved Routes</h2>
-
-  <template id="savedRoutesTemplate">
-    <div class="card">
-      <h5 class="bus-title card-header"></h5>
-      <div class="card-body">
-        <p class="bus-safetyLevel"></p>
-        <p class="bus-details"></p>
-        <p class="bus-busy"></p>
-        <a href="#" class="btn btn-primary">report Incident</a>
-      </div>
-    </div>
-  </template>
-
-  <div id="savedRoutes-go-here"></div> -->
 
   <nav id="navbarPlaceholder"></nav>
 
@@ -136,8 +97,10 @@
   <script src="scripts/firebaseConfig.js"></script>
   <script src="scripts/login.js"></script>
   <script src="scripts/skeleton.js"></script>
-  <script src="scripts/saved.js"></script>
-
-  <script src="scripts/eachStation.js"></script>
+  <script src="scripts/station.js"></script>
+  <script src="scripts/routes.js"></script>
+  <script src="scripts/bookmark.js"></script>
+  <script src="scripts/search.js"></script>
+  <script src="scripts/searchroutes.js"></script>
 </body>
 </html>

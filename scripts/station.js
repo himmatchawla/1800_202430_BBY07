@@ -38,31 +38,7 @@ async function displayRecentIncidents(stationId) {
     }
 }
 
-// load station data based on stationId
-async function loadStationData() {
-    const stationId = getStationIdFromURL();
-    if (!stationId) {
-        console.error("No station ID specified in URL.");
-        return;
-    }
 
-    try {
-        const stationDoc = await db.collection("stations").doc(stationId).get();
-        if (stationDoc.exists) {
-            const stationData = stationDoc.data();
-            document.getElementById("stationName").textContent = stationData.name || "Unknown";
-            document.getElementById("stationNeighborhood").textContent = `Neighborhood: ${stationData.neighborhood || "N/A"}`;
-            document.getElementById("stationDescription").textContent = `Description: ${stationData.description || "N/A"}`;
-            document.getElementById("stationFacilities").textContent = `Facilities: ${stationData.facilities || "N/A"}`;
-            calculateAverageSafetyLevel(stationId);
-            displayRecentIncidents(stationId);
-        } else {
-            console.error("Station data not found.");
-        }
-    } catch (error) {
-        console.error("Error loading station data:", error);
-    }
-}
 
 // submit safety level report
 async function reportSafetyLevel(stationId, safetyLevel) {
@@ -86,30 +62,18 @@ async function reportSafetyLevel(stationId, safetyLevel) {
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
-        // add aura points
-        const userRef = db.collection("users").doc(userId);
-        await userRef.update({
-            auraPoints: firebase.firestore.FieldValue.increment(1),
-        });
-
-        // add to user history
-        await userRef.collection("history").doc(newReportRef.id).set({
-            type: "Safety Report",
-            stationId: stationId,
-            safetyLevel: parseInt(safetyLevel),
-            timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-        });
-
         document.getElementById("successMessage").textContent = "Safety level reported successfully. You've earned 1 aura point!";
         document.getElementById("successMessage").style.color = "green";
 
-        calculateAverageSafetyLevel(stationId);
+        // Recalculate safety level
+        await calculateStationAverageSafetyLevel(stationId);
     } catch (error) {
         console.error("Error reporting safety level:", error);
         document.getElementById("successMessage").textContent = "Failed to report safety level.";
         document.getElementById("successMessage").style.color = "red";
     }
 }
+
 
 // submit incident report
 async function submitIncidentReport(stationId, title, details) {
@@ -214,17 +178,45 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // calculate and display average safety level
-async function calculateAverageSafetyLevel(stationId) {
+// Display the average safety level on a gradient bar
+function displayAverageSafetyLevelBar(averageSafetyLevel) {
+    console.log("Updating gradient bar with safety level:", averageSafetyLevel);
+    const overlay = document.getElementById("averageOverlay");
+
+    if (!overlay) {
+        console.error("Gradient bar overlay not found in DOM.");
+        return;
+    }
+
+    if (averageSafetyLevel === "N/A") {
+        overlay.textContent = "N/A";
+        overlay.style.left = "0";
+        overlay.style.backgroundColor = "#ccc"; // Neutral color for N/A
+        console.log("Set gradient bar to N/A.");
+    } else {
+        overlay.textContent = averageSafetyLevel;
+        const percentage = ((averageSafetyLevel - 1) / 4) * 100; // Scale 1-5 to percentage
+        overlay.style.left = `calc(${percentage}% - 20px)`;
+        overlay.style.backgroundColor = getSafetyColor(averageSafetyLevel); // Set color
+        console.log("Gradient bar updated with:", overlay.style.left, overlay.style.backgroundColor);
+    }
+}
+
+// Calculate and display average safety level
+async function calculateStationAverageSafetyLevel(stationId) {
+    console.log("Calculating safety level for station ID:", stationId);
     const oneHourAgo = new Date(Date.now() - 3600000);
     const safetyReportsRef = db.collection("stations").doc(stationId).collection("safetyReports");
 
     try {
-        const recentReportsSnapshot = await safetyReportsRef.where("timestamp", ">", oneHourAgo).get();
-        const recentReports = recentReportsSnapshot.docs.map(doc => doc.data().safetyLevel);
+        const snapshot = await safetyReportsRef.where("timestamp", ">", oneHourAgo).get();
+        const safetyLevels = snapshot.docs.map(doc => doc.data().safetyLevel);
 
-        const averageSafetyLevel = recentReports.length
-            ? (recentReports.reduce((sum, level) => sum + level, 0) / recentReports.length).toFixed(2)
+        const averageSafetyLevel = safetyLevels.length
+            ? (safetyLevels.reduce((sum, level) => sum + level, 0) / safetyLevels.length).toFixed(2)
             : "N/A";
+
+        console.log("Calculated Average Safety Level:", averageSafetyLevel);
 
         document.getElementById("currentSafetyLevel").textContent = `Current Average Safety Level: ${averageSafetyLevel}`;
         displayAverageSafetyLevelBar(averageSafetyLevel);
@@ -233,24 +225,107 @@ async function calculateAverageSafetyLevel(stationId) {
     }
 }
 
-// Display the average safety level on a gradient bar
-function displayAverageSafetyLevelBar(averageSafetyLevel) {
-    const overlay = document.getElementById("averageOverlay");
-    if (averageSafetyLevel === "N/A") {
-        overlay.textContent = "N/A";
-        overlay.style.left = "0";
-    } else {
-        overlay.textContent = averageSafetyLevel;
-        const percentage = ((averageSafetyLevel - 1) / 4) * 100;
-        overlay.style.left = `calc(${percentage}% - 20px)`;
+
+// Load station data
+async function loadStationData() {
+    const stationId = getStationIdFromURL();
+    if (!stationId) {
+        console.error("No station ID specified in URL.");
+        return;
+    }
+
+    try {
+        const stationDoc = await db.collection("stations").doc(stationId).get();
+        if (stationDoc.exists) {
+            const stationData = stationDoc.data();
+            document.getElementById("stationName").textContent = stationData.name || "Unknown";
+            document.getElementById("stationNeighborhood").textContent = `Neighborhood: ${stationData.neighborhood || "N/A"}`;
+            document.getElementById("stationDescription").textContent = `Description: ${stationData.description || "N/A"}`;
+            document.getElementById("stationFacilities").textContent = `Facilities: ${stationData.facilities || "N/A"}`;
+            console.log("Station data loaded successfully.");
+            await calculateStationSafetyLevel(stationId);
+            await displayRecentIncidents(stationId);
+        } else {
+            console.error("Station data not found.");
+        }
+    } catch (error) {
+        console.error("Error loading station data:", error);
     }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+
+function getSafetyColor(averageSafetyLevel) {
+    if (averageSafetyLevel < 2) {
+        return "red"; // Unsafe
+    } else if (averageSafetyLevel < 3) {
+        return "orange"; // Moderately unsafe
+    } else if (averageSafetyLevel < 4) {
+        return "yellow"; // Neutral
+    } else {
+        return "green"; // Safe
+    }
+}
+
+
+// Initialize Bookmark Button
+document.addEventListener("DOMContentLoaded", async () => {
+    console.log("DOMContentLoaded event triggered"); // Debug log to verify listener is triggered
     const stationId = getStationIdFromURL();
 
-    if (stationId) {
-        loadStationData();
-        checkBookmarkStatus(stationId); // Check and set the bookmark status
+    if (!stationId) {
+        console.error("No station ID found in URL.");
+        return;
+    }
+
+    // Fetch and load station data
+    try {
+        const stationDoc = await db.collection("stations").doc(stationId).get();
+
+        if (stationDoc.exists) {
+            const stationData = stationDoc.data();
+            const stationName = stationData.name || "Unnamed Station";
+
+            // Update station details in DOM
+            const stationNameElement = document.getElementById("stationName");
+            if (stationNameElement) {
+                stationNameElement.textContent = stationName;
+            }
+
+            // Load additional station data
+            await loadStationData(); // Call this to fetch station details, safety level, and incidents
+        } else {
+            console.error("Station document not found in Firestore.");
+        }
+    } catch (error) {
+        console.error("Error fetching station data:", error);
+    }
+
+    // Set up the bookmark button
+    const bookmarkButton = document.getElementById("bookmarkButton");
+    if (bookmarkButton) {
+        try {
+            const stationDoc = await db.collection("stations").doc(stationId).get();
+            const stationName = stationDoc.data()?.name || "Unnamed Station";
+
+            // Check initial bookmark status
+            const isBookmarked = await checkBookmarkStatus(stationId);
+            bookmarkButton.textContent = isBookmarked ? "Remove Bookmark" : "Bookmark";
+
+            // Add event listener for bookmarking
+            bookmarkButton.addEventListener("click", async () => {
+                await toggleBookmark(stationId, "station", stationName);
+
+                // Update button text after toggling
+                const updatedStatus = await checkBookmarkStatus(stationId);
+                bookmarkButton.textContent = updatedStatus ? "Remove Bookmark" : "Bookmark";
+
+                console.log(`Bookmark toggled for Station ID: ${stationId}, Name: ${stationName}`);
+            });
+        } catch (error) {
+            console.error("Error setting up bookmark button:", error);
+        }
+    } else {
+        console.error("Bookmark button not found in DOM.");
     }
 });
+

@@ -221,6 +221,14 @@ p[id$='-p'] {
     margin-right: auto;
 }
 
+.card {
+    margin: 10px;
+}
+
+.input-container {
+    margin: 10px;
+}
+
  .dropdown-container {
     position: relative;
     width: 80%;
@@ -262,6 +270,41 @@ p[id$='-p'] {
   #search-routes-h1, #search-stations-h1, #login-h1 {
     text-align: center;
   }
+
+  .buttons {
+    display: flex;
+    gap: 10px; /* Adds space between buttons */
+    align-items: center; /* Aligns buttons vertically */
+}
+
+.btn {
+    display: inline-block;
+    text-decoration: none; /* Removes underline */
+    color: white; /* Text color */
+    padding: 8px 16px; /* Button padding */
+    border-radius: 4px; /* Rounded corners */
+    font-size: 14px; /* Font size */
+    text-align: center; /* Centers text */
+}
+
+.btn-primary {
+    background-color: #007bff; /* Bootstrap primary blue */
+    border: none;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Bootstrap secondary gray */
+    border: none;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Darker gray on hover */
+}
+
 
 
 /*---------------STATION.HTML AND ROUTE.HTML STYLES---------------*/

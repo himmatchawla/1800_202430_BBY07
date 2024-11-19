@@ -17,3 +17,5 @@ const firebaseConfig = {
   }
   
   const db = firebase.firestore(); // Initialize Firestore
+
+  console.log("Firebase initialized");

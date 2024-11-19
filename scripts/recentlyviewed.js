@@ -55,7 +55,7 @@ async function addToRecentlyViewed(itemId, type) {
 async function displayRecentlyViewedItems() {
     const user = firebase.auth().currentUser;
 
-    if (!user) { // runs into issues sometimes, so its in a try block
+    if (!user) {
         console.error("No user is logged in."); // error logging
         const container = document.getElementById("recentlyViewedContainer");
         container.innerHTML = `
@@ -84,28 +84,31 @@ async function displayRecentlyViewedItems() {
             const itemElement = document.createElement("div");
             itemElement.classList.add("recent-item");
 
+            // Append "Station" to station names
+            const displayName = data.type === "station" ? `${data.itemId} Station` : data.itemId;
+
             const link =
                 data.type === "station"
                     ? `station.html?stationId=${data.itemId}`
                     : `route.html?routeId=${data.itemId}`;
 
-                    itemElement.innerHTML = `
-    <a href="${link}" class="recently-viewed-link">
-        <div class="recently-viewed-item">
-            <div class="recently-viewed-content">
-                <p>${data.itemId}</p>
-            </div>
-        </div>
-    </a>
-`;
+            itemElement.innerHTML = `
+                <a href="${link}" class="recently-viewed-link">
+                    <div class="recently-viewed-item">
+                        <div class="recently-viewed-content">
+                            <p>${displayName}</p>
+                        </div>
+                    </div>
+                </a>
+            `;
 
-                
             container.appendChild(itemElement);
         });
     } catch (error) {
         console.error("Error displaying recently viewed items:", error); // error logging
     }
 }
+
 
 // extract station or route IDs from the URL
 function getStationIdFromURL() {

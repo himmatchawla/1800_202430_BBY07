@@ -29,7 +29,7 @@
     <!-- Other libs -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
-    <script src="scripts/dropdown.js" defer></script>
+    <!-- <script src="scripts/dropdown.js" defer></script> -->
 
     <style>
         /* Basic styles for dropdown */
@@ -79,43 +79,57 @@
 
     <h1 id="search-stations-h1">Search Your Station</h1>
 
-    <div class="dropdown-container">
-        <input type="text" id="dropdownInputStations" class="dropdown-input" placeholder="Search stations..." oninput="filterOptions()" onclick="toggleDropdown()">
-        <div id="dropdownOptionsStations" class="dropdown-options"></div>
+    <div>
+        <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="Search stations..."
+            aria-label="Search stations"
+        />
     </div>
     
-
+    <div id="stations-go-here"></div>
+    
 
       
    
 
 <!-- ---------------- CARDS TEMPLATE-------------------- -->
-      <template id="stationsTemplate">
-        <div class="card">
-            <h5 class="station-title card-header"></h5>
-            <div class="card-body">
-                <p>Location: <span class="station-text"></span></p>
-                <p>Busyness: <span class="staiton-details"></span></p>
-                <p>Address: <span class="station-safety"></span></p>
-                <i class="material-icons">bookmark_border</i>
-                <a class="btn btn-primary" onclick="saveStationDocumentIDAndRedirect()">Report Incident</a>
+<template id="stationsTemplate">
+    <div class="card">
+        <a class="station-title card-header"></a>
+        <div class="card-body">
+            <p class="station-safety"></p>
+            <p class="station-details"></p>
+            <div class="buttons">
+                <a class="btn btn-primary view-station">View Station</a>
+                <a class="btn btn-secondary bookmark-button"></a>
             </div>
         </div>
-    </template>
+    </div>
+</template>
 
-    <div id="stations-go-here"></div>
+
+
+
+
+
 
     <nav id="navbarPlaceholder"></nav>
 
         <!-- JS funcs  -->
 
         <script src="scripts/firebaseConfig.js"></script>
+        <script src="scripts/login.js"></script>
+        <script src="scripts/bookmark.js"></script>
         <script src="scripts/skeleton.js"></script>
         <script src="scripts/station.js"></script>
         <script src="scripts/main.js"></script>
 
-        <script src="scripts/eachStation.js"></script>
-        <script src="scripts/saved.js"></script>
-        <script src="scripts/firebaseConfig.js"></script>
+        <!-- <script src="scripts/eachStation.js"></script> -->
+        <!-- <script src="scripts/saved.js"></script> -->
+        <!-- <script src="scripts/firebaseConfig.js"></script> -->
+        <script src="scripts/search.js" defer></script>
 </body>
 </html>

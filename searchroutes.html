@@ -62,40 +62,42 @@
     </style>
 </head>
 <body>
-
     <div class="back-button-container">
         <a href="main.html">
-        <button>
-            ← Back
-        </button>
+            <button>← Back</button>
         </a>
     </div>
 
+    <nav id="navbarPlaceholder"></nav>
 
-  <nav id="navbarPlaceholder"></nav>
+    <h1>Search Routes</h1>
 
-  <h1>Search Routes</h1>
+    <div>
+        <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            placeholder="Search routes..."
+        />
+    </div>
 
-  <div class="dropdown-container">
-    <input type="text" id="dropdownInputRoutes" class="dropdown-input" placeholder="Search routes..." oninput="filterOptions()" onclick="toggleDropdown()">
-    <div id="dropdownOptionsRoutes" class="dropdown-options"></div>
-</div>
+    <template id="routesTemplate">
+        <div class="card">
+            <h5 class="routes-title card-header"></h5>
+            <div class="card-body">
+                <p><span class="routes-safetyLevel"></span></p>
+                <p><span class="routes-details"></span></p>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-primary view-routes">View Route</a>
+                    <a href="#" class="btn btn-secondary routes-bookmark-button">Bookmark</a>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <div id="routes-go-here"></div>
 
 
-  
-
-  <template id="routesTemplate">
-      <div class="card">
-          <h5 class="routes-title card-header"></h5>
-          <div class="card-body">
-              <p> Bus Number: <span class="routes-number"></span></p>
-              <p>Safety Level: <span class="routes-safetyLevel"></span></p>
-              <a href="route.html?routeId={{routeId}}" class="btn btn-primary">View Route</a>
-          </div>
-      </div>
-  </template>
-
-  <div id="routes-go-here"></div>
 
   
   <script src="scripts/firebaseConfig.js"></script>
@@ -105,6 +107,8 @@
   <script src="scripts/skeleton.js"></script>
   <script src="scripts/dropdown.js"></script>
   <script src="scripts/routes.js"></script>
+  <script src="scripts/bookmark.js"></script>
+  <script src="scripts/searchroutes.js"></script>
   
 </body>
 </html>
