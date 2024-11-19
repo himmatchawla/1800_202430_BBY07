@@ -245,3 +245,12 @@ function displayAverageSafetyLevelBar(averageSafetyLevel) {
         overlay.style.left = `calc(${percentage}% - 20px)`;
     }
 }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const stationId = getStationIdFromURL();
+
+    if (stationId) {
+        loadStationData();
+        checkBookmarkStatus(stationId); // Check and set the bookmark status
+    }
+});

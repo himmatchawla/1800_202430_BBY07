@@ -329,6 +329,12 @@ p[id$='-p'] {
     text-align: center;
 }
 
+#bookmarkMessage {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+
 #stationNeighborhood, #stationDescription, #stationFacilities, #currentSafetyLevel {
     display: none;
 }

@@ -242,3 +242,12 @@ function displayAverageSafetyLevelBar(averageSafetyLevel) {
         overlay.style.left = `calc(${percentage}% - 20px)`;
     }
 };
+
+document.addEventListener("DOMContentLoaded", () => {
+    const routeId = getRouteIdFromURL();
+
+    if (routeId) {
+        loadRouteData();
+        checkBookmarkStatus(routeId); // Check bookmark status
+    }
+});

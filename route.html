@@ -31,6 +31,7 @@
   <script src="scripts/routes.js"></script>
   <script src="scripts/skeleton.js"></script>
   <script src="scripts/recentlyviewed.js"></script>
+  <script src="scripts/bookmark.js"></script>
   
 
 
@@ -40,6 +41,10 @@
   <h1 id="routeName">Route Name</h1>
   <p id="routeDescription">Description: </p>
   <p id="currentSafetyLevel">Current Safety Level: </p>
+
+  <button id="bookmarkButton" class="btn btn-primary">Bookmark Station</button>
+<p id="bookmarkMessage"></p>
+
   <div class="safety-bar-container">
     <div class="safety-bar">
       <div class="average-overlay" id="averageOverlay">N/A</div>
@@ -85,4 +90,15 @@
       </div>
   </div>
 </body>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const routeId = getRouteIdFromURL();
+
+    if (routeId) {
+        loadRouteData();
+        checkBookmarkStatus(routeId); // Check and set the bookmark status
+    }
+});
+</script>
 </html>
