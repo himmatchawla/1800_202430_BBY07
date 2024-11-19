@@ -27,12 +27,7 @@
         <!-- Other libs -->
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <script src="scripts/firebaseConfig.js"></script>
-    <script src="scripts/login.js"></script>
-    <script src="scripts/routes.js"></script>
-    <script src="scripts/skeleton.js"></script>
-    <script src="scripts/dropdown.js"></script>
-    <script src="scripts/routes.js"></script>
+ 
     <link rel="stylesheet" href="styles/styles.css">
     <style>
         .dropdown-container {
@@ -67,6 +62,16 @@
     </style>
 </head>
 <body>
+
+    <div class="back-button-container">
+        <a href="main.html">
+        <button>
+            ← Back
+        </button>
+        </a>
+    </div>
+
+
   <nav id="navbarPlaceholder"></nav>
 
   <h1>Search Routes</h1>
@@ -77,16 +82,29 @@
 </div>
 
 
-  <div id="routes-go-here"></div>
+  
 
   <template id="routesTemplate">
       <div class="card">
-          <h5 class="route-title card-header"></h5>
+          <h5 class="routes-title card-header"></h5>
           <div class="card-body">
-              <p>Details: <span class="route-text"></span></p>
+              <p> Bus Number: <span class="routes-number"></span></p>
+              <p>Safety Level: <span class="routes-safetyLevel"></span></p>
               <a href="route.html?routeId={{routeId}}" class="btn btn-primary">View Route</a>
           </div>
       </div>
   </template>
+
+  <div id="routes-go-here"></div>
+
+  
+  <script src="scripts/firebaseConfig.js"></script>
+  <!-- <script src="scripts/login.js"></script> -->
+  <script src="scripts/main.js"></script>
+  <script src="scripts/routes.js"></script>
+  <script src="scripts/skeleton.js"></script>
+  <script src="scripts/dropdown.js"></script>
+  <script src="scripts/routes.js"></script>
+  
 </body>
 </html>
