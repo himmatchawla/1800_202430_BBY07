@@ -53,7 +53,7 @@ async function loadRouteData() {
     try {
         document.getElementById("routeName").textContent = routeId;
 
-        await calculateAverageSafetyLevel(routeId);
+        await calculateRoutesAverageSafetyLevel(routeId);
 
         await displayRecentIncidents(routeId);
     } catch (error) {
@@ -100,7 +100,7 @@ async function reportSafetyLevel(routeId, safetyLevel) {
         document.getElementById("successMessage").textContent = "Safety level reported successfully. You've earned 1 aura point!";
         document.getElementById("successMessage").style.color = "green";
 
-        await calculateAverageSafetyLevel(routeId);
+        await calculateRoutesAverageSafetyLevel(routeId);
     } catch (error) {
         console.error("Error reporting safety level:", error);
         document.getElementById("successMessage").textContent = "Failed to report safety level.";
@@ -211,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // Calculate and display average safety level
-async function calculateAverageSafetyLevel(routeId) {
+async function calculateRoutesAverageSafetyLevel(routeId) {
     const oneHourAgo = new Date(Date.now() - 3600000);
     const safetyReportsRef = db.collection("routes").doc(routeId).collection("safetyReports");
 

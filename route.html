@@ -45,6 +45,10 @@
   <button id="bookmarkButton" class="btn btn-primary">Bookmark Station</button>
 <p id="bookmarkMessage"></p>
 
+<div id="successMessage" class="success-message"></div>
+
+<div id="safetyLevel">
+  <h2>Current Safety Level</h2>
   <div class="safety-bar-container">
     <div class="safety-bar">
       <div class="average-overlay" id="averageOverlay">N/A</div>
@@ -62,9 +66,12 @@
       <option value="5">5 - Very Safe</option>
   </select>
   <button id="reportSafetyButton">Submit Safety Level</button>
+</div>
 
-  <div id="successMessage" class="success-message"></div>
 
+
+<div id="incidents">
+  <h2 id="recentIncidentsH2">Recent Incidents</h2>
   <div id="recentIncidents" class="mt-5">
     <h4>Recent Incidents</h4>
     <div class="incident-list"></div>
@@ -89,6 +96,8 @@
           </form>
       </div>
   </div>
+
+</div>
 </body>
 
 <script>
