@@ -134,6 +134,79 @@ button:hover {
 
 
 
+/* Container to position the button */
+#firstResponderContainer {
+    position: fixed; /* Fixed to the viewport */
+    top: 10px; /* Distance from the top */
+    right: 10px; /* Distance from the right */
+    z-index: 10; /* Ensure it appears above other elements */
+}
+
+/* First Responder Button */
+#firstResponderButton {
+    padding: 8px 15px; /* Slim padding for a shorter button */
+    font-size: 1rem; /* Adjusted font size */
+    border-radius: 5px; /* Rounded corners */
+    text-align: center;
+    background-color: #dc3545; /* Danger red */
+    color: white;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    width: auto; /* Adjust width dynamically */
+    height: 40px; /* Slim height */
+}
+
+/* Welcome Banner */
+#user-name {
+    margin-top: 70px; /* Adds space below the button */
+    text-align: center;
+}
+
+#limited-to-van {
+    text-align: center;
+}
+
+/* First Responder Overlay Menu */
+.first-responder-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+    color: white;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    z-index: 1000; /* Ensure overlay is above all other content */
+}
+
+.first-responder-menu.active {
+    display: flex;
+    opacity: 1;
+}
+
+.first-responder-menu h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+.first-responder-menu a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2rem;
+    margin: 10px 0;
+}
+
+.first-responder-menu button {
+    margin-top: 20px;
+}
+
+
 /*---------------SEARCHSTATIONS.HTML AND SEARCHROUTE.HTML STYLES---------------*/
 p[id$='-p'] {
     font-size: 0.9rem;

@@ -49,7 +49,24 @@
         }
       </script>
 
-    
+      
+<!-- First Responder Button Container -->
+<div id="firstResponderContainer">
+  <button id="firstResponderButton" class="btn btn-danger" onclick="toggleFirstResponderMenu()">First Responder</button>
+</div>
+
+<!-- First Responder Overlay -->
+<div id="firstResponderOverlay" class="first-responder-menu">
+  <h2>Contact First Responders</h2>
+  <p>For emergencies:</p>
+  <button class="btn btn-danger" onclick="window.location.href='tel:911'">Call 911</button>
+  <p>For non-emergencies contact Transit Police directly:</p>
+  <button class="btn btn-primary" onclick="window.location.href='tel:6045158300'">Call 604.515.8300</button>
+  <button class="btn btn-secondary" onclick="window.location.href='sms:877777'">Text 87.77.77</button>
+  <button class="btn btn-outline-light mt-3" onclick="toggleFirstResponderMenu()">Close</button>
+</div>
+
+
 
     <h1 id="user-name" class="display-4">Welcome, <span id="nameGoesHere"></span> </h1>
 
@@ -63,7 +80,6 @@
     <a href="searchroutes.html" style="text-decoration: none;">
         <button id="search-routes-button">Search Routes</button></a>
     <p id="search-routes-p">Search Bus and Train Routes for Safety Levels and Incident Reports</p>
-
     
     <div id="recentlyViewedContainer">
       <h2>Recently Viewed Stations</h2>
@@ -90,6 +106,15 @@
               console.log("No user logged in.");
           }
       });
+
+
+
+function toggleFirstResponderMenu() {
+    const overlay = document.getElementById('firstResponderOverlay');
+    overlay.classList.toggle('active');
+}
+
+
     </script>
     
 
