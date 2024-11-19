@@ -1,60 +1,110 @@
-var currentUser;               //points to the document of the user who is logged in
+// Function to populate user info
 function populateUserInfo() {
-            firebase.auth().onAuthStateChanged(user => {
-                // Check if user is signed in:
-                if (user) {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {
 
-                    //go to the correct user document by referencing to the user uid
-                    currentUser = db.collection("users").doc(user.uid)
-                    //get the document for current user.
-                    currentUser.get()
-                        .then(userDoc => {
-                            //get the data fields of the user
-                            let userEmail = userDoc.data().email;
-                            let userName = userDoc.data().name;
-                            // let userPassword = userDoc.data().password;
+            // Go to the correct user document by referencing the user UID
+            let currentUser = db.collection("users").doc(user.uid);
+            // Get the document for the current user
+            currentUser.get()
+                .then(userDoc => {
+                    if (userDoc.exists) {
+                        //get the data fields of the user
+                        let userEmail = userDoc.data().email;
+                        let userName = userDoc.data().name;
 
-                            //if the data fields are not empty, then write them in to the form.
-                            if (userEmail != null) {
-                                document.getElementById("userEmail").value = userEmail;
-                            }
-                            if (userName != null) {
-                                document.getElementById("nameInput").value = userName;
-                            }
-                            // if (userPassword != null) {
-                            //     document.getElementById("cityInput").value = userPassword;
-                            // }
-                        })
-                } else {
-                    // No user is signed in.
-                    console.log ("No user is signed in");
-                }
-            });
+                        //if the data fields are not empty, write them into the form.
+                        if (userEmail) { // CHANGE: I TOOK AWAY != null and just left it as "userEmail"
+                            document.getElementById("userEmail").value = userEmail;
+                        }
+                        if (userName) { // CHANGE: I TOOK AWAY != null and just left it as "userName"
+                            document.getElementById("nameInput").value = userName;
+                        }
+                    } else { // CHANGE: ADDED ELSE BLOCK FOR ERROR LOGGING
+                        console.log("No user document found");
+                    }
+                })
+                .catch(error => { // CHANGE: ADDED CATCH BLOCK
+                    console.error("Error getting user document:", error);
+                });
+        } else {
+            // No user is signed in
+            console.log("No user is signed in");
         }
+    });
+}
 
-//call the function to run it 
+//call the function to run it
 populateUserInfo();
 
 
 function editUserInfo() {
-    //Enable the form fields
+    //enable the form fields
     document.getElementById('personalInfoFields').disabled = false;
- }
+}
 
 function saveUserInfo() {
-    //a) get user entered values
-    document.getElementById("userEmail").value = user.email;
-    document.getElementById("nameInput").value = user.displayName;
-    
-    //b) update user's document in Firestore
-    currentUser.update({
-        name: userName,
-        email: userEmail,
-    })
-    .then(() => {
-        console.log("Document succesfully updated!");
-    })
-    
-    //c) disable edit 
+    //a) Get user-entered values
+    let userEmail = document.getElementById("userEmail").value; // CHANGE: changed to let format instead of "user.data().email"
+    let userName = document.getElementById("nameInput").value;// CHANGE: changed to let format instead of "user.data().DisplayName"
+
+    //b)get the current user document AND update Firestore
+    firebase.auth().onAuthStateChanged(user => {
+        if (user) { // CHANGE: added code to make sure user is authenticated
+            let currentUser = db.collection("users").doc(user.uid); // CHANGE: redefined currentUser
+            currentUser.update({
+                email: userEmail,
+                name: userName,
+            })
+            .then(() => {
+                console.log("Document successfully updated!");
+            })
+            .catch(error => { // CHANGE: catch block
+                console.error("Error updating document:", error);
+            });
+        } else { // CHANGE: error logging
+            console.log("No user is signed in");
+        }
+    });
+
+    // c) Disable edit
     document.getElementById('personalInfoFields').disabled = true;
 }
+
+// function populateAuraPoints() {
+//     firebase.auth().onAuthStateChanged(user => {
+//         // Check if user is signed in:
+//         if (user) {
+
+//             //go to the correct user document by referencing to the user uid
+//             currentUser = db.collection("users").doc(user.uid)
+//             //get the document for current user.
+//             currentUser.get()
+//                 .then(userDoc => {
+//                     //get the data fields of the user
+//                     let userEmail = userDoc.data().email;
+//                     let userName = userDoc.data().name;
+//                     // let userPassword = userDoc.data().password;
+
+//                     //if the data fields are not empty, then write them in to the form.
+//                     if (userEmail != null) {
+//                         document.getElementById("userEmail").value = userEmail;
+//                     }
+//                     if (userName != null) {
+//                         document.getElementById("nameInput").value = userName;
+//                     }
+//                     // if (userPassword != null) {
+//                     //     document.getElementById("cityInput").value = userPassword;
+//                     // }
+//                 })
+//         } else {
+//             // No user is signed in.
+//             console.log ("No user is signed in");
+//         }
+//     });
+// }
+// }
+
+// //call function
+// populateAuraPoints();
