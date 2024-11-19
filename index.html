@@ -28,30 +28,88 @@
         <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
       
-</head>
-
-<body>
-
-  <nav id="navbarPlaceholder"></nav>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f8f9fa;
+                margin: 0;
+                padding: 0;
+            }
     
-    <div class="container text-center py-4">
-        <div class="rounded-circle overflow-hidden">
-            <img class="responsive" src="./media/logo.png" alt="">
+            .navbar {
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
+    
+            .container {
+                text-align: center;
+            }
+    
+            .container img {
+                width: 180px; /* Larger image size */
+                height: 180px;
+                object-fit: cover;
+                margin-bottom: 15px;
+                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            }
+    
+            .container h1 {
+                font-size: 2rem;
+                font-weight: 700;
+                margin-bottom: 10px;
+            }
+    
+            .container p {
+                font-size: 1rem;
+                line-height: 1.6;
+                margin: 5px 0;
+            }
+    
+            .btn-warning {
+                font-size: 1rem;
+                padding: 10px 20px;
+                margin-top: 15px;
+            }
+    
+            .text-primary {
+                font-size: 1.2rem;
+                font-weight: 600;
+            }
+        </style>
+    </head>
+    
+    <body>
+    
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand" href="#">TransitAura</a>
+            </div>
+        </nav>
+    
+        <!-- Main Section -->
+        <div class="container mt-5">
+            <!-- Logo and Slogan -->
+            <img src="./media/transitAura.png" alt="TransitAura Logo">
+            <h1>TransitAura, getting you there safely</h1>
+    
+            <!-- Login Button -->
+            <a href="login.html" class="btn btn-warning" role="button">Log in</a>
+    
+            <!-- Description -->
+            <p id="homepage-p1">
+                Welcome to <strong>TransitAura</strong>, a project aimed at making Vancouver safer for its residents.
+                Using our easy-to-navigate interface, users can view Safety Levels and Incidents on their transit routes and stations.
+            </p>
+            <h2 class="text-primary" id="homepage-h2-2">Riding Transit? TransitAura.</h2>
+            <p id="homepage-p2">Make an account to start reporting and viewing today!</p>
         </div>
-        <h1>TransitAura, getting you there safely</h1>
-        <a href="login.html" class="btn btn-warning" role="button">Log in</a>
-    </div>
     
-    <p id="homepage-p1">Welcome to TransitAura, a project aimed at making Vancouver safer for its residents. Using our easy-to-navigate interface, users can view Safety Levels and Incidents on their transit routes and stations. This data is crowd-sourced, and everyone has a part to play in keeping transit safe!</p>
 
-    <h2 id="homepage-h2-2">Riding Transit? TransitAura.</h2>
-    
-    <p id="homepage-p2">Make an account to start reporting and viewing today!</p>
 
     <nav id="navbarPlaceholder"></nav>
 
     <script src="scripts/firebaseConfig.js"></script>
-    <script src="scripts/login.js"></script>
+
     <script src="scripts/skeleton.js"></script>
 
 </body>

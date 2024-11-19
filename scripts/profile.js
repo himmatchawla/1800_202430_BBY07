@@ -72,39 +72,36 @@ function saveUserInfo() {
     document.getElementById('personalInfoFields').disabled = true;
 }
 
-// function populateAuraPoints() {
-//     firebase.auth().onAuthStateChanged(user => {
-//         // Check if user is signed in:
-//         if (user) {
-
-//             //go to the correct user document by referencing to the user uid
-//             currentUser = db.collection("users").doc(user.uid)
-//             //get the document for current user.
-//             currentUser.get()
-//                 .then(userDoc => {
-//                     //get the data fields of the user
-//                     let userEmail = userDoc.data().email;
-//                     let userName = userDoc.data().name;
-//                     // let userPassword = userDoc.data().password;
-
-//                     //if the data fields are not empty, then write them in to the form.
-//                     if (userEmail != null) {
-//                         document.getElementById("userEmail").value = userEmail;
-//                     }
-//                     if (userName != null) {
-//                         document.getElementById("nameInput").value = userName;
-//                     }
-//                     // if (userPassword != null) {
-//                     //     document.getElementById("cityInput").value = userPassword;
-//                     // }
-//                 })
-//         } else {
-//             // No user is signed in.
-//             console.log ("No user is signed in");
-//         }
-//     });
-// }
-// }
-
-// //call function
-// populateAuraPoints();
+function populateAuraPoints() {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if user is signed in:
+        if (user) {              
+                //go to the correct user document by referencing to the user uid   
+                let currentUser = db.collection("users").doc(user.uid);
+                //get the document for current user.
+                currentUser.get()
+                    .then(userDoc => {
+                        if (userDoc.exists) {
+                            // get the aurapoints data field
+                            let userAuraPoints = userDoc.data().auraPoints;
+                            
+                            if (userAuraPoints !== undefined){
+                                document.getElementById("userAuraPoints").innerText = userAuraPoints;
+                            } else {
+                                document.getElementById("userAuraPoints").innerText = "No points available";
+                            }     // Optional fallback
+                        } else {
+                            console.log("No user document found");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error getting user document:", error);
+                    });
+            } else {
+                // No user is signed in.
+                console.log ("No user is signed in");
+            }
+        });
+        }
+//call function
+populateAuraPoints();
