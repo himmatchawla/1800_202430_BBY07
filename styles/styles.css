@@ -431,6 +431,14 @@ p[id$='-p'] {
     text-align: center;
 }
 
+#routeName {
+    text-align: center;
+}
+
+#routeDescription {
+    display: none;
+}
+
 /*---------------BOOKMARK.HTML STYLES---------------*/
 /* #user-name{
     text-align: center;

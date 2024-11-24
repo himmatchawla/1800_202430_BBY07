@@ -223,6 +223,7 @@ window.viewStation = viewStation;
 
 async function displaySafetyLevel(stationId) {
     const averageSafetyLevel = await calculateStationAverageSafetyLevel(stationId);
+    console.log("stationAverageLoaded");
     alert(`Average Safety Level for Station ${stationId}: ${averageSafetyLevel}`);
 }
 
