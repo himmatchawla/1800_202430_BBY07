@@ -68,20 +68,20 @@
 
 
 
-    <h1 id="user-name" class="display-4">Welcome, <span id="nameGoesHere"></span> </h1>
+  <h1 id="user-name" class="display-4">Welcome, <span id="nameGoesHere"></span> </h1>
 
-    <p id="limited-to-van">For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.
-    </p>
+  <p id="limited-to-van">For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.
+  </p>
 
-    <a href="searchstations.html" style="text-decoration: none;">
-        <button id="search-stations-button">Search Stations</button></a>
-    <p id="search-stations-p">Search Stations for Safety Levels and Incident Reports</p>
+  <a href="searchstations.html" style="text-decoration: none;">
+      <button id="search-stations-button">Search Stations</button></a>
+  <p id="search-stations-p">Search Stations for Safety Levels and Incident Reports</p>
 
-    <a href="searchroutes.html" style="text-decoration: none;">
-        <button id="search-routes-button">Search Routes</button></a>
-    <p id="search-routes-p">Search Bus and Train Routes for Safety Levels and Incident Reports</p>
+  <a href="searchroutes.html" style="text-decoration: none;">
+      <button id="search-routes-button">Search Routes</button></a>
+  <p id="search-routes-p">Search Bus and Train Routes for Safety Levels and Incident Reports</p>
     
-    <div id="recentlyViewedContainer">
+  <div id="recentlyViewedContainer">
       <h2>Recently Viewed Stations</h2>
       <div id="recentlyViewedCards"></div>
   </div>
@@ -91,21 +91,21 @@
 
 
 
-    <!-- JS funcs  -->
-    <script src="scripts/firebaseConfig.js"></script>
-    <script src="scripts/login.js"></script>
-    <script src="scripts/skeleton.js"></script>
-    <script src="scripts/station.js"></script>
-    <script src="scripts/recentlyviewed.js"></script>
-    <script src="scripts/main.js"></script>
-    <script>
-      firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-              displayRecentlyViewedStations();
-          } else {
-              console.log("No user logged in.");
-          }
-      });
+  <!-- JS funcs  -->
+  <script src="scripts/firebaseConfig.js"></script>
+  <script src="scripts/login.js"></script>
+  <script src="scripts/skeleton.js"></script>
+  <script src="scripts/station.js"></script>
+  <script src="scripts/recentlyviewed.js"></script>
+  <script src="scripts/main.js"></script>
+  <script>
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            displayRecentlyViewedStations();
+        } else {
+            console.log("No user logged in.");
+        }
+    });
 
 
 

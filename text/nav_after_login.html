@@ -1,5 +1,13 @@
 <!-- READ!
  COPIED SNIPPET FROM main.html -->
+ <!DOCTYPE html>
+ <html>
+ <head>
+    <title>Nav After Login </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ </head>
 
 <nav class="navbar navbar-expand bg-primary fixed-bottom">
     <div class="container-fluid d-flex justify-content-center">
@@ -25,9 +33,9 @@
   </nav>
 
   <div class="dropup-menu" id="profileDropupMenu">
-    <a href="./profile.html"><button class="btn btn-outline-light mt-3">Account Details</button></a>
-    <a href="../index.html"><button class="btn btn-outline-light mt-3" onclick="logout()">Logout</button></a>
-    <button class="btn btn-outline-light mt-3" onclick="toggleDropupMenu()">Close</button>
+    <a href="./profile.html"><button id="accountDetailsButton" class="btn btn-outline-light mt-3">Account Details</button></a>
+    <a href="../index.html"><button id="logoutButton" class="btn btn-outline-light mt-3" onclick="logout()">Logout</button></a>
+    <button id="closeButton" class="btn btn-outline-light mt-3" onclick="toggleDropupMenu()">✖</button>
   </div>
   <script>
     function toggleDropupMenu() {
@@ -35,3 +43,4 @@
       menu.classList.toggle('active');
     }
   </script>
+</html>

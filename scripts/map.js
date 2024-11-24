@@ -76,9 +76,10 @@ async function showMap() {
 
     const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        types: 'country,region,place,postcode,locality,neighborhood,address',
-        localGeocoder: customGeocoder, // Ensure this is the updated function
-        placeholder: 'Search for a station' // Custom placeholder
+        localGeocoder: customGeocoder, 
+        localGeocoderOnly: true, // Ensure only local geocoding is used
+        placeholder: 'Search for a STATION', 
+        mapboxgl: mapboxgl
     });
     map.addControl(geocoder);
     

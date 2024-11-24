@@ -83,28 +83,29 @@
     <div class="incident-list"></div>
 </div>
 
-<button class="btn btn-primary" id="submitReportBtn">Submit an Incident Report</button>
+<div id="recentIncidentsBox">
+  <button class="btn btn-primary" id="submitReportBtn">Submit an Incident Report</button>
 
-        <div id="overlay">
-            <div id="overlayContent">
-                <button id="closeOverlay">&times;</button>
-                <h3>Submit an Incident Report</h3>
-                <form id="incidentForm">
-                    <div class="mb-3">
-                        <label for="incidentTitle" class="form-label">Title (Optional)</label>
-                        <input type="text" class="form-control" id="incidentTitle" placeholder="Incident Title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="incidentDetails" class="form-label">Details</label>
-                        <textarea class="form-control" id="incidentDetails" rows="5" placeholder="Provide detailed information about the incident" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit Report</button>
-                </form>
+    <div id="overlay">
+        <div id="overlayContent">
+            <button id="closeOverlay">&times;</button>
+            <h3>Submit an Incident Report</h3>
+          <form id="incidentForm">
+            <div class="mb-3">
+              <label for="incidentTitle" class="form-label">Title (Optional)</label>
+              <input type="text" class="form-control" id="incidentTitle" placeholder="Incident Title">
             </div>
-        </div>
-    </div>
-
+            <div class="mb-3">
+              <label for="incidentDetails" class="form-label">Details</label>
+              <textarea class="form-control" id="incidentDetails" rows="5" placeholder="Provide detailed information about the incident" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Report</button>
+          </form>
+          </div>
+      </div>
+  </div>
 </div>
+
 
 </body>
 </html>
