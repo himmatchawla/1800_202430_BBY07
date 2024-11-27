@@ -101,17 +101,49 @@ function setupIncidentReportButton(collection) {
         }
 
         try {
+            const user = firebase.auth().currentUser;
+            if (!user) {
+                messageBox.textContent = "Please log in to submit an incident report.";
+                messageBox.style.color = "red";
+                messageBox.style.display = "block";
+                setTimeout(() => {
+                    messageBox.style.display = "none";
+                }, 5000);
+                return;
+            }
+
+            const userId = user.uid;
             const incidentReportsRef = db.collection(collection).doc(documentId).collection("incidentReports");
             const newIncidentRef = incidentReportsRef.doc();
 
+            // Add the incident report
+            const reportId = newIncidentRef.id;
+            const timestamp = firebase.firestore.FieldValue.serverTimestamp();
             await newIncidentRef.set({
-                userId: firebase.auth().currentUser?.uid || "Anonymous",
+                userId: userId,
                 title: title || "No Title",
                 details: details,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                timestamp,
             });
 
-            messageBox.textContent = "Incident report submitted successfully!";
+            // Increment aura points
+            const userRef = db.collection("users").doc(userId);
+            await userRef.update({
+                auraPoints: firebase.firestore.FieldValue.increment(3),
+            });
+
+            // Add to user's report history
+            const reportHistoryRef = userRef.collection("reportHistory").doc(reportId);
+            await reportHistoryRef.set({
+                type: "incidentReport",
+                collection: collection, // "stations" or "routes"
+                documentId: documentId, // ID of the station or route
+                title: title || "No Title",
+                details: details,
+                timestamp,
+            });
+
+            messageBox.textContent = "Incident report submitted successfully! You earned 3 Aura Points.";
             messageBox.style.color = "green";
             messageBox.style.display = "block";
             overlay.style.display = "none"; // Close the overlay
@@ -133,6 +165,8 @@ function setupIncidentReportButton(collection) {
         }
     });
 }
+
+
 
 
 //----------SAFETY LEVELS----------
@@ -179,13 +213,42 @@ function setupReportSafetyLevelButton(collection) {
         }
 
         try {
+            const user = firebase.auth().currentUser;
+            if (!user) {
+                messageBox.textContent = "Please log in to submit a safety report.";
+                messageBox.style.color = "red";
+                messageBox.style.display = "block";
+                setTimeout(() => (messageBox.style.display = "none"), 5000);
+                return;
+            }
+
+            const userId = user.uid;
             const safetyReportsRef = db.collection(collection).doc(documentId).collection("safetyReports");
             const newReportRef = safetyReportsRef.doc();
 
+            // Add the safety report
+            const reportId = newReportRef.id;
+            const timestamp = firebase.firestore.FieldValue.serverTimestamp();
             await newReportRef.set({
-                userId: firebase.auth().currentUser?.uid || "Anonymous",
+                userId: userId,
                 safetyLevel,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                timestamp,
+            });
+
+            // Increment aura points
+            const userRef = db.collection("users").doc(userId);
+            await userRef.update({
+                auraPoints: firebase.firestore.FieldValue.increment(1),
+            });
+
+            // Add to user's report history
+            const reportHistoryRef = userRef.collection("reportHistory").doc(reportId);
+            await reportHistoryRef.set({
+                type: "safetyReport",
+                collection: collection, // "stations" or "routes"
+                documentId: documentId, // ID of the station or route
+                safetyLevel,
+                timestamp,
             });
 
             // Wait briefly for Firestore to process the new document
@@ -200,7 +263,7 @@ function setupReportSafetyLevelButton(collection) {
             await updateSafetyBar(collection, documentId);
 
             // Show success message
-            messageBox.textContent = "Safety level reported successfully!";
+            messageBox.textContent = "Safety level reported successfully! You earned 1 Aura Point.";
             messageBox.style.color = "green";
             messageBox.style.display = "block";
             setTimeout(() => (messageBox.style.display = "none"), 5000);
@@ -213,6 +276,7 @@ function setupReportSafetyLevelButton(collection) {
         }
     });
 }
+
 
 // gradient bar display (general to stations AND routes)
 async function updateSafetyBar(collection, documentId) {

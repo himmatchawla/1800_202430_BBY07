@@ -198,6 +198,7 @@
     <script src="scripts/recentlyviewed.js"></script>
     <!-- <script src="scripts/main.js"></script> -->
     <script>
+      // display recently viewed
       firebase.auth().onAuthStateChanged((user) => {
           if (user) {
               displayRecentlyViewedStations();
@@ -207,7 +208,7 @@
       });
 
 
-
+// first responder menu overlay
 function toggleFirstResponderMenu() {
     const overlay = document.getElementById('firstResponderOverlay');
     overlay.classList.toggle('active');
@@ -216,6 +217,7 @@ function toggleFirstResponderMenu() {
 
     </script>
     <script>
+      // "what is transitaura" collapsible
         var coll = document.getElementsByClassName("collapsible");
 var i;
 
