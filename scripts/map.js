@@ -290,16 +290,16 @@ async function loadCustomData() {
 }
 
 
-function customGeocoder(query) {
-    const matchingFeatures = [];
-    for (const feature of customData.features) {
-        if (feature.properties.title.toLowerCase().includes(query.toLowerCase())) {
-            feature['place_name'] = `🚉 ${feature.properties.title}`; // Use station emoji 🚉
-            feature['center'] = feature.geometry.coordinates;
-            feature['place_type'] = ['station']; // Optional: Label as a station
-            matchingFeatures.push(feature);
-        }
-    }
-    return matchingFeatures;
-}
+// function customGeocoder(query) {
+//     const matchingFeatures = [];
+//     for (const feature of customData.features) {
+//         if (feature.properties.title.toLowerCase().includes(query.toLowerCase())) {
+//             feature['place_name'] = `🚉 ${feature.properties.title}`; // Use station emoji 🚉
+//             feature['center'] = feature.geometry.coordinates;
+//             feature['place_type'] = ['station']; // Optional: Label as a station
+//             matchingFeatures.push(feature);
+//         }
+//     }
+//     return matchingFeatures;
+// }
 

@@ -29,6 +29,72 @@
     <!-- Other libs -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
+    <style>
+      .view-item, .view-station, .remove-bookmark, .station-bookmark-button {
+      width: 100%; 
+      text-align: center; 
+      margin: 0;
+  }
+  .safety-bar-container {
+    position: relative;
+    width: 100%;
+    height: 20px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.safety-bar {
+    height: 100%;
+    transition: background 0.3s ease;
+}
+
+.average-overlay {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+    font-weight: bold;
+    color: #000000;
+    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    pointer-events: none;
+}
+
+    </style>
+    <style>
+      body {
+    margin-bottom: 60px;
+}
+.navbar.fixed-bottom {
+    height: 60px;
+}
+    </style>
+
+    <style>
+       .collapsible {
+  background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+}
+
+.active, .collapsible:hover {
+  background-color: #555;
+}
+
+.content {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+    </style>
 </head>
 
 <body>
@@ -73,39 +139,72 @@
   <p id="limited-to-van">For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.
   </p>
 
-  <a href="searchstations.html" style="text-decoration: none;">
-      <button id="search-stations-button">Search Stations</button></a>
-  <p id="search-stations-p">Search Stations for Safety Levels and Incident Reports</p>
+    <a href="searchstations.html" style="text-decoration: none;">
+        <button id="search-stations-button">Search Stations</button></a>
 
-  <a href="searchroutes.html" style="text-decoration: none;">
-      <button id="search-routes-button">Search Routes</button></a>
-  <p id="search-routes-p">Search Bus and Train Routes for Safety Levels and Incident Reports</p>
-    
+    <a href="searchroutes.html" style="text-decoration: none;">
+        <button id="search-routes-button">Search Bus and Train Routes</button></a>
+
+    <button type="button" class="collapsible">What is TransitAura?</button>
+    <div class="content">
+        <p>TransitAura is a platform for transit riders to plan their trip safely and assist their fellow riders. View and report Safety Levels and Incidents, and earn Aura Points along the way!</p>
+        <p><strong>What is Safety Level?</strong> Report how safe you feel on any TransLink station or route. The Safety Level color bar is generated based on recent data from TransitAura users.</p>
+        <p><strong>What are Incidents?</strong> Incidents are reported by users and are specific to stations or routes.</p>
+        <p><strong>What are Aurapoints?</strong> Aurapoints are earned by using TransitAura. Earn 1 point from every Safety Level Report and 3 points from every Incident Report. See your achievements in Account Details!</p>
+    </div>
+
+
+
+  <h1 class="my-4" style="text-align: center;">Your Bookmarks</h1>
+
+  <!-- Bookmarks Go Here -->
+  <div id="bookmarks-go-here"></div>
+  
+  <!-- Card Template -->
+  <template id="bookmarksTemplate">
+    <div class="card my-3">
+        <h5 class="bookmark-title card-header"></h5>
+        <div class="card-body">
+            <p><span class="bookmark-details"></span></p>
+            <div class="safety-bar-container">
+                <div class="safety-bar">
+                    <div class="average-overlay"></div>
+                </div>
+            </div>
+            <div class="d-flex gap-2 mt-2">
+                <a href="#" class="btn btn-primary flex-grow-1 view-item">View</a>
+                <button class="btn btn-secondary flex-grow-1 remove-bookmark">Remove Bookmark</button>
+            </div>
+        </div>
+    </div>
+</template>
+
+  
+  
   <div id="recentlyViewedContainer">
-      <h2>Recently Viewed Stations</h2>
-      <div id="recentlyViewedCards"></div>
-  </div>
-  
-  
+    <h2>Recently Viewed Stations</h2>
+    <div id="recentlyViewedCards"></div>
+</div>
 
 
 
-
-  <!-- JS funcs  -->
-  <script src="scripts/firebaseConfig.js"></script>
-  <script src="scripts/login.js"></script>
-  <script src="scripts/skeleton.js"></script>
-  <script src="scripts/station.js"></script>
-  <script src="scripts/recentlyviewed.js"></script>
-  <script src="scripts/main.js"></script>
-  <script>
-    firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-            displayRecentlyViewedStations();
-        } else {
-            console.log("No user logged in.");
-        }
-    });
+    <!-- JS funcs  -->
+    <script src="scripts/firebaseConfig.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/skeleton.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/stationsandroutes.js"></script>
+    <script src="scripts/bookmark.js"></script>
+    <script src="scripts/recentlyviewed.js"></script>
+    <!-- <script src="scripts/main.js"></script> -->
+    <script>
+      firebase.auth().onAuthStateChanged((user) => {
+          if (user) {
+              displayRecentlyViewedStations();
+          } else {
+              console.log("No user logged in.");
+          }
+      });
 
 
 
@@ -115,6 +214,22 @@ function toggleFirstResponderMenu() {
 }
 
 
+    </script>
+    <script>
+        var coll = document.getElementsByClassName("collapsible");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+  coll[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var content = this.nextElementSibling;
+    if (content.style.display === "block") {
+      content.style.display = "none";
+    } else {
+      content.style.display = "block";
+    }
+  });
+}
     </script>
     
 

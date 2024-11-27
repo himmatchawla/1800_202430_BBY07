@@ -1,24 +1,46 @@
 console.log("Bookmarks script loaded");
 
-// Listen for authentication state changes
-firebase.auth().onAuthStateChanged((user) => {
-    if (user) {
-        console.log("User is logged in:", user.email);
-        displayBookmarks(); // Fetch and display all bookmarks
-    } else {
-        console.log("User not logged in.");
-        const bookmarksContainer = document.getElementById("bookmarks-go-here");
-        if (bookmarksContainer) {
-            bookmarksContainer.innerHTML = "<p>Please log in to view bookmarks.</p>";
-        }
+// Bookmark an item (station or route)
+async function toggleBookmark(itemId, type, name) {
+    const user = firebase.auth().currentUser;
+    if (!user) {
+        alert("Please log in to manage bookmarks.");
+        return;
     }
-});
+
+    const userId = user.uid;
+    const bookmarkRef = db.collection("users").doc(userId).collection("bookmarks").doc(itemId);
+
+    try {
+        const doc = await bookmarkRef.get();
+        if (doc.exists) {
+            await bookmarkRef.delete();
+            alert(`${type.toUpperCase()} "${name}" removed from bookmarks.`);
+        } else {
+            await bookmarkRef.set({
+                type, // "station" or "route"
+                name,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+            alert(`${type.toUpperCase()} "${name}" bookmarked successfully.`);
+        }
+    } catch (error) {
+        console.error("Error toggling bookmark:", error);
+    }
+}
+
 
 // Display all bookmarks
 async function displayBookmarks() {
+    console.log("displayBookmarks called");
+
     const user = firebase.auth().currentUser;
     if (!user) {
         console.warn("User not logged in. Cannot display bookmarks.");
+        const container = document.getElementById("bookmarks-go-here");
+        if (container) {
+            container.innerHTML = "<p>Please log in to view bookmarks.</p>";
+        }
         return;
     }
 
@@ -36,8 +58,10 @@ async function displayBookmarks() {
 
     try {
         const snapshot = await bookmarksRef.get();
+        console.log("Bookmarks snapshot size:", snapshot.size);
 
         if (snapshot.empty) {
+            console.log("No bookmarks found.");
             container.innerHTML = "<p>No bookmarks found.</p>";
             return;
         }
@@ -45,147 +69,96 @@ async function displayBookmarks() {
         snapshot.forEach(async (doc) => {
             const data = doc.data();
             const itemId = doc.id;
-            const itemType = data.type; // "station" or "route"
+            const itemType = data.type || "station"; // Default to "station" if type is missing
             const itemName = data.name || "Unnamed Item";
 
             const newCard = cardTemplate.content.cloneNode(true);
 
-            // Set header link and text
+            // Set header and link
             const titleElement = newCard.querySelector(".bookmark-title");
             if (titleElement) {
                 titleElement.textContent = itemName;
-                titleElement.href = itemType === "station"
-                    ? `station.html?stationId=${itemId}`
-                    : `route.html?routeId=${itemId}`;
             }
 
-            // Calculate safety level
-            const safetyLevel = await calculateAverageSafetyLevel(itemId, itemType);
-            const safetyElement = newCard.querySelector(".bookmark-safety");
-            if (safetyElement) {
-                safetyElement.textContent = `Current Safety Level: ${safetyLevel}`;
-            }
-
-            // Fetch and display last incident timestamp
-            const lastIncident = await getLastIncidentReportTime(itemId, itemType);
-            const detailsElement = newCard.querySelector(".bookmark-details");
-            if (detailsElement) {
-                detailsElement.textContent = `Last Incident: ${lastIncident}`;
-            }
-
-            // Set "View Item" button link
+            // Set "View" button link
             const viewButton = newCard.querySelector(".view-item");
             if (viewButton) {
-                viewButton.href = itemType === "station"
-                    ? `station.html?stationId=${itemId}`
-                    : `route.html?routeId=${itemId}`;
+                viewButton.href =
+                    itemType === "station"
+                        ? `station.html?stationId=${itemId}`
+                        : `route.html?routeId=${itemId}`;
+            }
+
+            // Fetch average safety level and update the gradient bar
+            const average = await calculateAverageSafetyLevel(
+                itemType === "station" ? "stations" : "routes",
+                itemId
+            );
+
+            const safetyBar = newCard.querySelector(".safety-bar");
+            const averageOverlay = newCard.querySelector(".average-overlay");
+
+            if (safetyBar && averageOverlay) {
+                // Update overlay text
+                averageOverlay.textContent = average === "N/A" ? "N/A" : average;
+
+                // Set gradient based on average
+                if (average !== "N/A" && !isNaN(average)) {
+                    const percentage = (average / 5) * 100; // Max safety level is 5
+                    safetyBar.style.background = `linear-gradient(90deg, red, yellow ${percentage}%, green)`;
+
+                    // Position the overlay dynamically
+                    averageOverlay.style.left = `calc(${percentage}% - 20px)`; // Adjust position to center text
+                } else {
+                    safetyBar.style.background = "linear-gradient(90deg, red, yellow, green)"; // Full gradient
+                    averageOverlay.textContent = "N/A";
+                }
+            }
+
+            // Fetch last incident
+            const lastIncident = await getLastIncidentReportTime(
+                itemType === "station" ? "stations" : "routes",
+                itemId
+            );
+            const detailsElement = newCard.querySelector(".bookmark-details");
+            if (detailsElement) {
+                detailsElement.innerHTML = `<strong>Last Incident:</strong> ${lastIncident}`;
             }
 
             // Configure Remove Bookmark Button
             const removeButton = newCard.querySelector(".remove-bookmark");
             if (removeButton) {
-                removeButton.addEventListener("click", (e) => {
+                removeButton.addEventListener("click", async (e) => {
                     e.preventDefault();
-                    removeBookmark(itemId, itemType, itemName);
+                    await toggleBookmark(itemId, itemType, itemName);
+                    displayBookmarks(); // Refresh bookmarks after removal
                 });
             }
 
             container.appendChild(newCard);
         });
     } catch (error) {
-        console.error("Error fetching bookmarks:", error);
+        console.error("Error displaying bookmarks:", error);
         container.innerHTML = "<p>Failed to load bookmarks. Please try again later.</p>";
     }
 }
 
-// Calculate Average Safety Level
-async function calculateAverageSafetyLevel(itemId, itemType) {
-    try {
-        const oneHourAgo = new Date(Date.now() - 3600000);
-        const collection = itemType === "station" ? "stations" : "routes";
-        const safetyReportsRef = db.collection(collection).doc(itemId).collection("safetyReports");
-        const snapshot = await safetyReportsRef.where("timestamp", ">", oneHourAgo).get();
 
-        const reports = snapshot.docs.map((doc) => doc.data().safetyLevel);
-        return reports.length
-            ? (reports.reduce((sum, level) => sum + level, 0) / reports.length).toFixed(2)
-            : "N/A";
-    } catch (error) {
-        console.error("Error calculating safety level for:", itemId, error);
-        return "N/A";
-    }
-}
 
-// Get Last Incident Report Time
-async function getLastIncidentReportTime(itemId, itemType) {
-    try {
-        const collection = itemType === "station" ? "stations" : "routes";
-        const incidentReportsRef = db.collection(collection).doc(itemId).collection("incidentReports");
-        const snapshot = await incidentReportsRef.orderBy("timestamp", "desc").limit(1).get();
-
-        if (!snapshot.empty) {
-            const lastIncident = snapshot.docs[0].data().timestamp?.toDate();
-            return lastIncident ? new Date(lastIncident).toLocaleString() : "No recent incidents";
-        } else {
-            return "No recent incidents";
+// event listener to activate the displayBookmarks function
+// NOTE: firebase.auth().currentUser only runs once and isnt a powerful 
+// NOTE: enough listener, its good for one-time clicks, etc, so we arent going 
+// NOTE: to use currentUser inside a DOMContentLoaded event listener
+firebase.auth().onAuthStateChanged((user) => {
+    console.log("onAuthStateChanged triggered");
+    if (user) {
+        console.log("User is logged in:", user.email);
+        displayBookmarks();
+    } else {
+        console.log("User is not logged in.");
+        const container = document.getElementById("bookmarks-go-here");
+        if (container) {
+            container.innerHTML = "<p>Please log in to view bookmarks.</p>";
         }
-    } catch (error) {
-        console.error("Error fetching last incident for:", itemId, error);
-        return "No recent incidents";
     }
-}
-
-// Remove Bookmark
-async function removeBookmark(itemId, itemType, itemName) {
-    const user = firebase.auth().currentUser;
-
-    if (!user) {
-        alert("Please log in to remove bookmarks.");
-        return;
-    }
-
-    const userId = user.uid;
-    const bookmarkRef = db.collection("users").doc(userId).collection("bookmarks").doc(itemId);
-
-    try {
-        await bookmarkRef.delete();
-        alert(`${itemType.toUpperCase()} "${itemName}" removed from bookmarks.`);
-        displayBookmarks(); // Refresh the displayed bookmarks
-    } catch (error) {
-        console.error("Error removing bookmark:", error);
-        alert("Failed to remove bookmark. Please try again.");
-    }
-}
-
-async function bookmarkCurrentItem(itemId, type, name) {
-    console.log("Bookmarking:", itemId, type, name);
-
-    const user = firebase.auth().currentUser;
-    if (!user) {
-        document.getElementById("bookmarkMessage").textContent = "Please log in to bookmark items.";
-        document.getElementById("bookmarkMessage").style.color = "red";
-        return;
-    }
-
-    const userId = user.uid;
-    const bookmarkRef = db.collection("users").doc(userId).collection("bookmarks").doc(itemId);
-
-    try {
-        const isBookmarked = await checkBookmarkStatus(itemId);
-
-        if (isBookmarked) {
-            await bookmarkRef.delete();
-            alert(`${type.toUpperCase()} "${name}" removed from bookmarks.`);
-        } else {
-            await bookmarkRef.set({
-                type,
-                name,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            });
-            alert(`${type.toUpperCase()} "${name}" bookmarked successfully.`);
-        }
-    } catch (error) {
-        console.error("Error bookmarking:", error);
-        alert("Failed to bookmark. Please try again.");
-    }
-}
+});

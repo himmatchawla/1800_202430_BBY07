@@ -38,13 +38,6 @@
     rel="stylesheet"
   />
   <link rel="stylesheet" href="/styles/styles.css" />
-<style>.view-item,
-  .remove-bookmark {
-      width: 100%; /* Ensure buttons are the same width */
-      text-align: center; /* Center align text within buttons */
-      margin: 0; /* Remove any margin */
-  }
-  </style>
 </head>
 
 <body>
@@ -68,26 +61,26 @@
   </div>
 
   
-          <h1 class="my-4">Your Bookmarks</h1>
+  <h1 class="my-4">Your Bookmarks</h1>
+
+  <!-- Bookmarks Go Here -->
+  <div id="bookmarks-go-here"></div>
   
-          <!-- Bookmarks Go Here -->
-          <div id="bookmarks-go-here"></div>
+  <!-- Card Template -->
+  <template id="bookmarksTemplate">
+      <div class="card my-3">
+          <h5 class="bookmark-title card-header"></h5>
+          <div class="card-body">
+              <p><strong>Details:</strong> <span class="bookmark-details"></span></p>
+              <p><strong>Safety Level:</strong> <span class="bookmark-safety"></span></p>
+              <div class="d-flex gap-2">
+                  <a href="#" class="btn btn-primary flex-grow-1 view-item">View</a>
+                  <button class="btn btn-danger flex-grow-1 remove-bookmark">Remove Bookmark</button>
+              </div>
+          </div>
+      </div>
+  </template>
   
-          <!-- Card Template -->
-          <template id="bookmarksTemplate">
-            <div class="card my-3">
-                <h5 class="bookmark-title card-header"></h5>
-                <div class="card-body">
-                    <p><strong>Details:</strong> <span class="bookmark-details"></span></p>
-                    <p><strong>Safety Level:</strong> <span class="bookmark-safety"></span></p>
-                    <div class="d-flex gap-2">
-                        <a href="#" class="btn btn-primary flex-grow-1 view-item">View</a>
-                        <button class="btn btn-danger flex-grow-1 remove-bookmark">Remove Bookmark</button>
-                    </div>
-                </div>
-            </div>
-        </template>
-        
 
 
   <nav id="navbarPlaceholder"></nav>
@@ -97,10 +90,9 @@
   <script src="scripts/firebaseConfig.js"></script>
   <script src="scripts/login.js"></script>
   <script src="scripts/skeleton.js"></script>
-  <script src="scripts/station.js"></script>
-  <script src="scripts/routes.js"></script>
+  <script src="scripts/utils.js"></script>
+  <script src="scripts/stationsandroutes.js"></script>
   <script src="scripts/bookmark.js"></script>
-  <script src="scripts/search.js"></script>
-  <script src="scripts/searchroutes.js"></script>
+  <!-- <script src="scripts/search.js"></script> -->
 </body>
 </html>

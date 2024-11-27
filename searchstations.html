@@ -32,36 +32,12 @@
     <!-- <script src="scripts/dropdown.js" defer></script> -->
 
     <style>
-        /* Basic styles for dropdown */
-        .dropdown-container {
-            position: relative;
-            width: 100%;
-        }
-        .dropdown-input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        .dropdown-options {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            width: 100%;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1;
-        }
-        .dropdown-options.show {
-            display: block;
-        }
-        .dropdown-option {
-            padding: 8px;
-            cursor: pointer;
-        }
-        .dropdown-option:hover {
-            background-color: #f0f0f0;
-        }
+.view-item, .view-station, .remove-bookmark, .station-bookmark-button {
+      width: 100%; 
+      text-align: center; 
+      margin: 0;
+  }
+
     </style>
 
 </head>
@@ -88,27 +64,29 @@
             aria-label="Search stations"
         />
     </div>
+
+    <p>Click on View Station to see and report Safety Levels and Incidents!</p>
     
     <div id="stations-go-here"></div>
     
 
-      
-   
-
 <!-- ---------------- CARDS TEMPLATE-------------------- -->
 <template id="stationsTemplate">
-    <div class="card">
-        <a class="station-title card-header"></a>
+    <div class="card station-card">
+        <h5 class="station-title card-header"></h5>
         <div class="card-body">
-            <p class="station-safety"></p>
-            <p class="station-details"></p>
-            <div class="buttons">
-                <a class="btn btn-primary view-station">View Station</a>
-                <a class="btn btn-secondary bookmark-button"></a>
+            <p><span class="station-safety"></span></p>
+            <p><span class="station-details"></span></p>
+            <div class="d-flex gap-2">
+                <a href="#" class="btn btn-primary view-station">View Station</a>
+                <button class="btn btn-secondary station-bookmark-button">Bookmark</button>
             </div>
         </div>
     </div>
 </template>
+
+
+
 
 
 
@@ -122,14 +100,11 @@
 
         <script src="scripts/firebaseConfig.js"></script>
         <script src="scripts/login.js"></script>
+        <script src="scripts/utils.js"></script>
         <script src="scripts/bookmark.js"></script>
         <script src="scripts/skeleton.js"></script>
         <script src="scripts/station.js"></script>
-        <script src="scripts/main.js"></script>
-
-        <!-- <script src="scripts/eachStation.js"></script> -->
-        <!-- <script src="scripts/saved.js"></script> -->
-        <!-- <script src="scripts/firebaseConfig.js"></script> -->
+        <!-- <script src="scripts/main.js"></script> -->
         <script src="scripts/search.js" defer></script>
 </body>
 </html>
