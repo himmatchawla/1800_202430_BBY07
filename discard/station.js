@@ -62,6 +62,15 @@ async function reportSafetyLevel(stationId, safetyLevel) {
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
 
+        // add aura points
+        const userRef = db.collection("users").doc(user.uid);
+        await userRef.update({
+            auraPoints: firebase.firestore.FieldValue.increment(1),
+            
+        });
+        console.log("1 aurapoint added");
+            
+
         document.getElementById("successMessage").textContent = "Safety level reported successfully. You've earned 1 aura point!";
         document.getElementById("successMessage").style.color = "green";
 
@@ -241,7 +250,7 @@ async function loadStationData() {
             document.getElementById("stationName").textContent = stationData.name || "Unknown";
             document.getElementById("stationDescription").textContent = `Description: ${stationData.description || "N/A"}`;
             console.log("Station data loaded successfully.");
-            await calculateStationSafetyLevel(stationId);
+            await calculateStationAverageSafetyLevel(stationId);
             await displayRecentIncidents(stationId);
         } else {
             console.error("Station data not found.");

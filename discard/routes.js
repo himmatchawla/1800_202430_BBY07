@@ -105,6 +105,7 @@ async function reportSafetyLevel(routeId, safetyLevel) {
         await userRef.update({
             auraPoints: firebase.firestore.FieldValue.increment(1),
         });
+        console.log("1 aurapoint added");
 
         // Add to user history
         await userRef.collection("history").doc(newReportRef.id).set({
