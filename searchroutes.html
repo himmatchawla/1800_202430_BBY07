@@ -30,35 +30,11 @@
  
     <link rel="stylesheet" href="styles/styles.css">
     <style>
-        .dropdown-container {
-            position: relative;
-            width: 100%;
-        }
-        .dropdown-input {
-            width: 100%;
-            padding: 10px;
-            box-sizing: border-box;
-        }
-        .dropdown-options {
-            display: none;
-            position: absolute;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            width: 100%;
-            max-height: 200px;
-            overflow-y: auto;
-            z-index: 1;
-        }
-        .dropdown-options.show {
-            display: block;
-        }
-        .dropdown-option {
-            padding: 8px;
-            cursor: pointer;
-        }
-        .dropdown-option:hover {
-            background-color: #f0f0f0;
-        }
+.view-item, .view-station, .remove-bookmark, .station-bookmark-button, .view-routes, .routes-bookmark-button {
+      width: 100%; 
+      text-align: center; 
+      margin: 0;
+  }
     </style>
 </head>
 <body>
@@ -81,34 +57,36 @@
         />
     </div>
 
+    <p>Click on View Route to see and report Safety Level and Incidents!</p>
+
     <template id="routesTemplate">
-        <div class="card">
+        <div class="card route-card">
             <h5 class="routes-title card-header"></h5>
             <div class="card-body">
                 <p><span class="routes-safetyLevel"></span></p>
                 <p><span class="routes-details"></span></p>
                 <div class="d-flex gap-2">
                     <a href="#" class="btn btn-primary view-routes">View Route</a>
-                    <a href="#" class="btn btn-secondary routes-bookmark-button">Bookmark</a>
+                    <button class="btn btn-secondary routes-bookmark-button">Bookmark</button>
                 </div>
             </div>
         </div>
     </template>
+    
 
     <div id="routes-go-here"></div>
 
 
 
   
-  <script src="scripts/firebaseConfig.js"></script>
-  <!-- <script src="scripts/login.js"></script> -->
-  <script src="scripts/main.js"></script>
-  <script src="scripts/routes.js"></script>
-  <script src="scripts/skeleton.js"></script>
-  <script src="scripts/dropdown.js"></script>
-  <script src="scripts/routes.js"></script>
-  <script src="scripts/bookmark.js"></script>
-  <script src="scripts/searchroutes.js"></script>
+    <script src="scripts/firebaseConfig.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/bookmark.js"></script>
+    <script src="scripts/skeleton.js"></script>
+    <script src="scripts/station.js"></script>
+    <!-- <script src="scripts/main.js"></script> -->
+    <script src="scripts/search.js" defer></script>
   
 </body>
 </html>

@@ -1,6 +1,9 @@
 /* ---------------WEBSITE WIDE STYLES---------------*/
 body {
-    background-color: #ebebeb;
+    background-color: #cce5fa;
+    /* color: white; */
+    /* background-color: #25415e; */
+    margin: 10px;
 }
 
 button {
@@ -63,7 +66,7 @@ button:hover {
     text-align: center;
     max-width: 1000px;
     /* margin-bottom: 40px; */
-    color: #000000; 
+
     margin-left: auto;
     margin-right: auto;
 }
@@ -209,11 +212,18 @@ button:hover {
     margin-top: 20px;
 }
 
+/*----------------BACK BUTTON-----------------------*/
+.back-button-container {
+    margin-bottom: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 
 /*---------------SEARCHSTATIONS.HTML AND SEARCHROUTE.HTML STYLES---------------*/
 p[id$='-p'] {
     font-size: 0.9rem;
-    color: #000000;
+    
     margin: 5px 0 20px 0;
     text-align: center;
     max-width: 600px;
@@ -408,6 +418,7 @@ p[id$='-p'] {
 
 #incidents {
     padding: 20px;
+    margin-bottom: 50px;
     background-color: #f0f5f6;
     border: 1px solid #2a73e8;
     border-radius: 15px;
@@ -429,6 +440,14 @@ p[id$='-p'] {
 
 #recentIncidentsH2 {
     text-align: center;
+}
+
+#routeName {
+    text-align: center;
+}
+
+#routeDescription {
+    display: none;
 }
 
 /*---------------BOOKMARK.HTML STYLES---------------*/
@@ -569,6 +588,38 @@ p[id$='-p'] {
     /* font-size: 1.2rem; */
   }
 
+#accountDetailsButton, #logoutButton {
+    background-color: #0077FF; 
+    color: white; 
+    border-color: white;
+    border-radius: 20px; 
+    padding: 8px 10px; 
+    font-size: 16px; 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    display: block; 
+    margin: 10px auto;
+    width: 150px; 
+    cursor: pointer; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth animations */
+} 
+
+    #closeButton {
+    background-color: #0077FF; 
+    color: white; 
+    border-color: white;
+    border-radius: 90px; 
+    text-align: center;
+    font-size: 16px; 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    display: block; 
+    margin: 10px auto;
+    width: 45px; 
+    cursor: pointer; 
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth animations */
+}
+
   /* .nav_before_login {
     
     padding: 10px 20px;
@@ -619,6 +670,67 @@ p[id$='-p'] {
 #donthaveaccount {
     text-align: center;
 }
+
+/* ------------------ PROFILE.HTML -----------------*/
+#userProfileContainer {
+    border-color: #0077FF ;
+    background-color: #deebf7;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 5px;
+    padding-top: 10px;
+    padding-bottom: 20px;
+    box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.1), 
+    0 1px 3px rgba(0, 0, 0, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+}
+
+#editUserInfoButton {
+    background-color: #6d7379;
+    padding: 10x;
+    display: block;
+    height: 50px;
+    margin: 10px;
+    width: 90px;
+    font-size: large;
+    border-radius: 8px ;
+}
+
+#saveUserInfoButton {
+    padding: 0px;
+    height: 50px;
+    width: 100px;
+    margin: 10px;
+    background-color: #0077FF;
+    font-size: large;
+    border-radius: 8px ;
+}
+
+
+#auraPointsDisplay {
+    width: 200px; 
+    height: 200px;
+    border-radius: 50%; 
+    border-color: #0077FF;
+    border-style: solid;
+    border-width: 5px; 
+    background-color: #deebf7;
+    padding: 20px; 
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center; 
+    margin-top: 60px; 
+    box-shadow: 0 0 20px #0077FF, 0 0 40px #0077FF, 0 0 60px #0077FF;
+}
+
+#userAuraPoints {
+    font-size: xx-large;
+    color: #035ec0;
+}
+
 
 /* #login-h1 {
     padding: 50px;

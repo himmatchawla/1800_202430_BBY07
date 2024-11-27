@@ -4,35 +4,32 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Station Page</title>
-    <!-- Bootstrap if we need it -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap if we need it -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
+  <!-- Firebase -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
+  <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
 
-    <!-- Firebase -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
-    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
-    <!-- Other libs -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="stylesheet" href="styles/styles.css">
-    <script src="scripts/firebaseConfig.js"></script>
-    <script src="scripts/login.js"></script>
-  <script src="scripts/station.js"></script>
-  <script src="scripts/skeleton.js"></script>
-  <script src="scripts/recentlyviewed.js"></script>
+  <!-- Other libs -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="styles/styles.css">
+  <script src="scripts/firebaseConfig.js"></script>
+  <script src="scripts/login.js"></script>
+  <script src="scripts/utils.js"></script>
+  <script src="scripts/stationsandroutes.js" defer></script>
+  <script src="scripts/skeleton.js" defer></script>
+  <script src="scripts/recentlyviewed.js" defer></script>
   <script src="scripts/bookmark.js" defer></script>
-  <script src="scripts/search.js"></script>
+  <!-- <script src="scripts/search.js" defer></script> -->
 </head>
 <body>
   <nav id="navbarPlaceholder"></nav>
@@ -42,65 +39,72 @@
   <p id="stationFacilities">Facilities: </p>
   <p id="currentSafetyLevel">Current Safety Level: </p>
 
+  <div class="back-button-container">
+    <button onclick="window.history.back()">← Back</button>
+  </div>
+
   <button id="bookmarkButton" class="btn btn-primary">Bookmark</button>
   <p id="bookmarkMessage" class="mt-2"></p>
-  
-
 
   <p id="reportMessage"></p> 
-  <p id="reportMessage"></p>
   <div id="successMessage" class="success-message"></div>
+  <div id="messageBox" class="mt-3" style="text-align: center;"></div>
+  <div id="incidentMessageBox" class="mt-3" style="text-align: center;"></div>
 
-<div id="safetyLevel">
+
+
+  <div id="safetyLevel">
     <h2>Current Safety Level</h2>
-  <div class="safety-bar-container">
-    <div class="safety-bar">
-        <div class="average-overlay" id="averageOverlay">N/A</div>
-    </div>
-    </div>
-
-
-  <label for="safetyLevelInput">Report Safety Level:</label>
-  <select id="safetyLevelInput">
-      <option value="">Select a level</option>
-      <option value="1">1 - Very Unsafe</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5 - Very Safe</option>
-  </select>
-  <button id="reportSafetyButton">Submit Safety Level</button>
-</div>
-
-<div id="incidents">
-    <h2 id="recentIncidentsH2">Recent Incidents</h2>
-  <div id="recentIncidents" class="mt-5">
-    <h4>Recent Incidents</h4>
-    <div class="incident-list"></div>
-</div>
-
-<button class="btn btn-primary" id="submitReportBtn">Submit an Incident Report</button>
-
-        <div id="overlay">
-            <div id="overlayContent">
-                <button id="closeOverlay">&times;</button>
-                <h3>Submit an Incident Report</h3>
-                <form id="incidentForm">
-                    <div class="mb-3">
-                        <label for="incidentTitle" class="form-label">Title (Optional)</label>
-                        <input type="text" class="form-control" id="incidentTitle" placeholder="Incident Title">
-                    </div>
-                    <div class="mb-3">
-                        <label for="incidentDetails" class="form-label">Details</label>
-                        <textarea class="form-control" id="incidentDetails" rows="5" placeholder="Provide detailed information about the incident" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit Report</button>
-                </form>
-            </div>
+    <div class="safety-bar-container">
+        <div class="safety-bar">
+            <div class="average-overlay" id="averageOverlay">N/A</div>
         </div>
     </div>
+    <p id="safetyReportInfo">No reports in the last hour.</p> <!-- New info text -->
 
+
+
+    <label for="safetyLevelInput">Report Safety Level:</label>
+    <select id="safetyLevelInput">
+        <option value="">Select a level</option>
+        <option value="1">1 - Very Unsafe</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 - Very Safe</option>
+    </select>
+    <button id="reportSafetyButton">Submit Safety Level</button>
+
+    <div id="messageBox" class="mt-3"></div>
 </div>
 
+
+  <div id="incidents">
+    <h2 id="recentIncidentsH2">Recent Incidents</h2>
+    <div id="recentIncidents" class="mt-5">
+      <h4>Recent Incidents</h4>
+      <div class="incident-list"></div>
+    </div>
+
+    <button class="btn btn-primary" id="submitReportBtn">Submit an Incident Report</button>
+
+    <div id="overlay">
+      <div id="overlayContent">
+        <button id="closeOverlay">&times;</button>
+        <h3>Submit an Incident Report</h3>
+        <form id="incidentForm">
+          <div class="mb-3">
+            <label for="incidentTitle" class="form-label">Title (Optional)</label>
+            <input type="text" class="form-control" id="incidentTitle" placeholder="Incident Title">
+          </div>
+          <div class="mb-3">
+            <label for="incidentDetails" class="form-label">Details</label>
+            <textarea class="form-control" id="incidentDetails" rows="5" placeholder="Provide detailed information about the incident" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit Report</button>
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

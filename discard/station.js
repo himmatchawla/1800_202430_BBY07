@@ -239,9 +239,7 @@ async function loadStationData() {
         if (stationDoc.exists) {
             const stationData = stationDoc.data();
             document.getElementById("stationName").textContent = stationData.name || "Unknown";
-            document.getElementById("stationNeighborhood").textContent = `Neighborhood: ${stationData.neighborhood || "N/A"}`;
             document.getElementById("stationDescription").textContent = `Description: ${stationData.description || "N/A"}`;
-            document.getElementById("stationFacilities").textContent = `Facilities: ${stationData.facilities || "N/A"}`;
             console.log("Station data loaded successfully.");
             await calculateStationSafetyLevel(stationId);
             await displayRecentIncidents(stationId);
@@ -328,4 +326,3 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error("Bookmark button not found in DOM.");
     }
 });
-

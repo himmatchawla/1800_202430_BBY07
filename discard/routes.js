@@ -1,3 +1,20 @@
+
+async function calculateAverageSafetyLevel(collection, documentId) {
+    try {
+        const oneHourAgo = new Date(Date.now() - 3600000);
+        const safetyReportsRef = db.collection(collection).doc(documentId).collection("safetyReports");
+        const snapshot = await safetyReportsRef.where("timestamp", ">", oneHourAgo).get();
+
+        const reports = snapshot.docs.map(doc => doc.data().safetyLevel);
+        return reports.length
+            ? (reports.reduce((sum, level) => sum + level, 0) / reports.length).toFixed(2)
+            : "N/A";
+    } catch (error) {
+        console.error(`Error calculating safety level for ${collection}/${documentId}:`, error);
+        return "N/A";
+    }
+}
+
 // Error logging
 console.log("Hello from routes.js");
 
@@ -212,6 +229,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Calculate and display average safety level
 async function calculateRoutesAverageSafetyLevel(routeId) {
+    return await calculateAverageSafetyLevel("routes", routeId);
+}
     const oneHourAgo = new Date(Date.now() - 3600000);
     const safetyReportsRef = db.collection("routes").doc(routeId).collection("safetyReports");
 
@@ -228,7 +247,7 @@ async function calculateRoutesAverageSafetyLevel(routeId) {
     } catch (error) {
         console.error("Error calculating average safety level:", error);
     }
-}
+
 
 // Display the average safety level on a gradient bar
 function displayAverageSafetyLevelBar(averageSafetyLevel) {
