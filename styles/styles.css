@@ -12,7 +12,7 @@ button {
     margin-top: 15px;
     display: block;
     width: 70%;
-    max-width: 600px;
+    /* max-width: 600px; */
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -27,6 +27,8 @@ button:hover {
     background-color: #3a8df5;
     transform: scale(1.03);
 }
+
+
 
 /*---------------MEDIA QUERIES---------------*/
 @media (max-width: 330px) {
@@ -61,6 +63,11 @@ button:hover {
 
 
 /*---------------MAIN.HTML STYLES---------------*/
+
+#search-stations-button, #search-routes-button {
+    width: 70% !important;
+}
+
 #limited-to-van {
     font-size: 1rem;
     /* text-align: center; */
