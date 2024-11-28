@@ -73,27 +73,50 @@
 
     <style>
        .collapsible {
-  background-color: #777;
-  color: white;
   cursor: pointer;
-  padding: 18px;
-  width: 100%;
+  width: 10%;
   border: none;
   text-align: left;
   outline: none;
   font-size: 15px;
   text-align: center;
+  position: fixed; /* Fixed to the viewport */
+    top: 23px; /* Distance from the top */
+    left: 15px; /* Distance from the right */
+    z-index: 10; /* Ensure it appears above other elements */
 }
 
-.active, .collapsible:hover {
-  background-color: #555;
-}
+
 
 .content {
   padding: 0 18px;
   display: none;
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: #ccdbe5;
+  width: 73%;
+  margin: 0 auto;
+}
+
+#infoIcon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2a73e8; 
+    color: white;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    z-index: 1000;
+}
+
+#infoIcon.active {
+    display: flex;
+    opacity: 1;
 }
     </style>
 </head>
@@ -137,8 +160,7 @@
 
   <h1 id="user-name" class="display-4">Welcome, <span id="nameGoesHere"></span> </h1>
 
-  <p id="limited-to-van">For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.
-  </p>
+  
 
     <a href="searchstations.html" style="text-decoration: none;">
         <button id="search-stations-button">Search Stations</button></a>
@@ -146,12 +168,14 @@
     <a href="searchroutes.html" style="text-decoration: none;">
         <button id="search-routes-button">Search Bus and Train Routes</button></a>
 
-    <button type="button" class="collapsible">What is TransitAura?</button>
-    <div class="content">
-        <p>TransitAura is a platform for transit riders to plan their trip safely and assist their fellow riders. View and report Safety Levels and Incidents, and earn Aura Points along the way!</p>
+    <img src="media/info.png" class="collapsible" onclick="toggleInfoIcon()">
+    <div class="content" id="infoIcon">
+      <p>For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.</p>
+      <p><strong>What is TransitAura?</strong> TransitAura is a platform for transit riders to plan their trip safely and assist their fellow riders. View and report Safety Levels and Incidents, and earn Aura Points along the way!</p>
         <p><strong>What is Safety Level?</strong> Report how safe you feel on any TransLink station or route. The Safety Level color bar is generated based on recent data from TransitAura users.</p>
         <p><strong>What are Incidents?</strong> Incidents are reported by users and are specific to stations or routes.</p>
         <p><strong>What are Aurapoints?</strong> Aurapoints are earned by using TransitAura. Earn 1 point from every Safety Level Report and 3 points from every Incident Report. See your achievements in Account Details!</p>
+        <button class="btn btn-outline-light mt-3" onclick="toggleInfoIcon()">Close</button>
     </div>
 
 
@@ -215,24 +239,29 @@ function toggleFirstResponderMenu() {
     overlay.classList.toggle('active');
 }
 
+function toggleInfoIcon() {
+    const overlay = document.getElementById('infoIcon');
+    overlay.classList.toggle('active');
+}
+
 
     </script>
     <script>
       // "what is transitaura" collapsible
-        var coll = document.getElementsByClassName("collapsible");
-var i;
+//         var coll = document.getElementsByClassName("collapsible");
+// var i;
 
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.display === "block") {
-      content.style.display = "none";
-    } else {
-      content.style.display = "block";
-    }
-  });
-}
+// for (i = 0; i < coll.length; i++) {
+//   coll[i].addEventListener("click", function() {
+//     this.classList.toggle("active");
+//     var content = this.nextElementSibling;
+//     if (content.style.display === "block") {
+//       content.style.display = "none";
+//     } else {
+//       content.style.display = "block";
+//     }
+//   });
+// }
     </script>
     
 
