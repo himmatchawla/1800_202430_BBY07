@@ -644,7 +644,7 @@ p[id$='-p'] {
 
 #homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
     text-align: center;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    /* font-family: Verdana, Geneva, Tahoma, sans-serif; */
     margin: 0 auto;
 }
 

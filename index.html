@@ -27,10 +27,11 @@
         <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
         <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
         <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
       
         <style>
             body {
-                font-family: Arial, sans-serif;
+                font-family: 'Poppins', sans-serif;
                 background-color: #f8f9fa;
                 margin: 0;
                 padding: 0;
@@ -45,11 +46,12 @@
             }
     
             .container img {
-                width: 180px; /* Larger image size */
-                height: 180px;
+                width: 100px;
+                /* height: 180px; */
                 object-fit: cover;
-                margin-bottom: 15px;
-                box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+                margin-bottom: 5px;
+                /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
+                margin: 0 auto;
             }
     
             .container h1 {
@@ -74,34 +76,104 @@
                 font-size: 1.2rem;
                 font-weight: 600;
             }
+
+            #homepage-p1 {
+                margin-top: 30px;
+            }
+
+            #homepage-ridingtransittransitaura {
+                margin-top: 20px;
+            }
+
+            #main-mockup {
+                width: 40%;
+                height: auto;
+                margin-top: 20px;
+            }
+
+            #stations-mockup {
+                width: 55%;
+                height: auto;
+                margin-top: 20px;
+            }
+
+            #loginbutton {
+                display: inline-block;
+                justify-content: right;
+            }
+
+            #busimg {
+                width: 100px;
+                height: auto;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            #safely {
+                width: 200px;
+                height: auto;
+                margin-top: 20px;
+                margin-bottom: 10px;
+            }
+
+            #homepage-featurelistheader {
+                margin-top: 15px;
+                font-size: 1.3rem;
+            }
+
+            #homepage-featurelistitem {
+                font-size: 0.9rem;
+                margin: 5px 0;
+                font-weight: lighter;
+            }
+
+            body {
+    padding-bottom: 60px;
+  }
+
+  .navbar {
+    height: 60px;
+  }
+  #mainlogo {
+    width: 110px;
+    margin: 0 auto;
+  }
         </style>
     </head>
     
     <body>
     
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="#">TransitAura</a>
+        <nav class="navbar" style="background-color: #f8f9fa;">
+            <div class="container" style="background-color: #f8f9fa;">
+                <img src="./media/ta-full-logo.png" alt="TransitAura Logo" id="mainlogo">
+                <a href="login.html" class="btn btn-primary" role="button" id="loginbutton">Log in</a>
             </div>
         </nav>
     
         <!-- Main Section -->
         <div class="container mt-5">
-            <!-- Logo and Slogan -->
-            <img src="./media/transitAura.png" alt="TransitAura Logo">
-            <h1>TransitAura, getting you there safely</h1>
+            <img src="media/mainhtml-mockup.png" alt="TransitAura Mockup" id="main-mockup">
     
             <!-- Login Button -->
-            <a href="login.html" class="btn btn-warning" role="button">Log in</a>
+            <br>
     
             <!-- Description -->
             <p id="homepage-p1">
                 Welcome to <strong>TransitAura</strong>, a project aimed at making Vancouver safer for its residents.
-                Using our easy-to-navigate interface, users can view Safety Levels and Incidents on their transit routes and stations.
+                Using our easy-to-navigate interface, users can view and report useful information about their transit stations and routes in Metro Vancouver.
             </p>
-            <h2 class="text-primary" id="homepage-h2-2">Riding Transit? TransitAura.</h2>
-            <p id="homepage-p2">Make an account to start reporting and viewing today!</p>
+
+            <img src="media/ta-bus.png" id="busimg">
+            <h1 class="text-primary" id="homepage-ridingtransittransitaura">Riding Transit? TransitAura.</h2>
+            <h2 id="homepage-featurelistheader">Features for Stations and Routes</p>
+            <p id="homepage-featurelistitem"><strong>·</strong> View and report how safe you feel using Safety Level <strong>·</strong></p>
+            <p id="homepage-featurelistitem"><strong>·</strong> View and report specific incidents using Incidents <strong>·</strong></p>
+            <p id="homepage-featurelistitem">NEW: View your Station on the Map page!</p>
+
+            <img src="media/stations-mockup.png" id="stations-mockup">
+            <h1 class="text-primary" id="homepage-ridingtransittransitaura" style="margin-top: 35px;">Try it now!</h2>
+            <img src="media/ta-logo-safely.png" id="safely">
         </div>
     
 
