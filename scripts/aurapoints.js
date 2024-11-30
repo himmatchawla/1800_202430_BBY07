@@ -18,7 +18,7 @@ function calculateTitle(auraPoints) {
         }
     }
 
-    return "No Title"; 
+    return "No Aura"; 
 }
 
 
@@ -42,9 +42,6 @@ function populateAuraPoints() {
                             // Update the points and title in the HTML
                             document.getElementById("userAuraPoints").innerText = `Points: ${userAuraPoints}`;
                             document.getElementById("titleDisplay").innerText = `Title: ${userTitle}`;
-                        } else {
-                            document.getElementById("userAuraPoints").innerText = "Points: No points available";
-                            document.getElementById("titleDisplay").innerText = "Title: No Title";
                         }
                     } else {
                         console.log("No user document found");
