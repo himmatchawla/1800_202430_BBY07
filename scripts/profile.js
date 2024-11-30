@@ -71,37 +71,3 @@ function saveUserInfo() {
     // c) Disable edit
     document.getElementById('personalInfoFields').disabled = true;
 }
-
-function populateAuraPoints() {
-    firebase.auth().onAuthStateChanged(user => {
-        // Check if user is signed in:
-        if (user) {              
-                //go to the correct user document by referencing to the user uid   
-                let currentUser = db.collection("users").doc(user.uid);
-                //get the document for current user.
-                currentUser.get()
-                    .then(userDoc => {
-                        if (userDoc.exists) {
-                            // get the aurapoints data field
-                            let userAuraPoints = userDoc.data().auraPoints;
-                            
-                            if (userAuraPoints !== undefined){
-                                document.getElementById("userAuraPoints").innerText = userAuraPoints;
-                            } else {
-                                document.getElementById("userAuraPoints").innerText = "No points available";
-                            }     // Optional fallback
-                        } else {
-                            console.log("No user document found");
-                        }
-                    })
-                    .catch(error => {
-                        console.error("Error getting user document:", error);
-                    });
-            } else {
-                // No user is signed in.
-                console.log ("No user is signed in");
-            }
-        });
-        }
-//call function
-populateAuraPoints();

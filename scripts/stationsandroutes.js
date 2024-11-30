@@ -129,7 +129,7 @@ function setupIncidentReportButton(collection) {
             // Increment aura points
             const userRef = db.collection("users").doc(userId);
             await userRef.update({
-                auraPoints: firebase.firestore.FieldValue.increment(3),
+                auraPoints: firebase.firestore.FieldValue.increment(5),
             });
 
             // Add to user's report history
@@ -143,7 +143,7 @@ function setupIncidentReportButton(collection) {
                 timestamp,
             });
 
-            messageBox.textContent = "Incident report submitted successfully! You earned 3 Aura Points.";
+            messageBox.textContent = "Incident report submitted successfully! You earned 5 Aura Points.";
             messageBox.style.color = "green";
             messageBox.style.display = "block";
             overlay.style.display = "none"; // Close the overlay
@@ -238,7 +238,7 @@ function setupReportSafetyLevelButton(collection) {
             // Increment aura points
             const userRef = db.collection("users").doc(userId);
             await userRef.update({
-                auraPoints: firebase.firestore.FieldValue.increment(1),
+                auraPoints: firebase.firestore.FieldValue.increment(2),
             });
 
             // Add to user's report history
@@ -263,7 +263,7 @@ function setupReportSafetyLevelButton(collection) {
             await updateSafetyBar(collection, documentId);
 
             // Show success message
-            messageBox.textContent = "Safety level reported successfully! You earned 1 Aura Point.";
+            messageBox.textContent = "Safety level reported successfully! You earned 2 Aura Point.";
             messageBox.style.color = "green";
             messageBox.style.display = "block";
             setTimeout(() => (messageBox.style.display = "none"), 5000);
@@ -392,6 +392,46 @@ async function loadRouteData() {
         }
     } catch (error) {
         console.error("Error loading route data:", error);
+    }
+}
+
+//--------------------- AURA POINTS TITLE ----------------------------
+
+async function displayUserAuraPoints(userId) {
+    try {
+        const userRef = db.collection("users").doc(userId);
+        const userDoc = await userRef.get();
+
+        if (userDoc.exists) {
+            const auraPoints = userDoc.data().auraPoints || 0;
+            const title = calculateTitle(auraPoints);
+
+            const auraPointsDisplay = document.getElementById("userAuraPoints");
+            auraPointsDisplay.innerHTML = `
+                <p><strong>Points:</strong> ${auraPoints}</p>
+                <p><strong>Title:</strong> ${title}</p>
+            `;
+        } else {
+            console.error("User document not found!");
+        }
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+    }
+}
+
+
+async function handleAuraPointIncrement(userId, incrementBy) {
+    const userRef = db.collection("users").doc(userId);
+
+    try {
+        await userRef.update({
+            auraPoints: firebase.firestore.FieldValue.increment(incrementBy),
+        });
+
+        // Call the new display function
+        await displayUserAuraPoints(userId);
+    } catch (error) {
+        console.error("Error updating aura points:", error);
     }
 }
 
