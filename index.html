@@ -35,6 +35,7 @@
                 background-color: #f8f9fa;
                 margin: 0;
                 padding: 0;
+                /* overflow-x: hidden; */
             }
     
             .navbar {
@@ -100,6 +101,7 @@
             #loginbutton {
                 display: inline-block;
                 justify-content: right;
+                margin-left: auto;
             }
 
             #busimg {
@@ -131,29 +133,26 @@
     padding-bottom: 60px;
   }
 
-  .navbar {
-    height: 60px;
-  }
-  #mainlogo {
-    width: 110px;
-    margin: 0 auto;
-  }
+
+
         </style>
     </head>
     
     <body>
     
         <!-- Navbar -->
-        <nav class="navbar" style="background-color: #f8f9fa;">
-            <div class="container" style="background-color: #f8f9fa;">
-                <img src="./media/ta-full-logo.png" alt="TransitAura Logo" id="mainlogo">
-                <a href="login.html" class="btn btn-primary" role="button" id="loginbutton">Log in</a>
+        <nav class="navbar" style="background-color: #f8f9fa;" id="header">
+            <div class="container">
+              <img src="./media/ta-full-logo.png" alt="TransitAura Logo" id="mainlogo">
+              <a href="login.html" class="btn btn-primary" role="button" id="loginbutton">Log in</a>
             </div>
-        </nav>
+          </nav>
+          
+          <nav id="navbarPlaceholder"></nav>
     
         
         <!-- Main Section -->
-        <div class="container mt-5">
+        <div class="container">
             <h1 class="text-primary" id="homepage-ridingtransittransitaura">Riding Transit? TransitAura.</h2>
             <img src="media/mainhtml-mockup.png" alt="TransitAura Mockup" id="main-mockup">
     
@@ -182,7 +181,7 @@
     
 
 
-    <nav id="navbarPlaceholder"></nav>
+    
 
     <script src="scripts/firebaseConfig.js"></script>
 

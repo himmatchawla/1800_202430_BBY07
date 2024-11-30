@@ -37,14 +37,15 @@
 <body>
   <nav id="navbarPlaceholder"></nav>
 
+  <div class="back-button-container">
+    <button onclick="window.history.back()">← Back</button>
+  </div>
 
   <h1 id="routeName">Route Name</h1>
   <p id="routeDescription" style="display: none;">Description: </p>
   <p id="currentSafetyLevel">Current Safety Level: N/A</p>
 
-  <div class="back-button-container">
-    <button onclick="window.history.back()">← Back</button>
-  </div>
+
 
   <button id="bookmarkButton" class="btn btn-primary">Bookmark Station</button>
 <p id="bookmarkMessage"></p>
@@ -65,15 +66,17 @@
 
   <p id="reportMessage"></p>
 
-  <label for="safetyLevelInput">Report Safety Level (1-5):</label>
-  <select id="safetyLevelInput">
-      <option value="">Select a level</option>
-      <option value="1">1 - Very Unsafe</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <option value="5">5 - Very Safe</option>
-  </select>
+  <div class="select-wrapper">
+    <label for="safetyLevelInput"></label>
+    <select id="safetyLevelInput" class="safetySelect">
+        <option value="">Report Safety Level</option>
+        <option value="1">1 - Very Unsafe</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5 - Very Safe</option>
+    </select>
+    </div>
   <button id="reportSafetyButton">Submit Safety Level</button>
 </div>
 

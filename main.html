@@ -80,10 +80,7 @@
   outline: none;
   font-size: 15px;
   text-align: center;
-  position: fixed; /* Fixed to the viewport */
-    top: 23px; /* Distance from the top */
-    left: 15px; /* Distance from the right */
-    z-index: 10; /* Ensure it appears above other elements */
+  margin-left: 10px;
 }
 
 
@@ -123,6 +120,19 @@
 
 <body>
   <nav id="navbarPlaceholder"></nav>
+
+  <nav class="navbar" style="background-color: #f8f9fa;" id="header">
+    <div class="container">
+      <img src="./media/ta-full-logo.png" alt="TransitAura Logo" id="mainlogo">
+            <!-- First Responder Button Container -->
+<div id="firstResponderContainer">
+  <button id="firstResponderButton" class="btn btn-danger" onclick="toggleFirstResponderMenu()">First Responder</button>
+</div>
+      <img src="media/info.png" class="collapsible" onclick="toggleInfoIcon()">
+
+    </div>
+  </nav>
+  
     
       <div class="dropup-menu" id="profileDropupMenu">
         <a href="#">Account Details</a>
@@ -140,10 +150,7 @@
       </script>
 
       
-<!-- First Responder Button Container -->
-<div id="firstResponderContainer">
-  <button id="firstResponderButton" class="btn btn-danger" onclick="toggleFirstResponderMenu()">First Responder</button>
-</div>
+
 
 <!-- First Responder Overlay -->
 <div id="firstResponderOverlay" class="first-responder-menu">
@@ -168,7 +175,7 @@
     <a href="searchroutes.html" style="text-decoration: none;">
         <button id="search-routes-button">Search Bus and Train Routes</button></a>
 
-    <img src="media/info.png" class="collapsible" onclick="toggleInfoIcon()">
+    
     <div class="content" id="infoIcon">
       <p>For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.</p>
       <p><strong>What is TransitAura?</strong> TransitAura is a platform for transit riders to plan their trip safely and assist their fellow riders. View and report Safety Levels and Incidents, and earn Aura Points along the way!</p>

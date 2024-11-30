@@ -3,7 +3,7 @@ body {
     background-color: #e1f0fb;
     /* color: white; */
     /* background-color: #25415e; */
-    margin: 10px;
+    /* margin: 10px; */
 }
 
 button {
@@ -27,6 +27,44 @@ button:hover {
     background-color: #3a8df5;
     transform: scale(1.03);
 }
+
+#header {
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    position: sticky;
+    width: 100%;
+    margin: 0 auto;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    margin-top: 0;
+  }
+
+  #mainlogo {
+    width: 110px;
+    margin: 0;
+  }
+
+  .container {
+    /* display: flex; */
+    align-items: center; /* Vertically aligns everything */
+    justify-content: space-between; /* Distributes items evenly */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  body {
+    padding-bottom: 60px; /* Adjust this value to match the height of your navbar */
+  }
+
+  .navbar {
+    height: 60px; /* Specify the navbar height */
+  }
+
 
 
 
@@ -68,6 +106,24 @@ button:hover {
     width: 70% !important;
 }
 
+#searchInput {
+    width: 95%;
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    outline: none;
+    box-shadow: none;
+    background-color: #fff;
+    padding-left: 35px;
+    background-image: url('../media/search-icon.png');
+    background-repeat: no-repeat;
+    background-position: 10px center;
+    background-size: 16px;
+    margin: 0 auto;
+  }
+  
+
 #limited-to-van {
     font-size: 1rem;
     /* text-align: center; */
@@ -80,6 +136,7 @@ button:hover {
 
 #user-name {
     text-align: center;
+    /* margin-top: 0; */
 }
 
 #recentlyViewedContainer {
@@ -149,10 +206,14 @@ button:hover {
 
 /* Container to position the button */
 #firstResponderContainer {
-    position: fixed; /* Fixed to the viewport */
-    top: 10px; /* Distance from the top */
-    right: 10px; /* Distance from the right */
-    z-index: 10; /* Ensure it appears above other elements */
+    /* position: fixed;  */
+    /* top: 10px;  */
+    /* right: 10px;  */
+    /* z-index: 10;  */
+    display: flex;
+    /* justify-content: right; */
+    align-items: center;
+    margin-left: auto;
 }
 
 /* First Responder Button */
@@ -168,11 +229,13 @@ button:hover {
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
     width: auto; /* Adjust width dynamically */
     height: 40px; /* Slim height */
+    display: flex;
+    margin: 0;
 }
 
 /* Welcome Banner */
 #user-name {
-    margin-top: 70px; /* Adds space below the button */
+    margin-top: 30px; /* Adds space below the button */
     text-align: center;
 }
 
@@ -325,6 +388,54 @@ p[id$='-p'] {
 
 
 /*---------------STATION.HTML AND ROUTE.HTML STYLES---------------*/
+.select-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 200px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+  }
+  
+  .safetySelect {
+    appearance: none; /* Hides the native dropdown arrow */
+    -webkit-appearance: none; /* For Safari */
+    -moz-appearance: none; /* For Firefox */
+    /* background: linear-gradient(to bottom, #ffffff, #e0f7ff); */
+    border: 2px solid #0066cc;
+    border-radius: 8px;
+    color: #0066cc;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    width: 100%;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 102, 204, 0.2);
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .safetySelect:hover {
+    background: linear-gradient(to bottom, #e0f7ff, #ffffff);
+    box-shadow: 0 6px 12px rgba(0, 102, 204, 0.4);
+  }
+  
+  .safetySelect:focus {
+    outline: none;
+    border-color: #004d99;
+    box-shadow: 0 0 5px 2px rgba(0, 102, 204, 0.6);
+  }
+  
+  .select-wrapper::after {
+    content: "▼";
+    font-size: 14px;
+    color: #0066cc;
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  
 .safety-bar-container {
     width: 100%;
     max-width: 400px;
@@ -412,7 +523,7 @@ p[id$='-p'] {
     background-color: #f0f5f6;
     border: 1px solid #2a73e8;
     border-radius: 15px;
-    /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     max-width: 900px;
     margin: 20px auto;
     transition: transform 0.3s, box-shadow 0.3s;

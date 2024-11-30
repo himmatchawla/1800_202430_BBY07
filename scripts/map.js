@@ -114,6 +114,13 @@ async function showMap() {
 showMap();
 
 
+function calculateSafetyLevelGradientColor(level) {
+    if (level === "N/A" || isNaN(level)) return "#ccc"; // Grey for N/A
+    const percentage = level / 5; // Scale safety level (max is 5)
+    const r = Math.round((1 - percentage) * 255); // Red decreases as level increases
+    const g = Math.round(percentage * 255); // Green increases as level increases
+    return `rgb(${r},${g},0)`; // Dynamic gradient color
+}
 
 function addHikePinsCircle(map) {
     db.collection('stations-test4').get().then(allEvents => {
@@ -124,14 +131,14 @@ function addHikePinsCircle(map) {
 
             if (data.lat && data.lng) {
                 const coordinates = [data.lng, data.lat];
-                const stationName = data.name || "Unnamed Station"; // Default name
-                const stationId = doc.id; // Get the document ID for reference
+                const stationName = data.name || "Unnamed Station";
+                const stationId = doc.id;
 
                 features.push({
                     'type': 'Feature',
                     'properties': {
-                        'description': `<strong>${stationName}</strong>`,
-                        'stationId': stationId // Include station ID for actions
+                        'description': stationName,
+                        'stationId': stationId
                     },
                     'geometry': {
                         'type': 'Point',
@@ -164,34 +171,52 @@ function addHikePinsCircle(map) {
                 }
             });
 
-            // Add click event listener for the circles
             map.on('click', 'places', async (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const stationName = e.features[0].properties.description;
                 const stationId = e.features[0].properties.stationId;
 
-                // Calculate the average safety level dynamically
                 const averageSafetyLevel = await calculateStationAverageSafetyLevel(stationId);
+                const circleColor = calculateSafetyLevelGradientColor(averageSafetyLevel);
 
-                // Create popup content with buttons
+                // Create a color-coded circle for the safety level
+                const circleHTML = `
+                    <div style="
+                        width: 50px;
+                        height: 50px;
+                        border-radius: 50%;
+                        background: ${circleColor};
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: white;
+                        font-weight: bold;
+                        font-size: 16px;
+                        border: 2px solid #fff;
+                        text-align: center;
+                        justify-content: center;
+                        margin: 0 auto;
+                        margin-top: 5px;
+                    ">
+                        ${averageSafetyLevel === "N/A" ? "N/A" : averageSafetyLevel}
+                    </div>
+                `;
+
+                // Update the popup content
                 const popupContent = `
-                    <div style="font-size: 14px;">
-                        <p>${stationName}</p>
-                        <p>Average Safety Level: ${averageSafetyLevel}</p>
+                    <div style="font-size: 14px; text-align: center;">
+                        
+                        <p><strong>${stationName}</strong></p>
+                        <p>Safety Level</p>
+                        ${circleHTML}
                         <button 
                             onclick="viewStation('${stationId}')" 
-                            style="margin: 5px; padding: 5px; background-color: #007bff; color: white; border: none; cursor: pointer;">
+                            style="margin: 5px; padding: 5px; background-color: #007bff; color: white; border: none; cursor: pointer; margin: 0 auto; margin-top: 5px;">
                             View Station
-                        </button>
-                        <button 
-                            onclick="displaySafetyLevel('${stationId}')" 
-                            style="margin: 5px; padding: 5px; background-color: #28a745; color: white; border: none; cursor: pointer;">
-                            Check Safety Level
                         </button>
                     </div>
                 `;
 
-                // Display the popup
                 new mapboxgl.Popup()
                     .setLngLat(coordinates)
                     .setHTML(popupContent)
@@ -212,6 +237,8 @@ function addHikePinsCircle(map) {
         console.error("Error fetching data from Firestore:", error);
     });
 }
+
+
 
 function viewStation(stationId) {
     // Replace with the actual path to your station details page
