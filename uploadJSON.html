@@ -45,7 +45,7 @@
                     const documentName = station.station; // uses "station" field as document ID
                     const { station: _, ...stationData } = station; // excludes "station" from document data
 
-                    await db.collection("stations-test").doc(documentName).set(stationData);
+                    await db.collection("stations-test4").doc(documentName).set(stationData);
                     console.log(`Document ${documentName} written successfully!`);
                 }
                 alert("All JSON data has been uploaded successfully!");

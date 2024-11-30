@@ -116,7 +116,7 @@ showMap();
 
 
 function addHikePinsCircle(map) {
-    db.collection('stations-test').get().then(allEvents => {
+    db.collection('stations-test4').get().then(allEvents => {
         const features = [];
 
         allEvents.forEach(doc => {
