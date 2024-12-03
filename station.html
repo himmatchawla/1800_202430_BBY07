@@ -21,7 +21,7 @@
 
   <!-- Other libs -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
   <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link rel="stylesheet" href="styles/styles.css">
   <script src="scripts/firebaseConfig.js"></script>
@@ -38,9 +38,15 @@
 <body>
   <nav id="navbarPlaceholder"></nav>
 
+  <nav class="navbar" style="margin-bottom: 1px; background-color: #e1f0fb;" id="header">
+    <div class="container" style="display: flex; justify-content: center;">
+      <img src="./media/ta-full-logo.png" alt="TransitAura Logo" id="mainlogo">
+    </div>
+  </nav>
+
   
   
-  <h1 id="stationName" style="font-family: 'Lato', sans-serif;">Station Name</h1>
+  <h1 id="stationName" style="font-family: 'Lato', sans-serif; font-size: 38px;">Station Name</h1>
   <p id="stationNeighborhood">Neighborhood: </p>
   <p id="stationDescription">Description: </p>
   <p id="stationFacilities">Facilities: </p>
@@ -88,32 +94,40 @@
 </div>
 
 
+
+
+
   <div id="incidents">
     <h2 id="recentIncidentsH2">Recent Incidents</h2>
     <div id="recentIncidents" class="mt-5">
       <h4>Recent Incidents</h4>
       <div class="incident-list"></div>
     </div>
-
     <button class="btn btn-primary" id="submitReportBtn">Submit an Incident Report</button>
+  </div>
 
-    <div id="overlay">
-      <div id="overlayContent">
-        <button id="closeOverlay">&times;</button>
-        <h3>Submit an Incident Report</h3>
-        <form id="incidentForm">
-          <div class="mb-3">
-            <label for="incidentTitle" class="form-label">Title (Optional)</label>
-            <input type="text" class="form-control" id="incidentTitle" placeholder="Incident Title">
-          </div>
-          <div class="mb-3">
-            <label for="incidentDetails" class="form-label">Details</label>
-            <textarea class="form-control" id="incidentDetails" rows="5" placeholder="Provide detailed information about the incident" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Report</button>
-        </form>
-      </div>
+  <!-- Move the overlay here -->
+  <div id="overlay">
+    <div id="overlayContent">
+      <button id="closeOverlay">X</button>
+      <h3>Submit an Incident Report</h3>
+      <form id="incidentForm">
+        <div class="mb-3">
+          <label for="incidentTitle" class="form-label">Title (Optional)</label>
+          <input type="text" class="form-control" id="incidentTitle" placeholder="Incident Title">
+        </div>
+        <div class="mb-3">
+          <label for="incidentDetails" class="form-label">Details</label>
+          <textarea class="form-control" id="incidentDetails" rows="5" placeholder="Provide detailed information about the incident" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit Report</button>
+      </form>
     </div>
   </div>
+
+
+</body>
+
+    
 </body>
 </html>

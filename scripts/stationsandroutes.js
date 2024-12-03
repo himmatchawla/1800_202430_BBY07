@@ -64,7 +64,7 @@ function setupIncidentReportButton(collection) {
 
     // Open the overlay when "Submit an Incident Report" button is clicked
     submitReportBtn.addEventListener("click", () => {
-        overlay.style.display = "block";
+        overlay.style.display = "flex";
     });
 
     // Close the overlay when the close button is clicked
@@ -145,14 +145,9 @@ function setupIncidentReportButton(collection) {
                 timestamp,
             });
 
-            messageBox.textContent = "Incident report submitted successfully! You earned 5 Aura Points.";
-            messageBox.style.color = "green";
-            messageBox.style.display = "block";
             overlay.style.display = "none"; // Close the overlay
-            setTimeout(() => {
-                messageBox.style.display = "none";
-                messageBox.textContent = ""; // Clear the message
-            }, 5000);
+            swal("Incident report submitted successfully!", "You earned 5 Aura Points.", "success");
+
 
             await displayRecentIncidents(collection, documentId); // Refresh the recent incidents
         } catch (error) {
@@ -265,10 +260,8 @@ function setupReportSafetyLevelButton(collection) {
             await updateSafetyBar(collection, documentId);
 
             // Show success message
-            messageBox.textContent = "Safety level reported successfully! You earned 2 Aura Point.";
-            messageBox.style.color = "green";
-            messageBox.style.display = "block";
-            setTimeout(() => (messageBox.style.display = "none"), 5000);
+            swal("Safety level reported successfully!", "You earned 2 Aura Points.", "success");
+
         } catch (error) {
             console.error("Error reporting safety level:", error);
             messageBox.textContent = "Failed to report safety level. Please try again.";
@@ -319,7 +312,7 @@ async function updateSafetyBar(collection, documentId) {
             averageOverlay.style.left = `calc(${percentage}% - 20px)`; // Adjust position to center text
 
             // Update info text
-            safetyReportInfo.textContent = `The Safety Level is derived from ${reports.length} report(s) in the last hour.`;
+            safetyReportInfo.innerHTML = `The Safety Level is derived from <strong>${reports.length}</strong> report(s) in the last hour.`;
         } else {
             // Full gradient for no data
             safetyBar.style.background = "linear-gradient(90deg, red, yellow, green)";

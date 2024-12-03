@@ -122,14 +122,14 @@
 <body>
   <nav id="navbarPlaceholder"></nav>
 
-  <nav class="navbar" style="background-color: #f8f9fa;" id="header">
+  <nav class="navbar" style="background-color: #e1f0fb;" id="header">
     <div class="container">
       <img src="./media/ta-full-logo.png" alt="TransitAura Logo" id="mainlogo">
             <!-- First Responder Button Container -->
 <div id="firstResponderContainer">
-  <button id="firstResponderButton" class="btn btn-danger" onclick="toggleFirstResponderMenu()">First Responder</button>
+  <button id="firstResponderButton" class="btn btn-primary" style="background-color: #2a73e8;" onclick="toggleFirstResponderMenu()">Help</button>
 </div>
-      <img src="media/info.png" class="collapsible" onclick="toggleInfoIcon()">
+      <!-- <img src="media/info.png" class="collapsible" onclick="toggleInfoIcon()"> -->
 
     </div>
   </nav>
@@ -155,10 +155,10 @@
 
 <!-- First Responder Overlay -->
 <div id="firstResponderOverlay" class="first-responder-menu">
-  <h2>Contact First Responders</h2>
-  <p>For emergencies:</p>
+  <button class="btn btn-primary" onclick="toggleInfoIcon()">Help with TransitAura</button>
+  <br>
+  <br>
   <button class="btn btn-danger" onclick="window.location.href='tel:911'">Call 911</button>
-  <p>For non-emergencies contact Transit Police directly:</p>
   <button class="btn btn-primary" onclick="window.location.href='tel:6045158300'">Call Tranist Police</button>
   <button class="btn btn-secondary" onclick="window.location.href='sms:877777'">Text Tranist Police</button>
   <button class="btn btn-outline-light mt-3" onclick="toggleFirstResponderMenu()">Close</button>
@@ -254,23 +254,7 @@ function toggleInfoIcon() {
 
 
     </script>
-    <script>
-      // "what is transitaura" collapsible
-//         var coll = document.getElementsByClassName("collapsible");
-// var i;
 
-// for (i = 0; i < coll.length; i++) {
-//   coll[i].addEventListener("click", function() {
-//     this.classList.toggle("active");
-//     var content = this.nextElementSibling;
-//     if (content.style.display === "block") {
-//       content.style.display = "none";
-//     } else {
-//       content.style.display = "block";
-//     }
-//   });
-// }
-    </script>
     
 
 </body>

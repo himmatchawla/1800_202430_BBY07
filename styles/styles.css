@@ -3,13 +3,14 @@ body {
     background-color: #e1f0fb;
     /* color: white; */
     /* background-color: #25415e; */
-    /* margin: 10px; */
+    margin: 10px;
+    padding-bottom: 60px;
 }
 
 button {
     font-size: 1.1rem;
     padding: 12px 25px;
-    margin-top: 12px !important;
+    margin-top: 12px;
     display: block;
     width: 70%;
     /* max-width: 600px; */
@@ -37,10 +38,10 @@ button:hover {
     position: sticky;
     width: 100%;
     margin: 0 auto;
-    top: 0;
-    left: 0;
+    top: 0 !important;
+    left: 0 !important;
     z-index: 1000;
-    margin-top: 0;
+    margin-top: 0 !important;
   }
 
   #mainlogo {
@@ -52,7 +53,7 @@ button:hover {
     /* display: flex; */
     align-items: center; /* Vertically aligns everything */
     justify-content: space-between; /* Distributes items evenly */
-    margin: 0;
+    /* margin: 0; */
     padding: 0;
     width: 100%;
   }
@@ -231,6 +232,8 @@ button:hover {
     height: 40px; /* Slim height */
     display: flex;
     margin: 0;
+    align-items: center;
+    margin-top: auto;
 }
 
 /* Welcome Banner */
@@ -351,21 +354,33 @@ p[id$='-p'] {
   #search-routes-h1, #search-stations-h1, #login-h1 {
     text-align: center;
   }
-
   .buttons {
     display: flex;
-    gap: 10px; /* Adds space between buttons */
-    align-items: center; /* Aligns buttons vertically */
+    gap: 10px; /* Space between buttons */
+    align-items: center; /* Align buttons vertically */
 }
 
+.d-flex {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    align-items: center; /* Vertically align items */
+    justify-content: flex-start;
+    margin-top: 0px !important;
+}
+
+
 .btn {
-    display: inline-block;
+    display: flex; /* Makes the button content align flexibly */
+    justify-content: center; /* Centers text horizontally */
+    align-items: center; /* Centers text vertically */
     text-decoration: none; /* Removes underline */
     color: white; /* Text color */
-    padding: 8px 16px; /* Button padding */
+    padding: 10px 20px !important; /* Consistent padding for buttons */
     border-radius: 4px; /* Rounded corners */
     font-size: 14px; /* Font size */
-    text-align: center; /* Centers text */
+    line-height: 1 !important; /* Prevents inconsistent line height */
+    height: auto !important; /* Allows height to adjust based on content */
+    min-width: 100px; /* Ensures consistent button width */
 }
 
 .btn-primary {
@@ -385,6 +400,8 @@ p[id$='-p'] {
 .btn-secondary:hover {
     background-color: #5a6268; /* Darker gray on hover */
 }
+
+
 
 
 
@@ -477,26 +494,29 @@ p[id$='-p'] {
     justify-content: center;
     align-items: center;
 }
-
 #overlayContent {
     background: #fff;
-    padding: 20px;
+    padding: 20px 40px;
     border-radius: 8px;
     max-width: 500px;
     width: 90%;
-    text-align: center;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    position: relative;
 }
 
 #closeOverlay {
-    float: right;
+    /* position: absolute; */
+    top: 10px;
+    right: 10px;
     background: none;
     border: none;
-    font-size: 2rem;
-    padding: 10px;
+    font-size: 1.5rem;
+    padding: 5px;
     cursor: pointer;
     color: #000;
 }
+
 
 .success-message {
     font-size: 16px;
@@ -653,10 +673,13 @@ p[id$='-p'] {
 }
 
 #bookmarkIcon {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
     /* margin-left: 0; */
     /* margin-right: auto; */
+    /* margin-top: 16px; */
+    /* margin-bottom: auto; */
+    
 }
 
 .backbtnbookmarkicon-container {
@@ -666,6 +689,7 @@ p[id$='-p'] {
     gap: 10px;
     width: 100%;
     text-align: center;
+    margin-top: 12px;
 }
 
 .backbtnbookmarkicon-container > button {

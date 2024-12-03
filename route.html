@@ -26,6 +26,8 @@
     <!-- Other libs -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <script src="scripts/firebaseConfig.js"></script>
     <script src="scripts/login.js"></script>
     <script src="scripts/utils.js" defer></script>
@@ -36,19 +38,25 @@
 </head>
 <body>
   <nav id="navbarPlaceholder"></nav>
+  
+  <nav class="navbar" style="margin-bottom: 1px; background-color: #e1f0fb;" id="header">
+    <div class="container" style="display: flex; justify-content: center;">
+      <img src="./media/ta-full-logo.png" alt="TransitAura Logo" id="mainlogo">
+    </div>
+  </nav>
 
-  <div class="back-button-container">
-    <button onclick="window.history.back()">← Back</button>
-  </div>
 
-  <h1 id="routeName">Route Name</h1>
+  <h1 id="routeName" style="font-family: 'Lato', sans-serif; font-size: 35px;">Route Name</h1>
   <p id="routeDescription" style="display: none;">Description: </p>
   <p id="currentSafetyLevel">Current Safety Level: N/A</p>
 
+  <div class="backbtnbookmarkicon-container">
+    <button onclick="window.history.back()">← Back</button>
+  <img src="media/bookmark-unfilled.png" id="bookmarkIcon" class="bookmark-icon" alt="Bookmark icon">
+  </div>
 
 
-  <button id="bookmarkButton" class="btn btn-primary">Bookmark Station</button>
-<p id="bookmarkMessage"></p>
+
 
 <p id="reportMessage"></p> 
   <div id="successMessage" class="success-message"></div>

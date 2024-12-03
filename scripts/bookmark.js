@@ -142,12 +142,7 @@ async function displayBookmarks() {
     }
 }
 
-
-
-
-
 // bookmark icon functionality (on station.html and route.html)
-// Handle bookmark icon functionality for both initialization and toggling
 async function handleBookmarkIcon(isInitialization = false) {
     const stationId = getStationIdFromURL();
     const routeId = getRouteIdFromURL();
@@ -204,9 +199,6 @@ async function handleBookmarkIcon(isInitialization = false) {
 }
 
 
-
-
-// event listener to activate the displayBookmarks function
 // event listener to activate the displayBookmarks function and handle the bookmark icon
 firebase.auth().onAuthStateChanged((user) => {
     console.log("onAuthStateChanged triggered");

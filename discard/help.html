@@ -15,9 +15,10 @@
   <!-- Other libs -->
   <link rel="stylesheet" href="styles/styles.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script src="scripts/skeleton.js"></script>
 </head>
 
-<body>
+<body style="display: flex; align-items: center; justify-content: center; text-align: center;">
   <nav id="navbarPlaceholder"></nav>
   <ul class="nav flex-column">
     <li class="nav-item">
@@ -36,7 +37,12 @@
     <!-- JS funcs  -->
     <script src="scripts/firebaseConfig.js"></script>
     <script src="scripts/login.js"></script>
-    <script src="scripts/skeleton.js"></script>
+    <script>
+      function toggleInfoIcon() {
+    const overlay = document.getElementById('infoIcon');
+    overlay.classList.toggle('active');
+}
+    </script>
 </body>
 
 </html>
