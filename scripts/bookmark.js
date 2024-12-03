@@ -1,10 +1,10 @@
 console.log("Bookmarks script loaded");
 
-// Bookmark an item (station or route)
+// bookmark an item (station or route)
 async function toggleBookmark(itemId, type, name) {
     const user = firebase.auth().currentUser;
     if (!user) {
-        alert("Please log in to manage bookmarks.");
+        swal("Please log in.", "You must be logged in to bookmark items.", "error");
         return;
     }
 
@@ -15,22 +15,21 @@ async function toggleBookmark(itemId, type, name) {
         const doc = await bookmarkRef.get();
         if (doc.exists) {
             await bookmarkRef.delete();
-            alert(`${type.toUpperCase()} "${name}" removed from bookmarks.`);
+            swal("Removed from Bookmarks!", `${name} has been removed from bookmarks.`, "success");
         } else {
             await bookmarkRef.set({
                 type, // "station" or "route"
                 name,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             });
-            alert(`${type.toUpperCase()} "${name}" bookmarked successfully.`);
+            swal("Added to Bookmarks!", `${name} has been added bookmarks.`, "success");
         }
     } catch (error) {
         console.error("Error toggling bookmark:", error);
     }
 }
 
-
-// Display all bookmarks
+// display bookmarks (on main.html)
 async function displayBookmarks() {
     console.log("displayBookmarks called");
 
@@ -145,20 +144,96 @@ async function displayBookmarks() {
 
 
 
+
+
+// bookmark icon functionality (on station.html and route.html)
+// Handle bookmark icon functionality for both initialization and toggling
+async function handleBookmarkIcon(isInitialization = false) {
+    const stationId = getStationIdFromURL();
+    const routeId = getRouteIdFromURL();
+    const itemId = stationId || routeId;
+    const itemType = stationId ? "station" : "route";
+
+    if (!itemId) {
+        console.warn("No station or route ID found in the URL.");
+        return;
+    }
+
+    const user = firebase.auth().currentUser;
+    if (!user) {
+        if (!isInitialization) {
+            swal("Please log in.", "You must be logged in to bookmark items.", "error");
+        }
+        return;
+    }
+
+    const userId = user.uid;
+    const bookmarkRef = db.collection("users").doc(userId).collection("bookmarks").doc(itemId);
+    const icon = document.getElementById("bookmarkIcon");
+
+    try {
+        const doc = await bookmarkRef.get();
+
+        if (isInitialization) {
+            // During initialization, only update the icon state
+            if (icon) {
+                icon.src = doc.exists ? "media/bookmark-filled.png" : "media/bookmark-unfilled.png";
+            }
+        } else {
+            // On user click, toggle the bookmark and update the icon
+            const nameElement = document.getElementById(stationId ? "stationName" : "routeName");
+            const name = nameElement ? nameElement.textContent.trim() : "Unnamed Item";
+
+            if (doc.exists) {
+                await bookmarkRef.delete();
+                if (icon) icon.src = "media/bookmark-unfilled.png";
+                swal("Removed from Bookmarks!", `${name} has been removed from bookmarks.`, "success");
+            } else {
+                await bookmarkRef.set({
+                    type: itemType,
+                    name,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                });
+                if (icon) icon.src = "media/bookmark-filled.png";
+                swal("Added to Bookmarks!", `${name} has been added to bookmarks.`, "success");
+            }
+        }
+    } catch (error) {
+        console.error("Error handling bookmark icon:", error);
+    }
+}
+
+
+
+
 // event listener to activate the displayBookmarks function
-// NOTE: firebase.auth().currentUser only runs once and isnt a powerful 
-// NOTE: enough listener, its good for one-time clicks, etc, so we arent going 
-// NOTE: to use currentUser inside a DOMContentLoaded event listener
+// event listener to activate the displayBookmarks function and handle the bookmark icon
 firebase.auth().onAuthStateChanged((user) => {
     console.log("onAuthStateChanged triggered");
+    const icon = document.getElementById("bookmarkIcon");
+
     if (user) {
         console.log("User is logged in:", user.email);
         displayBookmarks();
+
+        // Initialize the bookmark icon functionality if it exists
+        if (icon) {
+            // Set up the click event
+            icon.addEventListener("click", () => handleBookmarkIcon(false));
+
+            // Initialize the icon's state
+            handleBookmarkIcon(true); // Pass `true` to indicate initialization
+        }
     } else {
         console.log("User is not logged in.");
         const container = document.getElementById("bookmarks-go-here");
         if (container) {
             container.innerHTML = "<p>Please log in to view bookmarks.</p>";
+        }
+
+        // Optionally reset the bookmark icon for unauthenticated users
+        if (icon) {
+            icon.src = "media/bookmark-unfilled.png";
         }
     }
 });

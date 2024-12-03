@@ -1,3 +1,5 @@
+//PROFILE.JS HANDLES UPDATING USER INFO IN FIRESTORE
+
 // Function to populate user info
 function populateUserInfo() {
     firebase.auth().onAuthStateChanged(user => {

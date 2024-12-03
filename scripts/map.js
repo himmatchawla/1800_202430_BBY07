@@ -1,4 +1,7 @@
+//MAP.JS HANDLES THE MAP DISPLAY
+
 async function showMap() {
+    
     //------------------------------------------
     // Defines and initiates basic Mapbox data
     //------------------------------------------

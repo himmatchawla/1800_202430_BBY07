@@ -1,3 +1,5 @@
+//STATIONSANDROUTES.JS HANDLES THE MAIN FUNCTIONALITY OF THE WEB APP (REPORTING/VIEWING ETC)
+
 console.log("stationsandroutes.js loaded");
 
 // ----------INITIALIZATION----------

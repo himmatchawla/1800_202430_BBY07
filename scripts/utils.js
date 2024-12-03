@@ -1,4 +1,4 @@
-// CALCULATEAVERAGESAFETYLEVEL.JS calculates average safety level of station or route in the last hour
+//UTILS.JS CONTAINS FUNCTIONS THAT ARE USED SLIGHTLY DIFFERENTLY ACROSS MULTIPLE SCRIPTS
 
 // calculate average safety level of station or route from data in the last hour
 async function calculateAverageSafetyLevel(collection, documentId) {

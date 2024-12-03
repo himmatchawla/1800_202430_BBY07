@@ -43,6 +43,45 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="/styles/styles.css" />
+    <style>
+      .card {
+    padding: 0.8rem;
+    font-size: 0.9rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 10px !important;
+    margin-bottom:10px !important;
+    
+}
+
+.card-title {
+    font-size: 1.1rem;
+    color: #0044cc;
+}
+
+.card-text {
+    font-size: 0.9rem;
+}
+
+.progress {
+    height: 0.75rem;
+}
+
+.progress-bar {
+    border-radius: 0.25rem;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#userAuraPoints {
+  color: #1d5ddd !important;
+}
+
+
+    </style>
   </head>
 
   <body>
@@ -52,69 +91,20 @@
     
     <nav id="navbarPlaceholder"></nav>
 
-    <div class="table-responsive" id="auraPointsLevels">
-      <h1>Aura Points Levels</h1>
-      <table class="table table-bordered table-striped">
-        <thead>
-          <tr>
-            <th>Points</th>
-            <th>Title</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>500</td>
-            <td>Giga Chad</td>
-          </tr>
-          <tr>
-            <td>200</td>
-            <td>Chad</td>
-          </tr>
-          <tr>
-            <td>100</td>
-            <td>Giga Sigma</td>
-          </tr>
-          <tr>
-            <td>80</td>
-            <td>Sigma</td>
-          </tr>
-          <tr>
-            <td>65</td>
-            <td>Giga Alpha</td>
-          </tr>
-          <tr>
-            <td>50</td>
-            <td>Alpha</td>
-          </tr>
-          <tr>
-            <td>35</td>
-            <td>Giga Beta</td>
-          </tr>
-          <tr>
-            <td>25</td>
-            <td>Beta</td>
-          </tr>
-          <tr>
-            <td>10</td>
-            <td>Giga Ligma</td>
-          </tr>
-          <tr>
-            <td>5</td>
-            <td>Ligma</td>
-          </tr>
-          <tr>
-            <td>0</td>
-            <td>No Aura</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+    <div class="container mt-4">
+      <h1 class="text-center text-primary">Aura Points</h1>
 
-    <div class="container" id="auraPointsDisplay">
-      <h1>Aura Points</h1>
-      <div id="userAuraPoints"></div>
-      <div id="titleDisplay"></div>
-    </div>
+      <!-- User Aura Points and Title -->
+      <div class="card mt-4 shadow-sm">
+          <div class="card-body text-center">
+              <h2 id="userAuraPoints" class="text-info"></h2>
+              <h4 id="titleDisplay" class="text-secondary"></h4>
+          </div>
+      </div>
+
+      <!-- Achievements -->
+      <div id="achievementsContainer" class="mt-4"></div>
+  </div>
 
     <script src="scripts/firebaseConfig.js"></script>
     <script src="scripts/login.js"></script>

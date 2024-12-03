@@ -1,3 +1,5 @@
+//SEARCH.JS HANDLES THE SEARCH FUNCTION AND DISPLAYING SEARCH RESULTS
+
 console.log("Search script loaded");
 
 // Display search results for stations or routes

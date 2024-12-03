@@ -21,6 +21,8 @@
 
   <!-- Other libs -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <link rel="stylesheet" href="styles/styles.css">
   <script src="scripts/firebaseConfig.js"></script>
   <script src="scripts/login.js"></script>
@@ -30,24 +32,27 @@
   <script src="scripts/recentlyviewed.js" defer></script>
   <script src="scripts/bookmark.js" defer></script>
   <!-- <script src="scripts/search.js" defer></script> -->
+
+
 </head>
 <body>
   <nav id="navbarPlaceholder"></nav>
 
-  <div class="back-button-container">
-    <button onclick="window.history.back()">← Back</button>
-  </div>
   
-  <h1 id="stationName">Station Name</h1>
+  
+  <h1 id="stationName" style="font-family: 'Lato', sans-serif;">Station Name</h1>
   <p id="stationNeighborhood">Neighborhood: </p>
   <p id="stationDescription">Description: </p>
   <p id="stationFacilities">Facilities: </p>
   <p id="currentSafetyLevel">Current Safety Level: </p>
 
+  <div class="backbtnbookmarkicon-container">
+    <button onclick="window.history.back()">← Back</button>
+  <img src="media/bookmark-unfilled.png" id="bookmarkIcon" class="bookmark-icon" alt="Bookmark icon">
+  </div>
 
 
-  <button id="bookmarkButton" class="btn btn-primary">Bookmark</button>
-  <p id="bookmarkMessage" class="mt-2"></p>
+
 
   <p id="reportMessage"></p> 
   <div id="successMessage" class="success-message"></div>
