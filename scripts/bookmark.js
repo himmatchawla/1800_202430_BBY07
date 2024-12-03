@@ -22,7 +22,7 @@ async function toggleBookmark(itemId, type, name) {
                 name,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             });
-            swal("Added to Bookmarks!", `${name} has been added bookmarks.`, "success");
+            swal("Added to Bookmarks!", `${name} has been added to bookmarks.`, "success");
         }
     } catch (error) {
         console.error("Error toggling bookmark:", error);
