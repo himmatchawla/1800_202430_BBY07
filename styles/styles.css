@@ -96,6 +96,17 @@ button:hover {
         margin-top: 15px;
         padding: 0 20px;
     }
+
+
+#bookmarks-go-here {
+        display: flex;
+        justify-content: center;
+    }
+
+    #bookmarks-go-here > .card {
+        width: 80%;
+    }
+
 }
 
 /*----------------index.html--------------------*/
