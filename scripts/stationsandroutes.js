@@ -390,33 +390,42 @@ async function loadRouteData() {
 
 //--------------------- AURA POINTS TITLE ----------------------------
 
+// Fetches and displays a user's aura points and corresponding title.
 async function displayUserAuraPoints(userId) {
     try {
+        // Reference to the user's document in the Firestore database
         const userRef = db.collection("users").doc(userId);
+
+        // Fetch the user document from the database
         const userDoc = await userRef.get();
 
         if (userDoc.exists) {
+            // Retrieve the aura points from the document; default to 0 if not found
             const auraPoints = userDoc.data().auraPoints || 0;
             const title = calculateTitle(auraPoints);
 
+            // Update the HTML to display the user's aura points and title
             const auraPointsDisplay = document.getElementById("userAuraPoints");
             auraPointsDisplay.innerHTML = `
                 <p><strong>Points:</strong> ${auraPoints}</p>
                 <p><strong>Title:</strong> ${title}</p>
             `;
         } else {
+            // Log an error if the user document does not exist
             console.error("User document not found!");
         }
     } catch (error) {
+        // Log any errors that occur during the fetch process
         console.error("Error fetching user data:", error);
     }
 }
 
-
+// Increments a user's aura points by a specified value and updates the display.
 async function handleAuraPointIncrement(userId, incrementBy) {
     const userRef = db.collection("users").doc(userId);
 
     try {
+        // increments the aura points to the users database in firestore
         await userRef.update({
             auraPoints: firebase.firestore.FieldValue.increment(incrementBy),
         });
@@ -424,6 +433,7 @@ async function handleAuraPointIncrement(userId, incrementBy) {
         // Call the new display function
         await displayUserAuraPoints(userId);
     } catch (error) {
+        // Log any errors that occur during the update process
         console.error("Error updating aura points:", error);
     }
 }

@@ -24,6 +24,7 @@ function calculateTitle(auraPoints) {
             return level.title;
         }
     }
+    // if user has no aurapoints, it return No Aura
     return "No Aura"; 
 }
 
@@ -80,21 +81,27 @@ function populateAuraPoints() {
                             { points: 500, title: "Giga Chad" }
                         ];
 
+                        // Generate HTML for each achievement card
                         let achievementsHTML = "";
                         titles.forEach(level => {
+                            // Calculate the progress percentage for each achievement level
                             const progress = Math.min((auraPoints / level.points) * 100, 100).toFixed(2);
+                            // Add an achievement card to the HTML string
                             achievementsHTML += createAchievementCard(level.title, level.points, progress);
                         });
-
+                        // Update the achievements container with the generated HTML
                         document.getElementById("achievementsContainer").innerHTML = achievementsHTML;
                     } else {
+                        // Log a message if the user document does not exist
                         console.log("No user document found");
                     }
                 })
                 .catch(error => {
+                    // Log any errors that occur during the document fetch
                     console.error("Error getting user document:", error);
                 });
         } else {
+            // Log a message if no user is signed in
             console.log("No user is signed in");
         }
     });

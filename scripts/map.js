@@ -134,11 +134,13 @@ function addHikePinsCircle(map) {
         allEvents.forEach(doc => {
             const data = doc.data();
 
+            // Check if the document contains latitude and longitude data
             if (data.lat && data.lng) {
                 const coordinates = [data.lng, data.lat];
                 const stationName = data.name || "Unnamed Station";
                 const stationId = doc.id;
 
+                // Push the feature (GeoJSON point) to the features array
                 features.push({
                     'type': 'Feature',
                     'properties': {
@@ -151,11 +153,14 @@ function addHikePinsCircle(map) {
                     }
                 });
             } else {
+                // Log a warning if a document is missing latitude or longitude data
                 console.warn(`Document ${doc.id} is missing lat/lng`);
             }
         });
 
+        // If features have been added, display them on the map
         if (features.length > 0) {
+            // Add the GeoJSON data as a source to the map
             map.addSource('places', {
                 'type': 'geojson',
                 'data': {
@@ -164,6 +169,8 @@ function addHikePinsCircle(map) {
                 }
             });
 
+
+            // Add a circle layer to display the stations on the map
             map.addLayer({
                 'id': 'places',
                 'type': 'circle',
@@ -176,12 +183,15 @@ function addHikePinsCircle(map) {
                 }
             });
 
+            // Add a click event listener to show station details in a popup
             map.on('click', 'places', async (e) => {
                 const coordinates = e.features[0].geometry.coordinates.slice();
                 const stationName = e.features[0].properties.description;
                 const stationId = e.features[0].properties.stationId;
 
+                // Calculate the average safety level for the station
                 const averageSafetyLevel = await calculateStationAverageSafetyLevel(stationId);
+                // Calculate the color for the safety level
                 const circleColor = calculateSafetyLevelGradientColor(averageSafetyLevel);
 
                 // Create a color-coded circle for the safety level
@@ -222,6 +232,7 @@ function addHikePinsCircle(map) {
                     </div>
                 `;
 
+                // Create and display the popup with the station's details
                 new mapboxgl.Popup()
                     .setLngLat(coordinates)
                     .setHTML(popupContent)
@@ -236,6 +247,7 @@ function addHikePinsCircle(map) {
                 map.getCanvas().style.cursor = '';
             });
         } else {
+            // Log a warning if there are no valid features to display
             console.warn("No valid features to display on the map.");
         }
     }).catch(error => {
@@ -300,17 +312,25 @@ function addUserPinCircle(map, userLocation) {
 
 
 /**
- * 
- * @returns 
+ * Loads custom data from the Firestore `stations-test` collection and formats it as GeoJSON.
+ * @returns A GeoJSON object containing the station data with `FeatureCollection` structure.
  */
 
 async function loadCustomData() {
+    // Initialize an empty GeoJSON FeatureCollection
     const customData = { features: [], type: 'FeatureCollection' };
     try {
+        // Fetch all documents from the `stations-test` Firestore collection
         const querySnapshot = await db.collection('stations-test').get();
+
+        // Iterate through each document in the query snapshot
         querySnapshot.forEach(doc => {
             const data = doc.data();
+
+            // Ensure the document contains the required fields: latitude, longitude, and name
             if (data.lat && data.lng && data.name) { 
+
+                // Add a GeoJSON Feature for the document
                 customData.features.push({
                     type: 'Feature',
                     properties: { title: data.name },
@@ -321,8 +341,10 @@ async function loadCustomData() {
                 });
             }
         });
+        // Log the successfully loaded custom data to the console
         console.log("Custom Data Loaded:", customData);
     } catch (error) {
+        // Log any errors that occur while fetching or processing data
         console.error("Error loading custom data:", error);
     }
     return customData;
