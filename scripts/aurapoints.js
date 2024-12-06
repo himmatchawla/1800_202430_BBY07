@@ -1,3 +1,10 @@
+//Handles Aura points of TransitAura
+
+/**
+ * Titles used for aura points
+ * @param {*} auraPoints gets aura points of the user 
+ * @returns title if the user has more than 0 aurapoints and "no Aura" if the user has 0.
+ */
 function calculateTitle(auraPoints) {
     const titles = [
         { points: 500, title: "Giga Chad" },
@@ -20,6 +27,14 @@ function calculateTitle(auraPoints) {
     return "No Aura"; 
 }
 
+/**
+ * How cards of the aura points title is displayed on the auraoints.html
+ * @param {*} title gets the title of aura points
+ * @param {*} points gets h ow many aura poits you ahve
+ * @param {*} progress gets how much you have left in the progress
+ * @returns a card for aura points.
+ */
+
 function createAchievementCard(title, points, progress) {
     return `
         <div class="card mb-3 shadow-sm">
@@ -34,6 +49,9 @@ function createAchievementCard(title, points, progress) {
     `;
 }
 
+/**
+ * Function used to populate how many aura points you have and stores it in the user Docuemtn in firestore.
+ */
 function populateAuraPoints() {
     firebase.auth().onAuthStateChanged(user => {
         if (user) {

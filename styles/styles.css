@@ -230,17 +230,17 @@ button:hover {
 
 /* First Responder Button */
 #firstResponderButton {
-    padding: 8px 15px; /* Slim padding for a shorter button */
-    font-size: 1rem; /* Adjusted font size */
-    border-radius: 5px; /* Rounded corners */
+    padding: 8px 15px; 
+    font-size: 1rem; 
+    border-radius: 5px; 
     text-align: center;
-    background-color: #dc3545; /* Danger red */
+    background-color: #dc3545; 
     color: white;
     border: none;
     cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-    width: auto; /* Adjust width dynamically */
-    height: 40px; /* Slim height */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); 
+    width: auto; 
+    height: 40px; 
     display: flex;
     margin: 0;
     align-items: center;
@@ -249,7 +249,7 @@ button:hover {
 
 /* Welcome Banner */
 #user-name {
-    margin-top: 30px; /* Adds space below the button */
+    margin-top: 30px; 
     text-align: center;
 }
 
@@ -264,7 +264,7 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.8); /* Black background with transparency */
+    background-color: rgba(0, 0, 0, 0.8); 
     color: white;
     display: none;
     flex-direction: column;
@@ -272,7 +272,7 @@ button:hover {
     justify-content: center;
     transition: opacity 0.3s ease;
     opacity: 0;
-    z-index: 1000; /* Ensure overlay is above all other content */
+    z-index: 1000; 
 }
 
 .first-responder-menu.active {
@@ -381,35 +381,35 @@ p[id$='-p'] {
 
 
 .btn {
-    display: flex; /* Makes the button content align flexibly */
-    justify-content: center; /* Centers text horizontally */
-    align-items: center; /* Centers text vertically */
-    text-decoration: none; /* Removes underline */
-    color: white; /* Text color */
-    padding: 10px 20px !important; /* Consistent padding for buttons */
-    border-radius: 4px; /* Rounded corners */
-    font-size: 14px; /* Font size */
-    line-height: 1 !important; /* Prevents inconsistent line height */
-    height: auto !important; /* Allows height to adjust based on content */
-    min-width: 100px; /* Ensures consistent button width */
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    text-decoration: none;
+    color: white; 
+    padding: 10px 20px !important; 
+    border-radius: 4px; 
+    font-size: 14px;
+    line-height: 1 !important; 
+    height: auto !important; 
+    min-width: 100px; 
 }
 
 .btn-primary {
-    background-color: #007bff; /* Bootstrap primary blue */
+    background-color: #007bff; 
     border: none;
 }
 
 .btn-primary:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: #0056b3; 
 }
 
 .btn-secondary {
-    background-color: #6c757d; /* Bootstrap secondary gray */
+    background-color: #6c757d; 
     border: none;
 }
 
 .btn-secondary:hover {
-    background-color: #5a6268; /* Darker gray on hover */
+    background-color: #5a6268; 
 }
 
 
@@ -427,10 +427,9 @@ p[id$='-p'] {
   }
   
   .safetySelect {
-    appearance: none; /* Hides the native dropdown arrow */
-    -webkit-appearance: none; /* For Safari */
-    -moz-appearance: none; /* For Firefox */
-    /* background: linear-gradient(to bottom, #ffffff, #e0f7ff); */
+    appearance: none;
+    -webkit-appearance: none; 
+    -moz-appearance: none; 
     border: 2px solid #0066cc;
     border-radius: 8px;
     color: #0066cc;
@@ -600,30 +599,6 @@ p[id$='-p'] {
     display: none;
 }
 
-/*---------------BOOKMARK.HTML STYLES---------------*/
-/* #user-name{
-    text-align: center;
-    font-size: 10vw;
-}
-
-#user-name2{
-    font-size: 7vw;
-}
-#saved-stations-h2{
-    text-align: center;
-    font-size: 6.5vw;
-}
-
-#saved-routes-h2{
-    text-align: center;
-    padding-top: 6%;
-    padding-bottom: 2%;
-    font-size: 6.5vw;
-}
-
-.card{
-    margin-top: 3%;
-} */
 
 /*---------------NAVBAR STYLES---------------*/
 .navbar-nav {
@@ -686,10 +661,6 @@ p[id$='-p'] {
 #bookmarkIcon {
     width: 36px;
     height: 36px;
-    /* margin-left: 0; */
-    /* margin-right: auto; */
-    /* margin-top: 16px; */
-    /* margin-bottom: auto; */
     
 }
 
@@ -763,11 +734,10 @@ p[id$='-p'] {
   }
 
   .dropup-menu a {
-    /* display: block; */
-    /* margin: 10px 0; */
+
     color: white;
     text-decoration: none;
-    /* font-size: 1.2rem; */
+
   }
 
 #auraPointsButton, #accountDetailsButton, #logoutButton {
@@ -802,15 +772,6 @@ p[id$='-p'] {
     transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth animations */
 }
 
-  /* .nav_before_login {
-    
-    padding: 10px 20px;
-    font-family: Arial, sans-serif;
-    margin-bottom: 5px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .nav_before_login ul {
     list-style-type: none;
@@ -819,10 +780,6 @@ p[id$='-p'] {
     display: flex; 
 } */
 
-/*---------------INDEX.HTML STYLES---------------*/
-/* #homepage-title-img {
-    width: 100%;
-} */
 
 #homepage-p1, #homepage-p2, #homepage-h2-1, #homepage-h2-2 {
     text-align: center;
@@ -914,19 +871,8 @@ p[id$='-p'] {
 }
 
 
-/* #login-h1 {
-    padding: 50px;
-} */
-
-/*---------------ABOUTUS.HTML STYLES---------------*/
-/* #body {
-    background-color: #384d60;
-} */
-
 #aboutUs{
     background-image: url("images/bus1.jpg");
-    /* background-color: #384d60;
-    color: white; */
 
 }
 .h1InAbout{

@@ -116,7 +116,7 @@ async function showMap() {
 
 showMap();
 
-
+//Function used to calculate the safety level. Will be used by displaySafetyLevel function to display the safey leve. on the map.
 function calculateSafetyLevelGradientColor(level) {
     if (level === "N/A" || isNaN(level)) return "#ccc"; // Grey for N/A
     const percentage = level / 5; // Scale safety level (max is 5)
@@ -125,6 +125,8 @@ function calculateSafetyLevelGradientColor(level) {
     return `rgb(${r},${g},0)`; // Dynamic gradient color
 }
 
+
+//How stations are displayed as points on the map
 function addHikePinsCircle(map) {
     db.collection('stations-test4').get().then(allEvents => {
         const features = [];
@@ -251,7 +253,7 @@ function viewStation(stationId) {
 // Attach the function to the global scope
 window.viewStation = viewStation;
 
-
+//Function used to display the safety level on the map.
 async function displaySafetyLevel(stationId) {
     const averageSafetyLevel = await calculateStationAverageSafetyLevel(stationId);
     console.log("stationAverageLoaded");
@@ -261,7 +263,11 @@ async function displaySafetyLevel(stationId) {
 // Attach to the global scope
 window.displaySafetyLevel = displaySafetyLevel;
 
-
+/**
+ * Code from Carly that gets the location of the user.
+ * @param {map} map 
+ * @param {userLocation} userLocation 
+ */
 
 function addUserPinCircle(map, userLocation) {
     map.addSource('userLocation', {
@@ -293,7 +299,10 @@ function addUserPinCircle(map, userLocation) {
 }
 
 
-
+/**
+ * 
+ * @returns 
+ */
 
 async function loadCustomData() {
     const customData = { features: [], type: 'FeatureCollection' };
@@ -301,7 +310,7 @@ async function loadCustomData() {
         const querySnapshot = await db.collection('stations-test').get();
         querySnapshot.forEach(doc => {
             const data = doc.data();
-            if (data.lat && data.lng && data.name) { // Validate required fields
+            if (data.lat && data.lng && data.name) { 
                 customData.features.push({
                     type: 'Feature',
                     properties: { title: data.name },
@@ -320,16 +329,4 @@ async function loadCustomData() {
 }
 
 
-// function customGeocoder(query) {
-//     const matchingFeatures = [];
-//     for (const feature of customData.features) {
-//         if (feature.properties.title.toLowerCase().includes(query.toLowerCase())) {
-//             feature['place_name'] = `🚉 ${feature.properties.title}`; // Use station emoji 🚉
-//             feature['center'] = feature.geometry.coordinates;
-//             feature['place_type'] = ['station']; // Optional: Label as a station
-//             matchingFeatures.push(feature);
-//         }
-//     }
-//     return matchingFeatures;
-// }
 
