@@ -8,7 +8,8 @@ async function showMap() {
     //------------------------------------------
     // Defines and initiates basic Mapbox data
     //------------------------------------------
-    mapboxgl.accessToken = 'pk.eyJ1IjoiaGF5ZG9uZyIsImEiOiJjbTN1bzc5cGUwbTZjMmtvbWJtNDJxZXFwIn0.IU9Ifa-g_8dvQo3wAXAiJQ'; // Add your Mapbox access token here
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaGF5ZG9uZyIsImEiOiJjbTN1bzc5cGUwbTZjMmtvbWJtNDJxZXFwIn0.IU9Ifa-g_8dvQo3wAXAiJQ'; 
+    // We know we pushed our access token but didn't want to hide this whole file
     const map = new mapboxgl.Map({
         container: 'map', // Container ID
         style: 'mapbox://styles/mapbox/streets-v11', // Styling URL
