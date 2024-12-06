@@ -108,10 +108,9 @@ async function showMap() {
         map.fitBounds(bounds, { padding: { top: 100, bottom: 50, left: 100, right: 50 } });
     });
 
-    //---------------------------------
-    // Add Pins for Stations
-    //---------------------------------
-    addHikePinsCircle(map);
+
+    // Adding Pins for Stations
+    addStationPinsCircle(map);
 }
 
 showMap();
@@ -127,7 +126,7 @@ function calculateSafetyLevelGradientColor(level) {
 
 
 //How stations are displayed as points on the map
-function addHikePinsCircle(map) {
+function addStationPinsCircle(map) {
     db.collection('stations-test4').get().then(allEvents => {
         const features = [];
 
