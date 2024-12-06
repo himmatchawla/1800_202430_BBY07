@@ -6,17 +6,11 @@
     <meta name="comp1800 template" content="My 1800 App">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
     <!-- Bootstrap if we need it -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-
     <!-- Firebase -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -25,176 +19,128 @@
     <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-
     <!-- Other libs -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="styles/styles.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <link rel="icon" type="image/x-icon" href="media/ta-bus.png">
     <style>
+    /* styles specific to this page (moving them to styles.css would result in 
+    bootstrap conflict or safety color bar conflict. we didn't have enough time 
+    to make unique ID styles for everything)*/
       .view-item, .view-station, .remove-bookmark, .station-bookmark-button {
       width: 100%; 
       text-align: center; 
       margin: 0;
-  }
-  .safety-bar-container {
-    position: relative;
-    width: 100%;
-    height: 20px;
-    background-color: #ddd;
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 10px;
-}
-
-.safety-bar {
-    height: 100%;
-    transition: background 0.3s ease;
-}
-
-.average-overlay {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 12px;
-    font-weight: bold;
-    color: #000000;
-    text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
-    pointer-events: none;
-}
-
-    </style>
-    <style>
-      body {
-    margin-bottom: 60px;
-}
-.navbar.fixed-bottom {
-    height: 60px;
-}
-    </style>
-
-    <style>
-       .collapsible {
-  cursor: pointer;
-  width: 10%;
-  border: none;
-  text-align: left;
-  outline: none;
-  font-size: 15px;
-  text-align: center;
-  margin-left: 10px;
-}
-
-
-
-.content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #ccdbe5;
-  width: 73%;
-  margin: 0 auto;
-}
-
-#infoIcon {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #2a73e8; 
-    color: white;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.3s ease;
-    opacity: 0;
-    z-index: 1000;
-}
-
-#infoIcon.active {
-    display: flex;
-    opacity: 1;
-}
+    }
+    .safety-bar-container {
+      position: relative;
+      width: 100%;
+      height: 20px;
+      background-color: #ddd;
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 10px;
+   }
+    .safety-bar {
+      height: 100%;
+      transition: background 0.3s ease;
+    }
+    .average-overlay {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      font-weight: bold;
+      color: #000000;
+      text-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+      pointer-events: none;
+    }
+    body {
+      margin-bottom: 60px;
+    }
+    .navbar.fixed-bottom {
+      height: 60px;
+    }
+    .collapsible {
+      cursor: pointer;
+      width: 10%;
+      border: none;
+      text-align: left;
+      outline: none;
+      font-size: 15px;
+      text-align: center;
+      margin-left: 10px;
+    }
+    .content {
+      padding: 0 18px;
+      display: none;
+      overflow: hidden;
+      background-color: #ccdbe5;
+      width: 73%;
+      margin: 0 auto;
+    }
     </style>
 </head>
 
 <body>
+  <!-- NAVBAR -->
   <nav id="navbarPlaceholder"></nav>
+  <!-- Profile Dropup Menu -->
+  <div class="dropup-menu" id="profileDropupMenu">
+    <a href="#">Account Details</a>
+    <a href="#">Account Settings</a>
+    <a href="#">Aurapoints</a>
+    <button class="btn btn-outline-light mt-3" onclick="logout()"><a href="../index.html">Logout</a></button>
+    <button class="btn btn-outline-light mt-3" onclick="toggleDropupMenu()">Close</button>
+  </div>
 
+  <!-- HEADER -->
   <nav class="navbar" style="background-color: #e1f0fb;" id="header">
     <div class="container">
       <img src="./media/ta-full-logo.png" alt="TransitAura Logo" id="mainlogo">
-            <!-- First Responder Button Container -->
-<div id="firstResponderContainer">
-  <button id="firstResponderButton" class="btn btn-primary" style="background-color: #2a73e8;" onclick="toggleFirstResponderMenu()">Help</button>
-</div>
-      <!-- <img src="media/info.png" class="collapsible" onclick="toggleInfoIcon()"> -->
-
+      <div id="firstResponderContainer">
+        <button id="firstResponderButton" class="btn btn-primary" style="background-color: #2a73e8;" onclick="toggleFirstResponderMenu()">Help</button>
+    </div>
     </div>
   </nav>
-  
-    
-      <div class="dropup-menu" id="profileDropupMenu">
-        <a href="#">Account Details</a>
-        <a href="#">Account Settings</a>
-        <a href="#">Aurapoints</a>
-        <button class="btn btn-outline-light mt-3" onclick="logout()"><a href="../index.html">Logout</a></button>
-        <button class="btn btn-outline-light mt-3" onclick="toggleDropupMenu()">Close</button>
-      </div>
-    
-      <script>
-        function toggleDropupMenu() {
-          const menu = document.getElementById('profileDropupMenu');
-          menu.classList.toggle('active');
-        }
-      </script>
+  <!-- help button Overlay -->
+  <div id="firstResponderOverlay" class="first-responder-menu">
+    <button class="btn btn-primary" onclick="toggleInfoIcon()">Help with TransitAura</button>
+    <br>
+    <br>
+    <button class="btn btn-danger" onclick="window.location.href='tel:911'">Call 911</button>
+    <button class="btn btn-primary" onclick="window.location.href='tel:6045158300'">Call Tranist Police</button>
+    <button class="btn btn-secondary" onclick="window.location.href='sms:877777'">Text Tranist Police</button>
+    <button class="btn btn-outline-light mt-3" onclick="toggleFirstResponderMenu()">Close</button>
+  </div>
+  <!-- "Help with TransitAura" overlay overlay-->
+  <div class="content" id="infoIcon">
+    <p>For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.</p>
+    <p><strong>What is TransitAura?</strong> TransitAura is a platform for transit riders to plan their trip safely and assist their fellow riders. View and report Safety Levels and Incidents, and earn Aura Points along the way!</p>
+      <p><strong>What is Safety Level?</strong> Report how safe you feel on any TransLink station or route. The Safety Level color bar is generated based on recent data from TransitAura users.</p>
+      <p><strong>What are Incidents?</strong> Incidents are reported by users and are specific to stations or routes.</p>
+      <p><strong>What are Aurapoints?</strong> Aurapoints are earned by using TransitAura. Earn 1 point from every Safety Level Report and 3 points from every Incident Report. See your achievements in Account Details!</p>
+      <button class="btn btn-outline-light mt-3" onclick="toggleInfoIcon()">Close</button>
+  </div>
 
-      
-
-
-<!-- First Responder Overlay -->
-<div id="firstResponderOverlay" class="first-responder-menu">
-  <button class="btn btn-primary" onclick="toggleInfoIcon()">Help with TransitAura</button>
-  <br>
-  <br>
-  <button class="btn btn-danger" onclick="window.location.href='tel:911'">Call 911</button>
-  <button class="btn btn-primary" onclick="window.location.href='tel:6045158300'">Call Tranist Police</button>
-  <button class="btn btn-secondary" onclick="window.location.href='sms:877777'">Text Tranist Police</button>
-  <button class="btn btn-outline-light mt-3" onclick="toggleFirstResponderMenu()">Close</button>
-</div>
-
-
-
+<!-- welcome -->
   <h1 id="user-name" class="display-4">Welcome, <span id="nameGoesHere"></span> </h1>
 
-  
+<!-- MAIN CONTENT-->
 
-    <a href="searchstations.html" style="text-decoration: none;">
-        <button id="search-stations-button">Search Stations</button></a>
+<!-- main buttons-->
+  <a href="searchstations.html" style="text-decoration: none;">
+      <button id="search-stations-button">Search Stations</button></a>
 
-    <a href="searchroutes.html" style="text-decoration: none;">
-        <button id="search-routes-button">Search Bus and Train Routes</button></a>
+  <a href="searchroutes.html" style="text-decoration: none;">
+      <button id="search-routes-button">Search Bus and Train Routes</button></a>
 
-    
-    <div class="content" id="infoIcon">
-      <p>For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.</p>
-      <p><strong>What is TransitAura?</strong> TransitAura is a platform for transit riders to plan their trip safely and assist their fellow riders. View and report Safety Levels and Incidents, and earn Aura Points along the way!</p>
-        <p><strong>What is Safety Level?</strong> Report how safe you feel on any TransLink station or route. The Safety Level color bar is generated based on recent data from TransitAura users.</p>
-        <p><strong>What are Incidents?</strong> Incidents are reported by users and are specific to stations or routes.</p>
-        <p><strong>What are Aurapoints?</strong> Aurapoints are earned by using TransitAura. Earn 1 point from every Safety Level Report and 3 points from every Incident Report. See your achievements in Account Details!</p>
-        <button class="btn btn-outline-light mt-3" onclick="toggleInfoIcon()">Close</button>
-    </div>
-
-
-
+<!-- bookmarks -->
   <h1 class="my-4" style="text-align: center;">Your Bookmarks</h1>
-
-  <!-- Bookmarks Go Here -->
+  <!-- bookmark container -->
   <div id="bookmarks-go-here"></div>
-  
-  <!-- Card Template -->
+  <!-- bookmark Template -->
   <template id="bookmarksTemplate">
     <div class="card my-3">
         <h5 class="bookmark-title card-header"></h5>
@@ -213,48 +159,50 @@
     </div>
 </template>
 
-  
-  
+<!-- recently viewed -->
   <div id="recentlyViewedContainer">
     <h2>Recently Viewed Stations</h2>
     <div id="recentlyViewedCards"></div>
 </div>
 
+<!-- JS   -->
+<script src="scripts/firebaseConfig.js"></script>
+<script src="scripts/login.js"></script>
+<script src="scripts/skeleton.js"></script>
+<script src="scripts/utils.js"></script>
+<script src="scripts/stationsandroutes.js"></script>
+<script src="scripts/bookmark.js"></script>
+<script src="scripts/recentlyviewed.js"></script>
 
 
-    <!-- JS funcs  -->
-    <script src="scripts/firebaseConfig.js"></script>
-    <script src="scripts/login.js"></script>
-    <script src="scripts/skeleton.js"></script>
-    <script src="scripts/utils.js"></script>
-    <script src="scripts/stationsandroutes.js"></script>
-    <script src="scripts/bookmark.js"></script>
-    <script src="scripts/recentlyviewed.js"></script>
-    <!-- <script src="scripts/main.js"></script> -->
-    <script>
-      // display recently viewed
-      firebase.auth().onAuthStateChanged((user) => {
-          if (user) {
-              displayRecentlyViewedStations();
-          } else {
-              console.log("No user logged in.");
-          }
-      });
+  <script>
+    // profile dropup menu
+    function toggleDropupMenu() {
+      const menu = document.getElementById('profileDropupMenu');
+      menu.classList.toggle('active');
+    }
 
+    // display recently viewed
+    firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+            displayRecentlyViewedStations();
+        } else {
+            console.log("No user logged in.");
+        }
+    });
 
-// first responder menu overlay
-function toggleFirstResponderMenu() {
-    const overlay = document.getElementById('firstResponderOverlay');
-    overlay.classList.toggle('active');
-}
+  // help button menu overlay
+  function toggleFirstResponderMenu() {
+      const overlay = document.getElementById('firstResponderOverlay');
+      overlay.classList.toggle('active');
+  }
 
-function toggleInfoIcon() {
-    const overlay = document.getElementById('infoIcon');
-    overlay.classList.toggle('active');
-}
-
-
-    </script>
+  // info icon (now "Help with TransitAura" overlay overlay)
+  function toggleInfoIcon() {
+      const overlay = document.getElementById('infoIcon');
+      overlay.classList.toggle('active');
+  }
+</script>
 
     
 

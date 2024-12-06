@@ -1,53 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags -->
     <title>Search Routes</title>
     <link rel="icon" type="image/x-icon" href="media/ta-bus.png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <!-- Google Icons (Material Design)-->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
-        <!-- Bootstrap if we need it -->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-            integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
-        </script>
-    
-        <!-- Firebase -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
-        <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
-        <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
-    
-        <!-- Other libs -->
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-        <link rel="stylesheet" href="styles/styles.css">
-        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <!-- Firebase -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+    <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+    <!-- Other libs -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
-.view-item, .view-station, .remove-bookmark, .station-bookmark-button, .view-routes, .routes-bookmark-button {
-      width: 100%; 
-      text-align: center; 
-      margin: 0;
-  }
+    /* styles specific to this page */
+        .view-item, .view-station, .remove-bookmark, .station-bookmark-button, .view-routes, .routes-bookmark-button {
+            width: 100%; 
+            text-align: center; 
+            margin: 0;
+        }
     </style>
 </head>
 <body>
+    <!-- back button -->
     <div class="back-button-container">
         <a href="main.html">
             <button>← Back</button>
         </a>
     </div>
-
+    <!-- navbar -->
     <nav id="navbarPlaceholder"></nav>
 
     <h1 style="text-align: center;">Search Your Route</h1>
 
+    <!-- search bar -->
     <div>
         <input
             type="text"
@@ -59,6 +56,7 @@
 
     <p style="text-align: center; font-size: small; margin-top: 3px;">Click on View Route to see and report Safety Level and Incidents!</p>
 
+    <!-- result template-->
     <template id="routesTemplate">
         <div class="card route-card">
             <h5 class="routes-title card-header"></h5>
@@ -72,20 +70,16 @@
             </div>
         </div>
     </template>
-    
 
+    <!-- routes container-->
     <div id="routes-go-here"></div>
 
-
-
-  
+    <!-- JS -->
     <script src="scripts/firebaseConfig.js"></script>
     <script src="scripts/login.js"></script>
     <script src="scripts/utils.js"></script>
     <script src="scripts/bookmark.js"></script>
     <script src="scripts/skeleton.js"></script>
-    <script src="scripts/station.js"></script>
-    <!-- <script src="scripts/main.js"></script> -->
     <script src="scripts/search.js" defer></script>
   
 </body>

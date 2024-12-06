@@ -51,19 +51,41 @@ button:hover {
 
   .container {
     /* display: flex; */
-    align-items: center; /* Vertically aligns everything */
-    justify-content: space-between; /* Distributes items evenly */
+    align-items: center;
+    justify-content: space-between;
     /* margin: 0; */
     padding: 0;
     width: 100%;
   }
 
   body {
-    padding-bottom: 60px; /* Adjust this value to match the height of your navbar */
+    padding-bottom: 60px;
   }
 
   .navbar {
-    height: 60px; /* Specify the navbar height */
+    height: 60px;
+  }
+
+  #infoIcon {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2a73e8; 
+    color: white;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+    z-index: 1000;
+  }
+
+  #infoIcon.active {
+      display: flex;
+      opacity: 1;
   }
 
 
@@ -107,9 +129,57 @@ button:hover {
         width: 80%;
     }
 
+    #main-mockup {
+        width: 15%;
+        margin-top: 20px;
+    }
+
 }
 
 /*----------------index.html--------------------*/
+
+#homepage-p1 {
+    margin-top: 30px;
+}
+#homepage-ridingtransittransitaura {
+    margin-top: 20px;
+}
+#main-mockup {
+    width: 40%;
+    height: auto;
+    margin-top: 20px;
+}
+#stations-mockup {
+    width: 55%;
+    height: auto;
+    margin-top: 20px;
+}
+#loginbutton {
+    display: inline-block;
+    justify-content: right;
+    margin-left: auto;
+}
+#busimg {
+    width: 100px;
+    height: auto;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+#safely {
+    width: 200px;
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+#homepage-featurelistheader {
+    margin-top: 15px;
+    font-size: 1.3rem;
+}
+#homepage-featurelistitem {
+    font-size: 0.9rem;
+    margin: 5px 0;
+    font-weight: lighter;
+}
 
 
 /*---------------MAIN.HTML STYLES---------------*/
@@ -214,9 +284,6 @@ button:hover {
     font-weight: bold;
 }
 
-
-
-/* Container to position the button */
 #firstResponderContainer {
     /* position: fixed;  */
     /* top: 10px;  */
@@ -228,7 +295,6 @@ button:hover {
     margin-left: auto;
 }
 
-/* First Responder Button */
 #firstResponderButton {
     padding: 8px 15px; 
     font-size: 1rem; 
@@ -247,7 +313,6 @@ button:hover {
     margin-top: auto;
 }
 
-/* Welcome Banner */
 #user-name {
     margin-top: 30px; 
     text-align: center;
@@ -257,7 +322,6 @@ button:hover {
     text-align: center;
 }
 
-/* First Responder Overlay Menu */
 .first-responder-menu {
     position: fixed;
     top: 0;
@@ -367,14 +431,14 @@ p[id$='-p'] {
   }
   .buttons {
     display: flex;
-    gap: 10px; /* Space between buttons */
-    align-items: center; /* Align buttons vertically */
+    gap: 10px;
+    align-items: center;
 }
 
 .d-flex {
     display: flex;
-    gap: 10px; /* Space between buttons */
-    align-items: center; /* Vertically align items */
+    gap: 10px;
+    align-items: center; 
     justify-content: flex-start;
     margin-top: 0px !important;
 }
@@ -470,7 +534,7 @@ p[id$='-p'] {
     margin: 20px auto;
     position: relative;
     height: 30px;
-    background: linear-gradient(to right, red, yellow, green); /* Gradient from red to green */
+    background: linear-gradient(to right, red, yellow, green);
     border-radius: 5px;
 }
 
@@ -753,7 +817,7 @@ p[id$='-p'] {
     margin: 10px auto;
     width: 150px; 
     cursor: pointer; 
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth animations */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 } 
 
 #closeButton {
@@ -769,7 +833,7 @@ p[id$='-p'] {
     margin: 10px auto;
     width: 45px; 
     cursor: pointer; 
-    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Smooth animations */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 
@@ -912,4 +976,26 @@ p[id$='-p'] {
     height: 200px;
     border-radius: 2%;
     margin: auto;
+}
+
+/* ------------------ AURAPOINTS.HTML -----------------*/
+#userAuraPoints {
+    color: #1d5ddd !important;
+  }
+  
+  .progress {
+    height: 0.75rem;
+}
+.progress-bar {
+    border-radius: 0.25rem;
+}
+
+/*---------------MEDIA QUERIES pt2---------------*/
+
+@media (min-width: 769px) {
+    #main-mockup, #stations-mockup {
+        width: 20%;
+        margin-top: 20px;
+    }
+
 }

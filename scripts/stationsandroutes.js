@@ -20,19 +20,19 @@ function getRouteIdFromURL() {
 
 // display recent incidents (general to stations AND routes)
 async function displayRecentIncidents(collection, documentId) {
-    try {
+    try { // try block for error handling
         const incidentReportsRef = db.collection(collection).doc(documentId).collection("incidentReports");
         const snapshot = await incidentReportsRef.orderBy("timestamp", "desc").limit(5).get();
         const incidentsContainer = document.getElementById("recentIncidents");
 
-        if (!incidentsContainer) {
+        if (!incidentsContainer) { // if the container is not found, log error
             console.error("Incidents container not found.");
             return;
         }
 
         incidentsContainer.innerHTML = "";
 
-        snapshot.forEach((doc) => {
+        snapshot.forEach((doc) => { // display incidents
             const incident = doc.data();
             const incidentElement = document.createElement("div");
             incidentElement.classList.add("incident");
@@ -44,7 +44,7 @@ async function displayRecentIncidents(collection, documentId) {
             `;
             incidentsContainer.appendChild(incidentElement);
         });
-    } catch (error) {
+    } catch (error) { // error handling
         console.error("Error displaying recent incidents:", error);
     }
 }
@@ -55,56 +55,56 @@ function setupIncidentReportButton(collection) {
     const closeOverlay = document.getElementById("closeOverlay");
     const submitReportBtn = document.getElementById("submitReportBtn");
     const incidentForm = document.getElementById("incidentForm");
-    const messageBox = document.getElementById("incidentMessageBox"); // Message box element
+    const messageBox = document.getElementById("incidentMessageBox");
 
-    if (!overlay || !closeOverlay || !submitReportBtn || !incidentForm || !messageBox) {
+    if (!overlay || !closeOverlay || !submitReportBtn || !incidentForm || !messageBox) { // if any of the elements are not found, log error
         console.error("Incident report overlay or buttons not found.");
         return;
     }
 
-    // Open the overlay when "Submit an Incident Report" button is clicked
+    // open overlay when "Submit an Incident Report" button is clicked
     submitReportBtn.addEventListener("click", () => {
         overlay.style.display = "flex";
     });
 
-    // Close the overlay when the close button is clicked
+    // close the overlay when the close button is clicked
     closeOverlay.addEventListener("click", () => {
         overlay.style.display = "none";
     });
 
-    // Submit the form
+    // submit form
     incidentForm.addEventListener("submit", async (event) => {
-        event.preventDefault(); // Prevent page reload
+        event.preventDefault(); // prevent page reload
 
         const title = document.getElementById("incidentTitle").value;
         const details = document.getElementById("incidentDetails").value;
-        const documentId = getStationIdFromURL() || getRouteIdFromURL(); // Get the document ID from the URL
+        const documentId = getStationIdFromURL() || getRouteIdFromURL();
 
-        if (!documentId) {
+        if (!documentId) { // if no station or route ID found in the URL
             messageBox.textContent = "Unable to identify the station or route.";
             messageBox.style.color = "red";
             messageBox.style.display = "block";
             setTimeout(() => {
                 messageBox.style.display = "none";
-                messageBox.textContent = ""; // Clear the message
+                messageBox.textContent = "";
             }, 5000);
             return;
         }
 
-        if (!details.trim()) {
+        if (!details.trim()) { // details are required
             messageBox.textContent = "Details field is required.";
             messageBox.style.color = "red";
             messageBox.style.display = "block";
             setTimeout(() => {
                 messageBox.style.display = "none";
-                messageBox.textContent = ""; // Clear the message
+                messageBox.textContent = "";
             }, 5000);
             return;
         }
 
-        try {
+        try { // try block for error handling
             const user = firebase.auth().currentUser;
-            if (!user) {
+            if (!user) { // user cannot submit incident report if not logged in
                 messageBox.textContent = "Please log in to submit an incident report.";
                 messageBox.style.color = "red";
                 messageBox.style.display = "block";
@@ -118,7 +118,7 @@ function setupIncidentReportButton(collection) {
             const incidentReportsRef = db.collection(collection).doc(documentId).collection("incidentReports");
             const newIncidentRef = incidentReportsRef.doc();
 
-            // Add the incident report
+            // add the incident report
             const reportId = newIncidentRef.id;
             const timestamp = firebase.firestore.FieldValue.serverTimestamp();
             await newIncidentRef.set({
@@ -128,36 +128,36 @@ function setupIncidentReportButton(collection) {
                 timestamp,
             });
 
-            // Increment aura points
+            // increment aura points
             const userRef = db.collection("users").doc(userId);
             await userRef.update({
                 auraPoints: firebase.firestore.FieldValue.increment(5),
             });
 
-            // Add to user's report history
+            // add to user's report history
             const reportHistoryRef = userRef.collection("reportHistory").doc(reportId);
             await reportHistoryRef.set({
                 type: "incidentReport",
-                collection: collection, // "stations" or "routes"
-                documentId: documentId, // ID of the station or route
+                collection: collection,
+                documentId: documentId,
                 title: title || "No Title",
                 details: details,
                 timestamp,
             });
 
-            overlay.style.display = "none"; // Close the overlay
+            overlay.style.display = "none"; // close overlay
             swal("Incident report submitted successfully!", "You earned 5 Aura Points.", "success");
 
 
-            await displayRecentIncidents(collection, documentId); // Refresh the recent incidents
-        } catch (error) {
+            await displayRecentIncidents(collection, documentId); // refresh the recent incidents
+        } catch (error) { // error handling
             console.error("Error submitting incident report:", error);
             messageBox.textContent = "Failed to submit the report. Please try again.";
             messageBox.style.color = "red";
             messageBox.style.display = "block";
             setTimeout(() => {
                 messageBox.style.display = "none";
-                messageBox.textContent = ""; // Clear the message
+                messageBox.textContent = "";
             }, 5000);
         }
     });
@@ -183,16 +183,16 @@ function setupReportSafetyLevelButton(collection) {
     const reportButton = document.getElementById("reportSafetyButton");
     const messageBox = document.getElementById("messageBox");
 
-    if (!reportButton || !messageBox) {
+    if (!reportButton || !messageBox) { // if the button or message box is not found, log error
         console.error("Report safety button or message box not found.");
         return;
     }
 
-    reportButton.addEventListener("click", async () => {
+    reportButton.addEventListener("click", async () => { // submit safety level report
         const safetyLevelInput = document.getElementById("safetyLevelInput");
-        const documentId = getStationIdFromURL() || getRouteIdFromURL(); // Get the document ID from the URL
+        const documentId = getStationIdFromURL() || getRouteIdFromURL(); // get document ID from the URL
 
-        if (!safetyLevelInput || !documentId) {
+        if (!safetyLevelInput || !documentId) { // if safety level input or document ID is missing
             messageBox.textContent = "Safety level input or document ID is missing.";
             messageBox.style.color = "red";
             messageBox.style.display = "block";
@@ -201,7 +201,7 @@ function setupReportSafetyLevelButton(collection) {
         }
 
         const safetyLevel = parseInt(safetyLevelInput.value, 10);
-        if (isNaN(safetyLevel)) {
+        if (isNaN(safetyLevel)) { // safety level must be a number
             messageBox.textContent = "Please select a valid safety level.";
             messageBox.style.color = "red";
             messageBox.style.display = "block";
@@ -209,9 +209,9 @@ function setupReportSafetyLevelButton(collection) {
             return;
         }
 
-        try {
+        try { // try block for error handling
             const user = firebase.auth().currentUser;
-            if (!user) {
+            if (!user) { // user cannot submit safety report if not logged in
                 messageBox.textContent = "Please log in to submit a safety report.";
                 messageBox.style.color = "red";
                 messageBox.style.display = "block";
@@ -223,7 +223,7 @@ function setupReportSafetyLevelButton(collection) {
             const safetyReportsRef = db.collection(collection).doc(documentId).collection("safetyReports");
             const newReportRef = safetyReportsRef.doc();
 
-            // Add the safety report
+            // add the safety report
             const reportId = newReportRef.id;
             const timestamp = firebase.firestore.FieldValue.serverTimestamp();
             await newReportRef.set({
@@ -232,26 +232,26 @@ function setupReportSafetyLevelButton(collection) {
                 timestamp,
             });
 
-            // Increment aura points
+            // increment aura points
             const userRef = db.collection("users").doc(userId);
             await userRef.update({
                 auraPoints: firebase.firestore.FieldValue.increment(2),
             });
 
-            // Add to user's report history
+            // add to user's report history
             const reportHistoryRef = userRef.collection("reportHistory").doc(reportId);
             await reportHistoryRef.set({
                 type: "safetyReport",
-                collection: collection, // "stations" or "routes"
-                documentId: documentId, // ID of the station or route
+                collection: collection,
+                documentId: documentId,
                 safetyLevel,
                 timestamp,
             });
 
-            // Wait briefly for Firestore to process the new document
+            // wait for firestore to process new document / promise
             await new Promise((resolve) => setTimeout(resolve, 500));
 
-            // Recalculate and update the bar
+            // recalculate avg safety lvl and update the bar (again)
             const updatedAverage = await calculateAverageSafetyLevel(collection, documentId);
             const averageSafetyLevelElement = document.getElementById("currentSafetyLevel");
             if (averageSafetyLevelElement) {
@@ -259,7 +259,7 @@ function setupReportSafetyLevelButton(collection) {
             }
             await updateSafetyBar(collection, documentId);
 
-            // Show success message
+            // show success message
             swal("Safety level reported successfully!", "You earned 2 Aura Points.", "success");
 
         } catch (error) {
@@ -272,27 +272,26 @@ function setupReportSafetyLevelButton(collection) {
     });
 }
 
-
 // gradient bar display (general to stations AND routes)
 async function updateSafetyBar(collection, documentId) {
     const averageOverlay = document.getElementById("averageOverlay");
     const safetyBar = document.querySelector(".safety-bar");
-    const safetyReportInfo = document.getElementById("safetyReportInfo"); // New info text element
+    const safetyReportInfo = document.getElementById("safetyReportInfo");
 
-    if (!averageOverlay || !safetyBar || !safetyReportInfo) {
+    if (!averageOverlay || !safetyBar || !safetyReportInfo) { // if any of the elements are not found, log error
         console.error("Gradient bar, overlay, or info text not found.");
         return;
     }
 
-    try {
-        // Fetch safety reports from Firestore
+    try { // try block for error handling
+        // get safety reports from firestore
         const oneHourAgo = new Date(Date.now() - 3600000);
         const safetyReportsRef = db.collection(collection).doc(documentId).collection("safetyReports");
         const snapshot = await safetyReportsRef.where("timestamp", ">", oneHourAgo).get();
 
         const reports = snapshot.docs.map((doc) => doc.data().safetyLevel);
 
-        // Calculate average safety level
+        // calculate average safety level
         const average = reports.length
             ? (reports.reduce((sum, level) => sum + level, 0) / reports.length).toFixed(2)
             : "N/A";
@@ -300,31 +299,28 @@ async function updateSafetyBar(collection, documentId) {
         console.log("Average for gradient bar:", average);
         console.log("Number of reports:", reports.length);
 
-        // Update overlay text
+        // update overlay text
         averageOverlay.textContent = average === "N/A" ? "N/A" : average;
 
-        // Set gradient based on average
+        // set gradient based on average
         if (average !== "N/A" && !isNaN(average)) {
-            const percentage = (average / 5) * 100; // Max safety level is 5
+            const percentage = (average / 5) * 100; // max safety level is 5
             safetyBar.style.background = `linear-gradient(90deg, red, yellow ${percentage}%, green)`;
 
-            // Position the overlay dynamically
             averageOverlay.style.left = `calc(${percentage}% - 20px)`; // Adjust position to center text
 
-            // Update info text
+            // how many reports did this come from?
             safetyReportInfo.innerHTML = `The Safety Level is derived from <strong>${reports.length}</strong> report(s) in the last hour.`;
         } else {
-            // Full gradient for no data
+            // Set gradient red to green
             safetyBar.style.background = "linear-gradient(90deg, red, yellow, green)";
             averageOverlay.textContent = "N/A";
 
-            // Update info text for no reports
+            // update info text for no reports
             safetyReportInfo.textContent = "No reports in the last hour.";
         }
-    } catch (error) {
+    } catch (error) { // error handling
         console.error("Error updating safety bar:", error);
-
-        // Handle errors gracefully
         safetyBar.style.background = "linear-gradient(90deg, red, yellow, green)";
         averageOverlay.textContent = "N/A";
         safetyReportInfo.textContent = "No reports in the last hour.";
@@ -339,47 +335,49 @@ async function loadStationData() {
     const stationId = getStationIdFromURL();
     if (!stationId) return;
 
-    try {
+    try { // try block for error handling
         const stationDoc = await db.collection("stations").doc(stationId).get();
-        if (stationDoc.exists) {
+        if (stationDoc.exists) { // if the station document exists, display the data
             const data = stationDoc.data();
             document.getElementById("stationName").textContent = data.name || "Unnamed Station";
 
+            // calculate and display the average safety level
             const averageSafetyLevel = await calculateStationAverageSafetyLevel(stationId);
             document.getElementById("currentSafetyLevel").textContent = `Current Average Safety Level: ${averageSafetyLevel}`;
 
             // update the gradient bar with the average station safety level
             await updateSafetyBar("stations", stationId);
 
+            // display recent incidents for the station
             await displayRecentIncidents("stations", stationId);
         }
-    } catch (error) {
+    } catch (error) { // error handling
         console.error("Error loading station data:", error);
     }
 }
 
 // load route data
 async function loadRouteData() {
-    const routeId = getRouteIdFromURL(); // Extract the routeId from the URL
+    const routeId = getRouteIdFromURL();
     if (!routeId) return;
 
-    try {
-        const routeDoc = await db.collection("routes").doc(routeId).get(); // Fetch the route document from Firestore
-        if (routeDoc.exists) {
-            const data = routeDoc.data(); // Get route data
+    try { // try block for error handling
+        const routeDoc = await db.collection("routes").doc(routeId).get();
+        if (routeDoc.exists) { // if the route document exists, display the data
+            const data = routeDoc.data();
 
-            // If no name is provided in the document, use the document ID (routeId)
+            // if no name is provided in the document, use the document ID (routeId)
             const routeName = data.name || routeId;
-            document.getElementById("routeName").textContent = routeName; // Display the route name or ID
+            document.getElementById("routeName").textContent = routeName;
 
-            // Calculate and display the average safety level
+            // calculate and display the average safety level
             const averageSafetyLevel = await calculateRoutesAverageSafetyLevel(routeId);
             document.getElementById("currentSafetyLevel").textContent = `Current Average Safety Level: ${averageSafetyLevel}`;
 
-            // Update the gradient bar
+            // update the gradient bar w average safety level
             await updateSafetyBar("routes", routeId);
 
-            // Display recent incidents for the route
+            // display recent incidents for the route
             await displayRecentIncidents("routes", routeId);
         } else {
             console.warn(`Route document with ID "${routeId}" does not exist.`);
@@ -431,7 +429,7 @@ async function handleAuraPointIncrement(userId, incrementBy) {
 }
 
 
-//----------MAIN EVENT LISTENER----------
+//----------EVENT LISTENER----------
 
 // dom content loaded event listener
 document.addEventListener("DOMContentLoaded", () => {
