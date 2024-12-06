@@ -1,5 +1,8 @@
 //MAP.JS HANDLES THE MAP DISPLAY
 
+/*Function used to display the mapbox. Sorry if the code is long, but I got this code from Carly's notion.
+*/ 
+
 async function showMap() {
     
     //------------------------------------------
@@ -125,7 +128,7 @@ function calculateSafetyLevelGradientColor(level) {
 }
 
 
-//How stations are displayed as points on the map
+//How stations are displayed as points on the map. Sorry if the code is long, this function is from Carly's Notion.
 function addStationPinsCircle(map) {
     db.collection('stations-test4').get().then(allEvents => {
         const features = [];
