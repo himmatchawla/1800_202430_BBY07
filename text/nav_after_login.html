@@ -1,54 +1,57 @@
 <!-- READ!
  COPIED SNIPPET FROM main.html -->
- <!DOCTYPE html>
- <html>
- <head>
-    <title>Nav After Login </title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
 
- </head>
+<head>
+  <title>Nav After Login </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
 
 <nav class="navbar navbar-expand bg-primary fixed-bottom">
-    <div class="container-fluid d-flex justify-content-center">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/map.html">
-            <img id="bookmark-icon" src="media/map.png" alt="Bookmarked Icon" />
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/main.html">
-            <img id="home-icon" src="media/house-door-fill.svg" alt="Home Icon" />
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="#" onclick="toggleDropupMenu()">
-            <img id="profile-icon" src="media/account.png" alt="Sorry no image" />
-          </a>
-        </li>
-      </ul>
+  <div class="container-fluid d-flex justify-content-center">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/map.html">
+          <img id="bookmark-icon" src="media/map.png" alt="Bookmarked Icon" />
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/main.html">
+          <img id="home-icon" src="media/house-door-fill.svg" alt="Home Icon" />
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="#" onclick="toggleDropupMenu()">
+          <img id="profile-icon" src="media/account.png" alt="Sorry no image" />
+        </a>
+      </li>
+    </ul>
 
-    </div>
-  </nav>
-
-  <div class="dropup-menu" id="profileDropupMenu">
-    <a href="./aurapoints.html"><button id="auraPointsButton" class="btn btn-outline-light mt-3">Aura Points</button></a>
-    <a href="./profile.html"><button id="accountDetailsButton" class="btn btn-outline-light mt-3">Account Details</button></a>
-    <a href="../index.html"><button id="logoutButton" class="btn btn-outline-light mt-3" onclick="logout()">Logout</button></a>
-    <button id="closeButton" class="btn btn-outline-light mt-3" onclick="toggleDropupMenu()">✖</button>
   </div>
-  <script>
-    function toggleDropupMenu() {
-      const menu = document.getElementById('profileDropupMenu');
-      menu.classList.toggle('active');
-    }
-  </script>
+</nav>
+
+<div class="dropup-menu" id="profileDropupMenu">
+  <a href="./aurapoints.html"><button id="auraPointsButton" class="btn btn-outline-light mt-3">Aura Points</button></a>
+  <a href="./profile.html"><button id="accountDetailsButton" class="btn btn-outline-light mt-3">Account
+      Details</button></a>
+  <a href="../index.html"><button id="logoutButton" class="btn btn-outline-light mt-3"
+      onclick="logout()">Logout</button></a>
+  <button id="closeButton" class="btn btn-outline-light mt-3" onclick="toggleDropupMenu()">✖</button>
+</div>
+<script>
+  function toggleDropupMenu() {
+    const menu = document.getElementById('profileDropupMenu');
+    menu.classList.toggle('active');
+  }
+</script>
 
 
 
 
-      </style>
-  </head>
-  
+</style>
+</head>
+
 </html>

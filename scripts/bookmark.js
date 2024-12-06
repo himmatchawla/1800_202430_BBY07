@@ -21,7 +21,7 @@ async function toggleBookmark(itemId, type, name) {
             swal("Removed from Bookmarks!", `${name} has been removed from bookmarks.`, "success");
         } else {
             await bookmarkRef.set({ // if bookmark does not exist, add it
-                type, 
+                type,
                 name,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             });
@@ -217,7 +217,7 @@ firebase.auth().onAuthStateChanged((user) => {
         // initialize the bookmark icon functionality (if it exists, so basically if we are on station.html or route.html)
         if (icon) {
             icon.addEventListener("click", () => handleBookmarkIcon(false));
-            handleBookmarkIcon(true); 
+            handleBookmarkIcon(true);
         }
     } else { // if user is not logged in, display message
         console.log("User is not logged in.");

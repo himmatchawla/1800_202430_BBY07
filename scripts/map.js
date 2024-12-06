@@ -1,14 +1,14 @@
 //MAP.JS HANDLES THE MAP DISPLAY
 
 /*Function used to display the mapbox. Sorry if the code is long, but I got this code from Carly's notion.
-*/ 
+*/
 
 async function showMap() {
-    
+
     //------------------------------------------
     // Defines and initiates basic Mapbox data
     //------------------------------------------
-    mapboxgl.accessToken = 'pk.eyJ1IjoiaGF5ZG9uZyIsImEiOiJjbTN1bzc5cGUwbTZjMmtvbWJtNDJxZXFwIn0.IU9Ifa-g_8dvQo3wAXAiJQ'; 
+    mapboxgl.accessToken = 'pk.eyJ1IjoiaGF5ZG9uZyIsImEiOiJjbTN1bzc5cGUwbTZjMmtvbWJtNDJxZXFwIn0.IU9Ifa-g_8dvQo3wAXAiJQ';
     // We know we pushed our access token but didn't want to hide this whole file
     const map = new mapboxgl.Map({
         container: 'map', // Container ID
@@ -79,17 +79,17 @@ async function showMap() {
         }
         return matchingFeatures;
     }
-    
+
 
     const geocoder = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
-        localGeocoder: customGeocoder, 
+        localGeocoder: customGeocoder,
         localGeocoderOnly: true, // Ensure only local geocoding is used
-        placeholder: 'Search for a STATION', 
+        placeholder: 'Search for a STATION',
         mapboxgl: mapboxgl
     });
     map.addControl(geocoder);
-    
+
 
     //--------------------------------------
     // Handle Search Results
@@ -331,7 +331,7 @@ async function loadCustomData() {
             const data = doc.data();
 
             // Ensure the document contains the required fields: latitude, longitude, and name
-            if (data.lat && data.lng && data.name) { 
+            if (data.lat && data.lng && data.name) {
 
                 // Add a GeoJSON Feature for the document
                 customData.features.push({

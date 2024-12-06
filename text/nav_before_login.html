@@ -1,74 +1,76 @@
 <head>
   <style>
     .content {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #ccdbe5;
-  width: 73%;
-  margin: 0 auto;
-}
+      padding: 0 18px;
+      display: none;
+      overflow: hidden;
+      background-color: #ccdbe5;
+      width: 73%;
+      margin: 0 auto;
+    }
 
-#infoIcon {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #2a73e8; 
-    color: white;
-    display: none;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.3s ease;
-    opacity: 0;
-    z-index: 1000;
-}
+    #infoIcon {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #2a73e8;
+      color: white;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.3s ease;
+      opacity: 0;
+      z-index: 1000;
+    }
 
-#infoIcon.active {
-    display: flex;
-    opacity: 1;
-}
+    #infoIcon.active {
+      display: flex;
+      opacity: 1;
+    }
   </style>
 </head>
 
 <nav class="navbar navbar-expand bg-primary fixed-bottom">
-    <div class="container-fluid d-flex justify-content-center">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/aboutus.html">
-            <img src="./media/person-raised-hand.svg"/>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link text-light" href="/index.html">
-            <img src="./media/house-door-fill.svg" />
-          </a>
-        </li>
-        <li class="nav-item">
-            <img src="./media/question-square-fill.svg" onclick="toggleInfoIcon()"/>
-          </a>
-        </li>
-      </ul>
+  <div class="container-fluid d-flex justify-content-center">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/aboutus.html">
+          <img src="./media/person-raised-hand.svg" />
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link text-light" href="/index.html">
+          <img src="./media/house-door-fill.svg" />
+        </a>
+      </li>
+      <li class="nav-item">
+        <img src="./media/question-square-fill.svg" onclick="toggleInfoIcon()" />
+        </a>
+      </li>
+    </ul>
 
-    </div>
-
-
-  </nav>
-
-  <script>
-    function toggleInfoIcon() {
-    const overlay = document.getElementById('infoIcon');
-    overlay.classList.toggle('active');
-}
-  </script>
-  <div class="content" id="infoIcon">
-    <p>For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.</p>
-    <p><strong>What is TransitAura?</strong> TransitAura is a platform for transit riders to plan their trip safely and assist their fellow riders. View and report Safety Levels and Incidents, and earn Aura Points along the way!</p>
-      <p><strong>What is Safety Level?</strong> Report how safe you feel on any TransLink station or route. The Safety Level color bar is generated based on recent data from TransitAura users.</p>
-      <p><strong>What are Incidents?</strong> Incidents are reported by users and are specific to stations or routes.</p>
-      <p><strong>What are Aurapoints?</strong> Aurapoints are earned by using TransitAura. Earn 1 point from every Safety Level Report and 3 points from every Incident Report. See your achievements in Account Details!</p>
-      <button class="btn btn-outline-light mt-3" onclick="toggleInfoIcon()">Close</button>
   </div>
 
+
+</nav>
+
+<script>
+  function toggleInfoIcon() {
+    const overlay = document.getElementById('infoIcon');
+    overlay.classList.toggle('active');
+  }
+</script>
+<div class="content" id="infoIcon">
+  <p>For now, TransitAura is limited to the service area provided by TransLink in Metro Vancouver.</p>
+  <p><strong>What is TransitAura?</strong> TransitAura is a platform for transit riders to plan their trip safely and
+    assist their fellow riders. View and report Safety Levels and Incidents, and earn Aura Points along the way!</p>
+  <p><strong>What is Safety Level?</strong> Report how safe you feel on any TransLink station or route. The Safety Level
+    color bar is generated based on recent data from TransitAura users.</p>
+  <p><strong>What are Incidents?</strong> Incidents are reported by users and are specific to stations or routes.</p>
+  <p><strong>What are Aurapoints?</strong> Aurapoints are earned by using TransitAura. Earn 1 point from every Safety
+    Level Report and 3 points from every Incident Report. See your achievements in Account Details!</p>
+  <button class="btn btn-outline-light mt-3" onclick="toggleInfoIcon()">Close</button>
+</div>

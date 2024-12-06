@@ -59,12 +59,12 @@ function saveUserInfo() {
                 email: userEmail,
                 name: userName,
             })
-            .then(() => {
-                console.log("Document successfully updated!");
-            })
-            .catch(error => { // CHANGE: catch block
-                console.error("Error updating document:", error);
-            });
+                .then(() => {
+                    console.log("Document successfully updated!");
+                })
+                .catch(error => { // CHANGE: catch block
+                    console.error("Error updating document:", error);
+                });
         } else { // CHANGE: error logging
             console.log("No user is signed in");
         }

@@ -9,14 +9,17 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
     <!-- Firebase -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script> 
+    <script src="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.js"></script>
     <link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/4.8.1/firebase-ui-auth.css" />
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
     <!-- Other libs -->
@@ -25,65 +28,66 @@
     <link rel="stylesheet" href="styles/styles.css">
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
     <style>
-    /* styles specific to this page */
-    .view-item, .view-station, .remove-bookmark, .station-bookmark-button {
-        width: 100%; 
-        text-align: center; 
-        margin: 0;
-    }
+        /* styles specific to this page */
+        .view-item,
+        .view-station,
+        .remove-bookmark,
+        .station-bookmark-button {
+            width: 100%;
+            text-align: center;
+            margin: 0;
+        }
     </style>
 </head>
+
 <body>
     <!-- navbar -->
-  <nav id="navbarPlaceholder"></nav>
+    <nav id="navbarPlaceholder"></nav>
     <!-- back button -->
     <div class="back-button-container"><a href="main.html"><button>
-            ← Back
-        </button></a></div>
+                ← Back
+            </button></a></div>
 
 
     <h1 id="search-stations-h1">Search Your Station</h1>
 
     <!-- search bar -->
     <div>
-        <input
-            type="text"
-            id="searchInput"
-            class="form-control"
-            placeholder="Search stations..."
-            aria-label="Search stations"
-        />
+        <input type="text" id="searchInput" class="form-control" placeholder="Search stations..."
+            aria-label="Search stations" />
     </div>
 
-    <p style="text-align: center; font-size: small; margin-top: 3px;">Click on View Station to see and report Safety Levels and Incidents!</p>
-    
+    <p style="text-align: center; font-size: small; margin-top: 3px;">Click on View Station to see and report Safety
+        Levels and Incidents!</p>
+
     <!-- results container -->
     <div id="stations-go-here"></div>
-    
 
-<!-- result template -->
-<template id="stationsTemplate">
-    <div class="card station-card">
-        <h5 class="station-title card-header"></h5>
-        <div class="card-body">
-            <p><span class="station-safety"></span></p>
-            <p><span class="station-details"></span></p>
-            <div class="d-flex gap-2">
-                <a href="#" class="btn btn-primary view-station">View Station</a>
-                <button class="btn btn-secondary station-bookmark-button">Bookmark</button>
+
+    <!-- result template -->
+    <template id="stationsTemplate">
+        <div class="card station-card">
+            <h5 class="station-title card-header"></h5>
+            <div class="card-body">
+                <p><span class="station-safety"></span></p>
+                <p><span class="station-details"></span></p>
+                <div class="d-flex gap-2">
+                    <a href="#" class="btn btn-primary view-station">View Station</a>
+                    <button class="btn btn-secondary station-bookmark-button">Bookmark</button>
+                </div>
             </div>
         </div>
-    </div>
-</template>
-<nav id="navbarPlaceholder"></nav>
+    </template>
+    <nav id="navbarPlaceholder"></nav>
 
-        <!-- JS funcs  -->
+    <!-- JS funcs  -->
 
-<script src="scripts/firebaseConfig.js"></script>
-<script src="scripts/login.js"></script>
-<script src="scripts/utils.js"></script>
-<script src="scripts/bookmark.js"></script>
-<script src="scripts/skeleton.js"></script>
-<script src="scripts/search.js" defer></script>
+    <script src="scripts/firebaseConfig.js"></script>
+    <script src="scripts/login.js"></script>
+    <script src="scripts/utils.js"></script>
+    <script src="scripts/bookmark.js"></script>
+    <script src="scripts/skeleton.js"></script>
+    <script src="scripts/search.js" defer></script>
 </body>
+
 </html>

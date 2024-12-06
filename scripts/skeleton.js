@@ -2,7 +2,7 @@
 
 function loadSkeleton() {
     firebase.auth().onAuthStateChanged(function (user) {
-        if (user) {                   
+        if (user) {
             // User is signed in
             console.log($('#navbarPlaceholder').load('../text/nav_after_login.html'));
             console.log($('#footerPlaceholder').load('../text/footer.html'));

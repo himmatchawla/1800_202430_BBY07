@@ -118,7 +118,7 @@ function filterSearchResults(isStation = true) {
 
 // event listener for Filtering
 document.getElementById("searchInput")?.addEventListener("input", () => {
-    const isStation = window.location.pathname.includes("station"); 
+    const isStation = window.location.pathname.includes("station");
     console.log("Filtering for:", isStation ? "Stations" : "Routes");
     filterSearchResults(isStation);
 });

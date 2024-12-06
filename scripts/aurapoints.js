@@ -25,7 +25,7 @@ function calculateTitle(auraPoints) {
         }
     }
     // if user has no aurapoints, it return No Aura
-    return "No Aura"; 
+    return "No Aura";
 }
 
 /**
