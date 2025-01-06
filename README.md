@@ -1,6 +1,10 @@
 # Project Title
 TransitAura
 
+# Demo Video
+[TransitAura Demo Video](https://www.youtube.com/watch?v=X8kUT-Y-a_0)
+
+
 ## 1. Project Description
 TransitAura is a transit safety app that helps citizens of Metro Vancouver feel safe and confident on public transit. The app provides the ability to check real-time, user-reported safety levels and incident reports. Every user can earn Aura Points for submitting their own safety levels and incidents.
 
